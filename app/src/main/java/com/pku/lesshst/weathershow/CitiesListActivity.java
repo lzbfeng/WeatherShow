@@ -58,12 +58,6 @@ public class CitiesListActivity extends Activity {
                 intent.putExtra("city", cityName);
                 setResult(RESULT_OK, intent);
                 instance.finish();
-//                Intent intent = new Intent(this, ProvinceListActivity.class);
-//                Bundle bundle = new Bundle();
-//                ArrayList<String> cities = getProvinceAllCities(provinceName);
-//                bundle.putStringArrayList("provinces", cities);
-//                intent.putExtras(bundle);
-//                startActivityForResult(intent, 1);
             }
         });
     }

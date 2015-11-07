@@ -3,6 +3,7 @@ package com.pku.lesshst.weathershow;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -12,15 +13,17 @@ import android.location.LocationManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.PagerTitleStrip;
+import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.pku.lesshst.weathershow.MyRefresh.MyRefreshView;
@@ -56,7 +59,6 @@ public class MainActivity extends Activity {
     }
 
     MyRefreshView refreshableView;
-
     RotateView rotateView;
     protected ImageView updateBtn;
     protected Button updateOneShengBtn;
@@ -70,29 +72,144 @@ public class MainActivity extends Activity {
                 case MainActivity.GUIUPDATEIDENTIFIER:
                     Bundle b = msg.getData();
                     String show = b.getString("天气更新时间");
-                    TextView myLocationText = (TextView) findViewById(R.id.cityName);
-                    myLocationText.setText(show);
+//                    TextView myLocationText = (TextView) findViewById(R.id.cityName);
+//                    myLocationText.setText(show);
                     updateControls();
                     break;
             }
             super.handleMessage(msg);
         }
     };
+
+    //PagerView
+    private ViewPager viewPager;//viewpager
+    private PagerTitleStrip pagerTitleStrip;//viewpager的标题
+    ArrayList<View> viewList;
+    ArrayList<String> citiesList;
+    int currentIndex = 0;
+    private void initViewPager() {
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+
+        LayoutInflater lf = getLayoutInflater().from(this);
+        String [] citiesNames = new String[]{"北京", "上海", "广州", "深圳", "杭州"};
+        viewList = new ArrayList<View>();// 将要分页显示的View装入数组
+        citiesList = new ArrayList<String>();// 每个页面的Title数据
+        View view;
+        for(int i = 0; i < citiesNames.length; i++){
+            view = lf.inflate(R.layout.activity_refresh, null);
+            viewList.add(view);
+            citiesList.add(citiesNames[i]);
+        }
+
+        PagerAdapter pagerAdapter = new PagerAdapter() {
+            @Override
+            public boolean isViewFromObject(View arg0, Object arg1) {
+                return arg0 == arg1;
+            }
+
+            @Override
+            public int getCount() {
+                return viewList.size();
+            }
+
+            @Override
+            public void destroyItem(ViewGroup container, int position,
+                                    Object object) {
+                container.removeView(viewList.get(position));
+            }
+
+            @Override
+            public int getItemPosition(Object object) {
+                return super.getItemPosition(object);
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                return citiesList.get(position);//直接用适配器来完成标题的显示，所以从上面可以看到，我们没有使用PagerTitleStrip。当然你可以使用。
+            }
+
+            @Override
+            public Object instantiateItem(ViewGroup container, int position) {
+                container.addView(viewList.get(position));
+                return viewList.get(position);
+            }
+        };
+        viewPager.setAdapter(pagerAdapter);
+        currentIndex = 0;
+        viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
+
+        LinearLayout scroll_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
+
+        plot_view = new LineView(this);
+//        plot_view.setBackgroundColor(Color.WHITE);
+        scroll_layout.addView(plot_view, 1080, 400);
+        Button btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                plot_view.startAnimator();
+            }
+        });
+
+    }
+    LineView plot_view;
+    public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
+
+        public void onPageScrollStateChanged(int arg0) {
+        }
+
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+            String city_name;
+            Log.e("onPageScrolled:", "0--" + arg0 + "--1--" + arg1 + "--2--" + arg2);
+            double diff = arg1 - 0.5;
+            float alpha;
+            if(diff > 0){
+                city_name = citiesList.get(arg0 + 1);
+                alpha = (float)(Math.abs(diff) / 0.5);
+            }else{
+                city_name = citiesList.get(arg0);
+                alpha = (float)(Math.abs(diff) / 0.5);
+            }
+            setCurrentTitle_City(city_name, alpha);
+        }
+
+        public void onPageSelected(int arg0) {
+            currentIndex = arg0;
+            setCurrentView();
+        }
+
+    }
+    private LineView lineView;
+    private void setCurrentView(){
+        Button btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+    }
+    private void setCurrentTitle_City(String city_name, float alpha){
+        TextView city_name_textview = (TextView)findViewById(R.id.city_name);
+        city_name_textview.setText(city_name);
+        city_name_textview.setAlpha(alpha);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_refresh);
-        init();
+        setContentView(R.layout.activity_main);
+        initBaseInfo();
+        initViewPager();
     }
     public static CityDB cityDB;
-    private void init(){
-        refreshableView = (MyRefreshView) findViewById(R.id.refreshable_view);
-        rotateView = (RotateView) findViewById(R.id.rotate_view);
+    private void initBaseInfo(){
         infoToShow = new InfoToShow();
         getLocation();
-        setOnFreshListener();
         cityDB = openCityDB();
+
+        refreshableView = (MyRefreshView) findViewById(R.id.refreshable_view);
+        rotateView = (RotateView) findViewById(R.id.rotate_view);
+        setOnFreshListener();
     }
 
     private void setOnFreshListener(){
@@ -260,14 +377,12 @@ public class MainActivity extends Activity {
             catch (Exception e) {
                 return;
             }
-
         }
     };
     private String _weatherInfoStr;
     Runnable runnable = new Runnable(){
         @Override
         public void run(){
-//            getWeatherInfo();
             getWeatherInfoFromXML();
         }
     };
@@ -306,9 +421,9 @@ public class MainActivity extends Activity {
                 case GetWeatherInfo.UPDATE_TODAY_WEATHER:
                     updateTodayWeather((TodayWeather)msg.obj);
                     break;
-                case GetWeatherInfo.UPDATE_PM_VALUE:
-                    updateAdminAreaPMValue((TodayWeather)msg.obj);
-                    break;
+//                case GetWeatherInfo.UPDATE_PM_VALUE:
+//                    updateAdminAreaPMValue((TodayWeather)msg.obj);
+//                    break;
                 default:
                     break;
             }
@@ -316,16 +431,10 @@ public class MainActivity extends Activity {
     };
 
     private void getWeatherInfoFromXML(){
+        mAddressCityNameHan = citiesList.get(currentIndex);
         try {
             GetWeatherInfo getweatherInfo = new GetWeatherInfo();
-            City city = cityDB.getCity(mAdminArea);
-            String cityCode;
-            if(city != null){
-                cityCode = city.getCityNumber();
-                getweatherInfo.queryWeatherCode(cityCode, mainHandler);
-            }
-
-            cityCode = cityDB.getCity(mAddressCityNameHan).getCityNumber();
+            String cityCode = cityDB.getCity(mAddressCityNameHan).getCityNumber();
             getweatherInfo.queryWeatherCode(cityCode, mainHandler);
         }
         catch (Exception e){
@@ -348,17 +457,15 @@ public class MainActivity extends Activity {
     }
 
     private void updateTodayWeather(TodayWeather todayWeather){
-        Log.d("updateControls", "开始更新controls的数据");
-        TextView city_name = (TextView) findViewById(R.id.city_name);
-        city_name.setText(todayWeather.getCity());
+        View currentView = viewList.get(currentIndex);
 
         String show;
 
-        TextView date_time = (TextView) findViewById(R.id.date_time);
+        TextView date_time = (TextView) currentView.findViewById(R.id.date_time);
         show = "今天" + todayWeather.getUpdatetime() + "发布";
         date_time.setText(show);
 
-        TextView humidity_value = (TextView) findViewById(R.id.humidity_value);
+        TextView humidity_value = (TextView) currentView.findViewById(R.id.humidity_value);
         show = todayWeather.getShidu();
         humidity_value.setText("湿度：" + show);
 
@@ -371,21 +478,21 @@ public class MainActivity extends Activity {
 //        show = todayWeather.getQuality();
 //        pm25_desc.setText("desc: " + show);
 
-        TextView temperature = (TextView) findViewById(R.id.temperature);
+        TextView temperature = (TextView) currentView.findViewById(R.id.temperature);
         show = todayWeather.getLow() + "/" +
                 todayWeather.getHigh();
         temperature.setText(show);
 
-        TextView today_week = (TextView) findViewById(R.id.today_week);
+        TextView today_week = (TextView) currentView.findViewById(R.id.today_week);
         show = todayWeather.getDate();
         today_week.setText(show);
 
-        TextView climate = (TextView) findViewById(R.id.climate);
+        TextView climate = (TextView) currentView.findViewById(R.id.climate);
         show = "" + todayWeather.getNightType() + "/" +
                 todayWeather.getDayType();
         climate.setText(show);
 
-        TextView wind = (TextView) findViewById(R.id.wind);
+        TextView wind = (TextView) currentView.findViewById(R.id.wind);
         show = "" + todayWeather.getFengxiang();
         wind.setText(show);
     }
