@@ -14,8 +14,8 @@ import android.view.animation.DecelerateInterpolator;
 /**
  * Created by lesshst on 2015/11/7.
  */
-public class LineView extends View {
-    public LineView(Context context) {
+public class GridView extends View {
+    public GridView(Context context) {
         super(context);
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
@@ -41,7 +41,7 @@ public class LineView extends View {
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                LineView.this.r_animator = (float)animation.getAnimatedValue();
+                GridView.this.r_animator = (float)animation.getAnimatedValue();
                 invalidate();
             }
         });

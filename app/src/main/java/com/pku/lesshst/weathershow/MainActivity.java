@@ -139,7 +139,6 @@ public class MainActivity extends Activity {
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
         LinearLayout scroll_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
-
         plot_view = new LineView(this);
 //        plot_view.setBackgroundColor(Color.WHITE);
         scroll_layout.addView(plot_view, 1080, 400);
@@ -151,8 +150,21 @@ public class MainActivity extends Activity {
             }
         });
 
+        LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
+        grid_view = new GridView(this);
+//        plot_view.setBackgroundColor(Color.WHITE);
+        grid_view_layout.addView(grid_view, 1080, 400);
+        btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_grid_laout_animator);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                grid_view.startAnimator();
+            }
+        });
+
     }
     LineView plot_view;
+    GridView grid_view;
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         public void onPageScrollStateChanged(int arg0) {
