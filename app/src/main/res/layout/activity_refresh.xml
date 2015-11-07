@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/biz_plugin_weather_shenzhen_bg">
+
+    <com.pku.lesshst.weathershow.MyRefresh.MyRefreshView
+        android:id="@+id/refreshable_view"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        >
+
+        <!---->
+        <ScrollView
+            android:id="@+id/pre_view"
+            android:layout_width="fill_parent"
+            android:layout_height="640dp"
+            android:layout_below="@+id/title"
+            android:background="@drawable/biz_plugin_weather_shenzhen_bg"
+            android:orientation="vertical"
+            android:scrollbarStyle="insideInset">
+
+
+            <!--姝ゅ鏀剧疆浠婃棩澶╂皵淇℃伅-->
+            <RelativeLayout
+                android:id="@+id/weather_today"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="0dp">
+                <LinearLayout
+                    android:id="@+id/title_info"
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal">
+                    <Button
+                        android:id="@+id/btn_change_city"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentLeft="true"
+                        android:onClick="OnClickOtherActivity"
+                        android:background="@drawable/base_action_bar_action_city"
+                        android:textColor="@android:color/white"/>
+                    <LinearLayout
+                        android:layout_width="300dp"
+                        android:layout_height="60dp"
+                        android:layout_centerInParent="true">
+                        <TextView
+                            android:id="@+id/city_name"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:text="鍖椾含"
+                            android:textSize="30dp"
+                            android:gravity="center"
+                            android:textColor="@android:color/white"/>
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/main_info"
+                    android:layout_width="fill_parent"
+                    android:layout_height="300dp"
+                    android:layout_below="@+id/title_info">
+                    <TextView
+                        android:id="@+id/temperature"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="hhaha"
+                        android:textSize="50sp"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"/>
+                </LinearLayout>
+                <!--姝ゅ鏀剧疆浠婃棩澶╂皵淇℃伅-->
+                <include
+                    android:id="@+id/weather_current"
+                    layout="@layout/weather_cur"
+                    />
+                <!--姝ゅ鏀剧疆PM2.5淇℃伅-->
+                <include
+                    android:id="@+id/weatehr_pm25"
+                    layout="@layout/weather_pm25" />
+                <!--姝ゅ鏀剧疆浠婃棩姒傚喌淇℃伅-->
+                <include
+                    android:id="@+id/weatehr_general_situation"
+                    layout="@layout/weather_general_situation"/>
+
+                <TextView android:id="@+id/cityName"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_below="@+id/weatehr_general_situation"
+                    android:scrollbars="vertical"
+                    android:textColor="@android:color/white"/>
+
+
+            </RelativeLayout>
+            <!--姝ゅ鏀剧疆涓冩棩澶╂皵淇℃伅-->
+            <!--姝ゅ鏀剧疆鍏朵粬淇℃伅-->
+        </ScrollView >
+    </com.pku.lesshst.weathershow.MyRefresh.MyRefreshView>
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="New Button"-->
+        <!--android:id="@+id/button2"-->
+        <!--android:layout_marginBottom="149dp"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_marginLeft="58dp"-->
+        <!--android:onClick="saveSharedPreference"/>-->
+
+</RelativeLayout>

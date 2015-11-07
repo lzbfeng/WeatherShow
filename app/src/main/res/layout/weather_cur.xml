@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/weather_cur"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="@android:color/transparent"
+    android:layout_below="@+id/main_info">
+    <!--<TextView-->
+        <!--android:id="@+id/city_name1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_marginLeft="15dp"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="北京"-->
+        <!--android:textSize="40sp"-->
+        <!--android:textColor="@android:color/white"/>-->
+    <TextView
+        android:id="@+id/date_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"
+        android:text="今天几点发布"
+        android:textSize="15sp"
+        android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/humidity_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/date_time"
+        android:singleLine="true"
+        android:text="湿度：55%"
+        android:textSize="15sp"
+        android:textColor="@android:color/white" />
+
+</RelativeLayout>

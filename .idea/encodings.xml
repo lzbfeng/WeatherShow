@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/CitiesListActivity.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/ProvinceListActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/utils" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/arrow.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/base_action_bar_action_city.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/biz_plugin_weather_0_50.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/biz_plugin_weather_qing.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/biz_plugin_weather_shenzhen_bg.jpg" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/drawable-xdbi" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/title_city.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/title_share.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/drawable/title_update.png" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_refresh.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/my_listview_item.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/province_list.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/weather_cur.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/weather_general_situation.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/weather_pm25.xml" charset="GBK" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

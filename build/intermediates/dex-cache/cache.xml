@@ -2,32 +2,39 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\lesshst\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
+        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\libs\pinyin4j-2.5.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-054582960d0cf9e4b7107e41cba699a252dbd5b4.jar" />
+        sha1="ae353005f973da1cd8545b54354504c2503f6865">
+        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\pinyin4j-2.5.0-409dfa2f474512a4d659d791125792c1098456a2.jar" />
     </item>
     <item
-        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
+        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\libs\httpcore-4.4.3.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\classes-86f5898d9de0b777f935acdeb293e145798ef907.jar" />
+        sha1="e876a79d561e5c6207b78d347e198c8c4531a5e5">
+        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\httpcore-4.4.3-f298ed1c4793e30c459f2196151ab11cd9b594a2.jar" />
     </item>
     <item
-        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
+        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\libs\httpclient-4.5.1.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-48b53cb228d8f31d99032aed6939589bd85a4574.jar" />
+        sha1="7e3cecc566df91338c6c67883b89ddd05a17db43">
+        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\httpclient-4.5.1-bde4c3059199b0c85f49a7327d28f66fcf717bcb.jar" />
     </item>
     <item
-        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
+        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\libs\json.org.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\classes-cd5260aa36179bcbc051d018b365019d1a851aac.jar" />
+        sha1="d2ee50d7a036902a5ca15d3e7d7dbd15eb93f910">
+        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\json.org-3a599a7193aff2e334eb57bda83188557905dd3f.jar" />
+    </item>
+    <item
+        jar="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\libs\httpmime-4.5.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="96823b9421ebb9f490dec837d9f96134e864e3a7">
+        <dex dex="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow\app\build\intermediates\pre-dexed\debug\httpmime-4.5.1-fa45e3155f9b790dd5b728c82ad3e7756e526f43.jar" />
     </item>
 
 </items>
