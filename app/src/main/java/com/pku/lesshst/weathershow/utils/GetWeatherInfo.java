@@ -63,12 +63,13 @@ public class GetWeatherInfo {
                             //Log.d("wuapp",todayWeather.toString());
                             //发送消息，由主线程更新UI
                             Message msg = new Message();
-                            if(todayWeather.getPm25() == null) {
-                                msg.what = UPDATE_TODAY_WEATHER;
-                            }
-                            else{
-                                msg.what = UPDATE_PM_VALUE;
-                            }
+//                            if(todayWeather.getPm25() == null) {
+//                                msg.what = UPDATE_TODAY_WEATHER;
+//                            }
+//                            else{
+//                                msg.what = UPDATE_PM_VALUE;
+//                            }
+                            msg.what = UPDATE_TODAY_WEATHER;
                             msg.obj = todayWeather;
                             mainHandler.sendMessage(msg);
                         }

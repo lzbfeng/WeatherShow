@@ -267,7 +267,6 @@ public class MainActivity extends Activity {
     Runnable runnable = new Runnable(){
         @Override
         public void run(){
-//            getWeatherInfo();
             getWeatherInfoFromXML();
         }
     };
