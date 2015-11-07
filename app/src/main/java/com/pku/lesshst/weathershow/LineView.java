@@ -32,7 +32,17 @@ public class LineView extends View {
 
         PathEffect effects = new DashPathEffect(new float[] { 5, 5, 5, 5}, 1);
         paint_dashline.setPathEffect(effects);
+
+        mPaint = new Paint();
+        mPaint.setAntiAlias(true);
+        mPaint.setDither(true);
+        mPaint.setColor(0xFFFF0000);
+        mPaint.setARGB(255, 0, 0, 0);
+        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setPathEffect(new DashPathEffect(new float[]{10, 40,}, 0));
+        mPaint.setStrokeWidth(12);
     }
+    Paint mPaint;
     public void startAnimator(){
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -51,11 +61,12 @@ public class LineView extends View {
         super.onDraw(canvas);
 
         paintTemps(canvas, temps_day);
-//        paintTemps(canvas, temps_night);
+        paintTemps(canvas, temps_night);
     }
+
     private final int count_days = 5;
     Paint paint = new Paint();
-    Path p = new Path();
+    Path path = new Path();
     int[] temps_day = new int[]{23, 34, 12, 34, 21};
     int[] temps_night = new int[]{12, 14, 10, 8, 11};
     float r_animator = 0f;
@@ -63,7 +74,7 @@ public class LineView extends View {
     Paint paint_dashline = new Paint();
     Paint strockpaint;
     private void paintTemps(Canvas canvas, int [] temps){
-        p.reset();
+        path.reset();
         int w = 1080;
         int step = w / count_days;
         int canvas_height = 400;
@@ -71,41 +82,28 @@ public class LineView extends View {
 
         int x = 0;
         int y = (int)(canvas_height - temps[0] * ratio * r_animator);
-        p.moveTo(x, y);
+        path.moveTo(x, y);
 
         for(int i = 0; i < count_days; i++){
             x = i * step + step / 2;
             y = (int)(canvas_height - ratio * temps[i] * r_animator);
-            p.lineTo(x, y);
-            if(i == 1){
-                //绘制虚线图
-                x = 1 * step + step / 2;
-                y = (int)(canvas_height - ratio * temps[1] * r_animator);
-                strockpaint = new Paint();
-                strockpaint.setAntiAlias(true);
-                strockpaint.setStyle(Paint.Style.STROKE);
-                strockpaint.setColor(Color.WHITE);
-                strockpaint.setStrokeWidth(1);
-                DashPathEffect effects = new DashPathEffect(new float[]{5, 5, 5, 5}, 1);
-                strockpaint.setPathEffect(effects);
-                canvas.drawLine(x, canvas_height, x, y, strockpaint);
-                //绘制小圆点
-                canvas.drawCircle(x, y, 10, paint_yuandian);
-            }
+            path.lineTo(x, y);
+
         }
         x = w;
         y = (int)(canvas_height - temps[count_days - 1] * ratio * r_animator);
-        p.lineTo(x, y);
-        canvas.drawPath(p, paint);
+        path.lineTo(x, y);
+        canvas.drawPath(path, paint);
 
-        //canvas.drawLine(0, 200, 400, 200, paint_dashline);
+        //绘制虚线图
+        x = 1 * step + step / 2;
+        y = (int)(canvas_height - ratio * temps[1] * r_animator);
+        path.reset();
+        path.moveTo(x, canvas_height);
+        path.lineTo(x, y);
+        canvas.drawPath(path, paint_dashline);
+        //绘制小圆点
+        canvas.drawCircle(x, y, 10, paint_yuandian);
 
-        Paint p = new Paint(Paint.ANTI_ALIAS_FLAG);
-        p.setStyle(Paint.Style.STROKE);
-        p.setColor(Color.WHITE);
-        p.setStrokeWidth(1);
-        PathEffect effects = new DashPathEffect(new float[] { 10, 20, 10, 20}, 1);
-        p.setPathEffect(effects);
-        canvas.drawLine(0, 200, 400, 200, p);
     }
 }
