@@ -1,0 +1,52 @@
+<com.pku.lesshst.weathershow.MyRefresh.HeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pull_to_refresh_head"
+    android:layout_width="fill_parent"
+    android:layout_height="60dip" >
+
+    <LinearLayout
+        android:layout_width="200dip"
+        android:layout_height="60dip"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_weight="5"
+            >
+
+            <com.pku.lesshst.weathershow.MyRefresh.RotateView
+                android:id="@+id/rotate_view"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="0dip"
+            android:layout_height="60dip"
+            android:layout_weight="10"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:layout_weight="1"
+                android:textColor="@android:color/white"
+                android:gravity="left|bottom"
+                android:text="@string/pull_to_refresh" />
+
+            <TextView
+                android:id="@+id/updated_at"
+                android:layout_width="fill_parent"
+                android:layout_height="0dip"
+                android:textColor="@android:color/white"
+                android:layout_weight="1"
+                android:gravity="left|top"
+                android:text="@string/updated_at" />
+        </LinearLayout>
+    </LinearLayout>
+
+</com.pku.lesshst.weathershow.MyRefresh.HeaderView>
