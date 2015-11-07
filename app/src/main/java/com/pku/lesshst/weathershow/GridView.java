@@ -8,6 +8,8 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
+import android.graphics.Rect;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -20,28 +22,25 @@ public class GridView extends View {
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.WHITE);
-        paint.setTextSize(30);
 
 
-        paint_yuandian.setStrokeWidth(5);
-        paint_yuandian.setStyle(Paint.Style.FILL);
-        paint_yuandian.setColor(Color.WHITE);
+        paint_titles.setAntiAlias(true);
+        paint_titles.setStrokeWidth(2);
+        paint_titles.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_titles.setColor(0xcccccccc);
+        paint_titles.setTextSize(30);
 
-        paint_dashline.setAntiAlias(true);
-        paint_dashline.setStrokeWidth(2);
-        paint_dashline.setStyle(Paint.Style.STROKE);
-        paint_dashline.setColor(Color.WHITE);
-
-        PathEffect effects = new DashPathEffect(new float[] { 10, 5, 5, 5}, 1);
-        paint_dashline.setPathEffect(effects);
-
+        paint_values.setStrokeWidth(2);
+        paint_values.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_values.setColor(Color.WHITE);
+        paint_values.setTextSize(60);
     }
     public void startAnimator(){
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                GridView.this.r_animator = (float)animation.getAnimatedValue();
+                GridView.this.r_animator = (float) animation.getAnimatedValue();
                 invalidate();
             }
         });
@@ -53,54 +52,71 @@ public class GridView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        paintTemps(canvas, temps_day, true);
-        paintTemps(canvas, temps_night, false);
+        drawGrid(canvas);
+//        paintTemps(canvas, temps_day, true);
+//        paintTemps(canvas, temps_night, false);
+    }
+
+    private void drawGrid(Canvas canvas) {
+        int w = 1080;
+        int h = 600;
+
+        int step_x = w / 3;
+        int step_y = h / 2;
+
+        //绘制横轴
+        canvas.drawLine(0, 0, w, 0, paint);
+        canvas.drawLine(0, step_y, w, step_y, paint);
+        canvas.drawLine(0, h, w, h, paint);
+
+        //绘制纵轴
+        canvas.drawLine(0 + step_x, 0, 0 + step_x, h, paint);
+        canvas.drawLine(step_x + step_x, 0, step_x+ step_x, h, paint);
+
+        int x = 0;
+        int y = 0;
+        //绘制
+        Rect rect = new Rect();
+        int index = 0;
+        int text_w = 0;
+        int text_h = 0;
+        int padding = 5;
+        int title_text_shift = 30;
+        for(int i = 0; i < 2; i++){
+            for(int j = 0; j < 3; j++) {
+                x = j * step_x + step_x / 2;
+                y = i * step_y + step_y / 2;
+                index = i * 3 + j;
+                paint_titles.getTextBounds(titles[index], 0, titles[index].length(), rect);
+                text_w = Math.abs(rect.right - rect.left);
+                text_h = Math.abs(rect.bottom - rect.top);
+                int x_show = x - text_w / 2;
+                int y_show = (int)(y + text_h / 2 - title_text_shift * this.r_animator); //以左下角为原点
+                canvas.drawText(titles[index], x_show, y_show, paint_titles);
+
+                paint_values.setTextSize(text_values_size * this.r_animator);
+//                paint_values.setAlpha((int)(this.r_animator));
+                paint_values.getTextBounds(values[index], 0, values[index].length(), rect);
+                text_w = Math.abs(rect.right - rect.left);
+                text_h = Math.abs(rect.bottom - rect.top);
+                x_show = x - text_w / 2;
+                y_show = y + text_h / 2 + 30;
+
+                canvas.drawText(values[index], x_show, y_show, paint_values);
+                Log.e("r_animator", "" + this.r_animator);
+            }
+        }
     }
 
     private final int count_days = 5;
-    Paint paint = new Paint();
+
     Path path = new Path();
-    int[] temps_day = new int[]{23, 34, 12, 34, 21};
-    int[] temps_night = new int[]{12, 14, 10, 8, 11};
+    String[] titles = new String[]{"湿度(%)", "可见度(km)", "北风", "紫外线", "气压", "体感(℃)"};
+    String[] values = new String[]{"86", "6.4", "一级", "最弱", "1022.0", "3.9"};
     float r_animator = 0f;
-    Paint paint_yuandian = new Paint();
-    Paint paint_dashline = new Paint();
-
-    private void paintTemps(Canvas canvas, int [] temps, boolean isDay){
-        path.reset();
-        int w = 1080;
-        int step = w / count_days;
-        int canvas_height = 400;
-        double ratio = 10;
-
-        int x = 0;
-        int y = (int)(canvas_height - temps[0] * ratio * r_animator);
-        path.moveTo(x, y);
-
-        for(int i = 0; i < count_days; i++){
-            x = i * step + step / 2;
-            y = (int)(canvas_height - ratio * temps[i] * r_animator);
-            path.lineTo(x, y);
-
-        }
-        x = w;
-        y = (int)(canvas_height - temps[count_days - 1] * ratio * r_animator);
-        path.lineTo(x, y);
-        canvas.drawPath(path, paint);
-
-        if(isDay) {
-            //绘制虚线图
-            x = 1 * step + step / 2;
-            y = (int) (canvas_height - ratio * temps[1] * r_animator);
-            path.reset();
-            path.moveTo(x, canvas_height);
-            path.lineTo(x, y);
-            canvas.drawPath(path, paint_dashline);
-            //绘制小圆点
-            canvas.drawCircle(x, y, 10, paint_yuandian);
-
-            canvas.drawText("5℃", x + 20, y - 20, paint);
-        }
-
-    }
+    Paint paint = new Paint();
+    Paint paint_values = new Paint();
+    Paint paint_titles = new Paint();
+    int text_values_size = 60;
+    int text_titles_size = 30;
 }

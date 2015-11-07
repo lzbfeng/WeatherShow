@@ -142,8 +142,8 @@ public class MainActivity extends Activity {
         plot_view = new LineView(this);
 //        plot_view.setBackgroundColor(Color.WHITE);
         scroll_layout.addView(plot_view, 1080, 400);
-        Button btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
-        btn.setOnClickListener(new View.OnClickListener() {
+        Button btn_line = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
+        btn_line.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 plot_view.startAnimator();
@@ -153,9 +153,9 @@ public class MainActivity extends Activity {
         LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
         grid_view = new GridView(this);
 //        plot_view.setBackgroundColor(Color.WHITE);
-        grid_view_layout.addView(grid_view, 1080, 400);
-        btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_grid_laout_animator);
-        btn.setOnClickListener(new View.OnClickListener() {
+        grid_view_layout.addView(grid_view, 1080, 600);
+        Button btn_grid = (Button)viewList.get(currentIndex).findViewById(R.id.btn_grid_laout_animator);
+        btn_grid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 grid_view.startAnimator();

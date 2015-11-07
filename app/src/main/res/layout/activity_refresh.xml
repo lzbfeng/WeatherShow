@@ -96,7 +96,7 @@
         <LinearLayout
             android:id="@+id/grid_view_layout"
             android:layout_width="fill_parent"
-            android:layout_height="200dp"
+            android:layout_height="400dp"
             android:layout_below="@id/weeks_show"
             android:orientation="vertical">
             <Button
