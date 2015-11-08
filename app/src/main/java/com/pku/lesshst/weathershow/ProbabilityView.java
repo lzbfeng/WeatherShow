@@ -14,17 +14,19 @@ import android.view.animation.DecelerateInterpolator;
  * Created by lesshst on 2015/11/7.
  */
 public class ProbabilityView extends View {
-    public ProbabilityView(Context context) {
-        super(context);
-        initAllPaints();
-    }
-    
+
+    float r_animator = 0f;
     Paint paint_rain_drop_inner = new Paint();
     Paint paint_text_probability = new Paint();
     Paint paint_text_baifenhao = new Paint();
     Paint paint_rain_drop_outer = new Paint();
     Paint paint_text_date = new Paint();
     Path mPath = new Path();
+
+    public ProbabilityView(Context context) {
+        super(context);
+        initAllPaints();
+    }
 
     private void initAllPaints(){
 
@@ -55,8 +57,6 @@ public class ProbabilityView extends View {
         paint_text_date.setColor(0xcccccccc);
         paint_text_date.setTextSize(40);
     }
-
-    float r_animator = 0f;
 
     public void startAnimator(){
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);

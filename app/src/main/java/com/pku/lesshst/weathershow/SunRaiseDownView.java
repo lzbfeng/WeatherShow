@@ -15,11 +15,12 @@ import android.view.animation.DecelerateInterpolator;
  * Created by lesshst on 2015/11/8.
  */
 public class SunRaiseDownView extends View {
-    public SunRaiseDownView(Context context) {
-        super(context);
-        initAllPaints();
-    }
 
+    float start_angle = 0;
+    float end_angle = 70;
+    float time_raise = 6;
+    float time_down = 18;
+    float time_now = 16;
     Paint paint_shader = new Paint();
     Paint paint_circle = new Paint();
     Paint paint_bezier = new Paint();
@@ -27,6 +28,11 @@ public class SunRaiseDownView extends View {
     Path path_bezier = new Path();
     Path path_shader = new Path();
     Path path_circle = new Path();
+
+    public SunRaiseDownView(Context context) {
+        super(context);
+        initAllPaints();
+    }
 
     private void initAllPaints(){
 
@@ -121,11 +127,6 @@ public class SunRaiseDownView extends View {
         canvas.drawPath(path_shader, paint_shader);
 
     }
-    float start_angle = 0;
-    float end_angle = 70;
-    float time_raise = 6;
-    float time_down = 18;
-    float time_now = 16;
 
     private void drawCircle(Canvas canvas){
         path_circle.reset();

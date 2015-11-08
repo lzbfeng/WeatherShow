@@ -163,7 +163,7 @@ public class MainActivity extends Activity {
 
         LinearLayout pm_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.pm_view_layout);
         pm_view = new PMView(this);
-        pm_view_layout.addView(pm_view, 1080, 600);
+        pm_view_layout.addView(pm_view, 1080, 700);
         Button btn_PM = (Button)viewList.get(currentIndex).findViewById(R.id.btn_pm_laout_animator);
         btn_PM.setOnClickListener(new View.OnClickListener() {
             @Override

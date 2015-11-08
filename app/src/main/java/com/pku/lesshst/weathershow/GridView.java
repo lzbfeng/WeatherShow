@@ -17,6 +17,15 @@ import android.view.animation.DecelerateInterpolator;
  * Created by lesshst on 2015/11/7.
  */
 public class GridView extends View {
+
+    String[] titles = new String[]{"湿度(%)", "可见度(km)", "北风", "紫外线", "气压", "体感(℃)"};
+    String[] values = new String[]{"86", "6.4", "一级", "最弱", "1022.0", "3.9"};
+    float r_animator = 0f;
+    Paint paint = new Paint();
+    Paint paint_values = new Paint();
+    Paint paint_titles = new Paint();
+    int text_values_size = 60;
+
     public GridView(Context context) {
         super(context);
         paint.setStrokeWidth(2);
@@ -103,16 +112,4 @@ public class GridView extends View {
             }
         }
     }
-
-    private final int count_days = 5;
-
-    Path path = new Path();
-    String[] titles = new String[]{"湿度(%)", "可见度(km)", "北风", "紫外线", "气压", "体感(℃)"};
-    String[] values = new String[]{"86", "6.4", "一级", "最弱", "1022.0", "3.9"};
-    float r_animator = 0f;
-    Paint paint = new Paint();
-    Paint paint_values = new Paint();
-    Paint paint_titles = new Paint();
-    int text_values_size = 60;
-    int text_titles_size = 30;
 }

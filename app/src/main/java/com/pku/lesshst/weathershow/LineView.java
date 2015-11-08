@@ -15,13 +15,22 @@ import android.view.animation.DecelerateInterpolator;
  * Created by lesshst on 2015/11/7.
  */
 public class LineView extends View {
+
+    private final int count_days = 5;
+    Paint paint = new Paint();
+    Path path = new Path();
+    int[] temps_day = new int[]{23, 34, 12, 34, 21};
+    int[] temps_night = new int[]{12, 14, 10, 8, 11};
+    float r_animator = 0f;
+    Paint paint_yuandian = new Paint();
+    Paint paint_dashline = new Paint();
+
     public LineView(Context context) {
         super(context);
         paint.setStrokeWidth(2);
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.WHITE);
         paint.setTextSize(30);
-
 
         paint_yuandian.setStrokeWidth(5);
         paint_yuandian.setStyle(Paint.Style.FILL);
@@ -56,15 +65,6 @@ public class LineView extends View {
         paintTemps(canvas, temps_day, true);
         paintTemps(canvas, temps_night, false);
     }
-
-    private final int count_days = 5;
-    Paint paint = new Paint();
-    Path path = new Path();
-    int[] temps_day = new int[]{23, 34, 12, 34, 21};
-    int[] temps_night = new int[]{12, 14, 10, 8, 11};
-    float r_animator = 0f;
-    Paint paint_yuandian = new Paint();
-    Paint paint_dashline = new Paint();
 
     private void paintTemps(Canvas canvas, int [] temps, boolean isDay){
         path.reset();
@@ -101,6 +101,5 @@ public class LineView extends View {
 
             canvas.drawText("5℃", x + 20, y - 20, paint);
         }
-
     }
 }
