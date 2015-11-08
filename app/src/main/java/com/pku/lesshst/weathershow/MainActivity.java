@@ -71,9 +71,6 @@ public class MainActivity extends Activity {
             switch (msg.what) {
                 case MainActivity.GUIUPDATEIDENTIFIER:
                     Bundle b = msg.getData();
-                    String show = b.getString("天气更新时间");
-//                    TextView myLocationText = (TextView) findViewById(R.id.cityName);
-//                    myLocationText.setText(show);
                     updateControls();
                     break;
             }
@@ -138,9 +135,12 @@ public class MainActivity extends Activity {
         currentIndex = 0;
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
 
+        initAllLayouts();
+    }
+
+    private void initAllLayouts(){
         LinearLayout scroll_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
         plot_view = new LineView(this);
-//        plot_view.setBackgroundColor(Color.WHITE);
         scroll_layout.addView(plot_view, 1080, 400);
         Button btn_line = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
         btn_line.setOnClickListener(new View.OnClickListener() {
@@ -152,7 +152,6 @@ public class MainActivity extends Activity {
 
         LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
         grid_view = new GridView(this);
-//        plot_view.setBackgroundColor(Color.WHITE);
         grid_view_layout.addView(grid_view, 1080, 600);
         Button btn_grid = (Button)viewList.get(currentIndex).findViewById(R.id.btn_grid_laout_animator);
         btn_grid.setOnClickListener(new View.OnClickListener() {
@@ -162,9 +161,44 @@ public class MainActivity extends Activity {
             }
         });
 
+        LinearLayout pm_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.pm_view_layout);
+        pm_view = new PMView(this);
+        pm_view_layout.addView(pm_view, 1080, 600);
+        Button btn_PM = (Button)viewList.get(currentIndex).findViewById(R.id.btn_pm_laout_animator);
+        btn_PM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pm_view.startAnimator();
+            }
+        });
+
+        LinearLayout pro_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.probability_view_layout);
+        pro_view = new ProbabilityView(this);
+        pro_view_layout.addView(pro_view, 1080, 600);
+        Button btn_pro = (Button)viewList.get(currentIndex).findViewById(R.id.btn_pro_laout_animator);
+        btn_pro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pro_view.startAnimator();
+            }
+        });
+
+        LinearLayout sun_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.sun_raise_donw_view_layout);
+        sun_view = new SunRaiseDownView(this);
+        sun_view_layout.addView(sun_view, 1080, 600);
+        Button btn_sun = (Button)viewList.get(currentIndex).findViewById(R.id.btn_sun_laout_animator);
+        btn_sun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sun_view.startAnimator();
+            }
+        });
     }
     LineView plot_view;
     GridView grid_view;
+    PMView pm_view;
+    ProbabilityView pro_view;
+    SunRaiseDownView sun_view;
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         public void onPageScrollStateChanged(int arg0) {

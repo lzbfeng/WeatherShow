@@ -23,7 +23,6 @@ public class GridView extends View {
         paint.setStyle(Paint.Style.STROKE);
         paint.setColor(Color.WHITE);
 
-
         paint_titles.setAntiAlias(true);
         paint_titles.setStrokeWidth(2);
         paint_titles.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -51,10 +50,7 @@ public class GridView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
         drawGrid(canvas);
-//        paintTemps(canvas, temps_day, true);
-//        paintTemps(canvas, temps_night, false);
     }
 
     private void drawGrid(Canvas canvas) {
@@ -103,7 +99,7 @@ public class GridView extends View {
                 y_show = y + text_h / 2 + 30;
 
                 canvas.drawText(values[index], x_show, y_show, paint_values);
-                Log.e("r_animator", "" + this.r_animator);
+//                Log.e("r_animator", "" + this.r_animator);
             }
         }
     }

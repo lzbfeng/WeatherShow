@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/weather_today"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="1920dp"
         android:padding="0dp">
 
         <LinearLayout
@@ -96,11 +96,48 @@
         <LinearLayout
             android:id="@+id/grid_view_layout"
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_below="@id/weeks_show"
             android:orientation="vertical">
             <Button
                 android:id="@+id/btn_grid_laout_animator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="动态"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/pm_view_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/grid_view_layout"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_pm_laout_animator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="动态"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/probability_view_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/pm_view_layout"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_pro_laout_animator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="动态"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/sun_raise_donw_view_layout"
+            android:layout_width="fill_parent"
+            android:layout_height="400dp"
+            android:layout_below="@id/probability_view_layout"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/btn_sun_laout_animator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="动态"/>
