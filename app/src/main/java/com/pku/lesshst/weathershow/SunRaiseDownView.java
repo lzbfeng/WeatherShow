@@ -6,6 +6,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.RectF;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -23,6 +25,7 @@ public class SunRaiseDownView extends View {
     Paint paint_bezier = new Paint();
     Path path_bezier = new Path();
     Path path_shader = new Path();
+    Path path_circle = new Path();
 
     private void initAllPaints(){
 
@@ -61,11 +64,11 @@ public class SunRaiseDownView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+//        drawBezier(canvas);
         drawCircle(canvas);
     }
 
-    private void drawCircle(Canvas canvas){
+    private void drawBezier(Canvas canvas){
         path_bezier.reset();
         path_shader.reset();
         int w = 1080;
@@ -113,5 +116,48 @@ public class SunRaiseDownView extends View {
         canvas.drawPath(path_bezier, paint_bezier);
         canvas.drawPath(path_shader, paint_shader);
 
+    }
+    float start_angle = 0;
+    float end_angle = 70;
+    float time_raise = 6;
+    float time_down = 18;
+    float time_now = 16;
+
+    private void drawCircle(Canvas canvas){
+        path_circle.reset();
+        path_shader.reset();
+        int w = 1080;
+        int h = 600;
+        float x_circle = w / 2;
+        float y_circle = h;
+
+        float padding = 160f;
+        float startx = 0f + padding;
+        float starty = h;
+
+        float circle_width = (w - 2 * padding) / 2;
+        float angle = start_angle + (end_angle - start_angle)* this.r_animator;
+        float radius = circle_width / (float)Math.sin(angle / 180 * (float)Math.PI );
+        //绘制部分圆
+        x_circle = x_circle;
+        y_circle = h + circle_width / (float)Math.tan(angle / 180 * (float)Math.PI);
+        canvas.drawCircle(x_circle, y_circle, radius, paint_bezier);
+
+        //绘制阴影
+        float angle_radians = angle / 180 * (float)Math.PI;
+        float x_shader = padding + (w - 2 * padding) * this.r_animator * (time_now - time_raise) / (time_down - time_raise);
+        double angle_temp = Math.asin((x_circle - x_shader) / radius);
+        float y_shader = y_circle - radius * (float)Math.cos(angle_temp);
+        double time_now_sweep_angle = (angle_radians - angle_temp) / Math.PI * 180;
+
+        RectF rect = new RectF();
+        rect.set(x_circle - radius, y_circle - radius, x_circle + radius, y_circle + radius);
+        path_shader.moveTo(startx, starty);
+        path_shader.addArc(rect, 270 - angle, (float) time_now_sweep_angle);
+
+        canvas.drawCircle(x_shader, y_shader, 20, paint_circle);
+        path_shader.lineTo(x_shader, h);
+        path_shader.lineTo(startx, starty);
+        canvas.drawPath(path_shader, paint_shader);
     }
 }
