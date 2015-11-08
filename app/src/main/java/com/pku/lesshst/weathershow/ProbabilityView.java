@@ -3,12 +3,10 @@ package com.pku.lesshst.weathershow;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.graphics.SweepGradient;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -20,28 +18,42 @@ public class ProbabilityView extends View {
         super(context);
         initAllPaints();
     }
-
-    Paint paint_circle_out = new Paint();
-    Paint paint_pointer = new Paint();
-    Paint paint_circle_inner = new Paint();
+    
+    Paint paint_rain_drop_inner = new Paint();
+    Paint paint_text_probability = new Paint();
+    Paint paint_text_baifenhao = new Paint();
+    Paint paint_rain_drop_outer = new Paint();
+    Paint paint_text_date = new Paint();
     Path mPath = new Path();
 
     private void initAllPaints(){
-        paint_circle_out.setStrokeWidth(2);
-        paint_circle_out.setStyle(Paint.Style.STROKE);
-        paint_circle_out.setColor(Color.WHITE);
 
-        paint_pointer.setAntiAlias(true);
-        paint_pointer.setStrokeWidth(2);
-        paint_pointer.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint_pointer.setColor(0xffffffff);
-        paint_pointer.setTextSize(30);
+        paint_rain_drop_inner.setAntiAlias(true);
+        paint_rain_drop_inner.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_rain_drop_inner.setColor(0xffffffff);
 
-        paint_circle_inner.setAntiAlias(true);
-        paint_circle_inner.setStrokeWidth(8);
-        paint_circle_inner.setStyle(Paint.Style.STROKE);
-        paint_circle_inner.setColor(0xffffffff);
-        paint_circle_inner.setTextSize(30);
+        paint_rain_drop_outer.setAntiAlias(true);
+        paint_rain_drop_outer.setStrokeWidth(8);
+        paint_rain_drop_outer.setStyle(Paint.Style.STROKE);
+        paint_rain_drop_outer.setColor(0xffffffff);
+
+        paint_text_probability.setAntiAlias(true);
+        paint_text_probability.setStrokeWidth(1);
+        paint_text_probability.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_text_probability.setColor(0xffffffff);
+        paint_text_probability.setTextSize(40);
+
+        paint_text_baifenhao.setAntiAlias(true);
+        paint_text_baifenhao.setStrokeWidth(1);
+        paint_text_baifenhao.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_text_baifenhao.setColor(0xcccccccc);
+        paint_text_baifenhao.setTextSize(20);
+
+        paint_text_date.setAntiAlias(true);
+        paint_text_date.setStrokeWidth(1);
+        paint_text_date.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_text_date.setColor(0xcccccccc);
+        paint_text_date.setTextSize(40);
     }
 
     float r_animator = 0f;
@@ -55,7 +67,7 @@ public class ProbabilityView extends View {
                 invalidate();
             }
         });
-        anim.setDuration(500);
+        anim.setDuration(1000);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
     }
@@ -64,28 +76,23 @@ public class ProbabilityView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        drawRaindrop(canvas, 100, 100, 50, 10);
-        drawRaindrop(canvas, 200, 100, 50, 30);
-        drawRaindrop(canvas, 300, 100, 50, 50);
-        drawRaindrop(canvas, 400, 100, 50, 70);
-        drawRaindrop(canvas, 500, 100, 50, 90);
-
-        drawRaindrop(canvas, 100, 300, 50, 20);
-        drawRaindrop(canvas, 200, 300, 50, 40);
-        drawRaindrop(canvas, 300, 300, 50, 60);
-        drawRaindrop(canvas, 400, 300, 50, 80);
-        drawRaindrop(canvas, 500, 300, 50, 100);
-        drawRaindrop(canvas, 600, 300, 50, 7);
+        int w = 1080;
+        int step = 1080 / 4;
+        int probabilities[] = new int[]{23, 38, 50, 89};
+        String dates[] = new String[]{"11/08", "11/09", "11/10", "11/11"};
+        for(int i = 0; i < 4; i ++){
+            drawRaindrop(canvas, i * step + step / 2, 300, 100, probabilities[i], dates[i]);
+        }
     }
 
-    private void drawRaindrop(Canvas canvas, float x, float y, float radius, float probability){
+    private void drawRaindrop(Canvas canvas, float x, float y, float radius, float probability, String date){
         float x_circle = x;
         float y_circle = y;
 
         radius = 50;
         RectF rect = new RectF();
         rect.set(x_circle - radius, y_circle - radius, x_circle + radius, y_circle + radius);
-        canvas.drawArc(rect, 330, 240, false, paint_circle_inner);
+        canvas.drawArc(rect, 330, 240, false, paint_rain_drop_outer);
 
         double angle = 60f / 180 * Math.PI;
         float end_x = x_circle;
@@ -93,11 +100,11 @@ public class ProbabilityView extends View {
         //绘制左边的直线
         float start_x_left = (float)(x_circle - radius * Math.sin(angle));
         float start_y_left = (float)(y_circle - radius * Math.cos(angle));
-        canvas.drawLine(start_x_left, start_y_left, end_x, end_y, paint_circle_inner);
+        canvas.drawLine(start_x_left, start_y_left, end_x, end_y, paint_rain_drop_outer);
         //绘制右边的直线
         float start_x_right = (float)(x_circle + radius * Math.sin(angle));
         float start_y_right = start_y_left;
-        canvas.drawLine(start_x_right, start_y_right, end_x, end_y, paint_circle_inner);
+        canvas.drawLine(start_x_right, start_y_right, end_x, end_y, paint_rain_drop_outer);
 
         //绘制雨滴内部的水量
         //probability = 25;
@@ -105,24 +112,29 @@ public class ProbabilityView extends View {
         float sweep_pro = 360 * scale;
         radius = 40;
         rect.set(x_circle - radius, y_circle - radius, x_circle + radius, y_circle + radius);
+
+        //用于控制雨滴内部水量波动的幅度
+        float fluctuation = 40 * (0.5f - Math.abs(0.5f - scale)) * (0.5f - (float)Math.abs(this.r_animator - 1));
         if(sweep_pro < 240) {
             mPath.reset();
             mPath.addArc(rect, 90 - sweep_pro / 2, sweep_pro);
             float angle_pro = sweep_pro / 180 * (float) Math.PI;
-            float startx = x_circle - radius * (float) Math.sin(angle_pro / 2);
-            float starty = y_circle + radius * (float) Math.cos(angle_pro / 2);
+            float x_ext = radius * (float) Math.sin(angle_pro / 2);
+            float y_ext = radius * (float) Math.cos(angle_pro / 2);
+            float startx = x_circle - x_ext;
+            float starty = y_circle + y_ext;
             float ctrlx = (x_circle - startx) * 2 / 3 + startx;
-            float ctrly = y_circle + radius * (float) Math.cos(angle_pro / 2) - 40 * (0.5f - Math.abs(0.5f - scale));
+            float ctrly = y_circle + y_ext - fluctuation;
             float endx = x_circle;
-            float endy = y_circle + radius * (float) Math.cos(angle_pro / 2);
+            float endy = y_circle + y_ext;
             mPath.cubicTo(startx, starty, ctrlx, ctrly, endx, endy);
 
             startx = endx;
             starty = endy;
-            endx = x_circle + radius * (float) Math.sin(angle_pro / 2);
-            endy = y_circle + radius * (float) Math.cos(angle_pro / 2);
+            endx = x_circle + x_ext;
+            endy = y_circle + y_ext;
             ctrlx = startx + (endx - startx) * 1 / 3;
-            ctrly = y_circle + radius * (float) Math.cos(angle_pro / 2) + 40 * (0.5f - Math.abs(0.5f - scale));
+            ctrly = y_circle + y_ext + fluctuation;
             mPath.cubicTo(startx, starty, ctrlx, ctrly, endx, endy);
         }
         else{
@@ -136,7 +148,7 @@ public class ProbabilityView extends View {
             float startx = x_circle - bianchang * (float)Math.cos(jiaodu1);
             float starty = y_circle - bianchang * (float) Math.sin(jiaodu1);
             float ctrlx = (x_circle - startx) * 2 / 3 + startx;
-            float ctrly = starty - 4 * (5 - Math.abs(5 - scale));
+            float ctrly = starty - fluctuation;
             float endx = x_circle;
             float endy = starty;
             mPath.cubicTo(startx, starty, ctrlx, ctrly, endx, endy);
@@ -146,14 +158,25 @@ public class ProbabilityView extends View {
             endx = x_circle + bianchang * (float)Math.cos(jiaodu1);
             endy = starty;
             ctrlx = startx + (endx - startx) * 1 / 3;
-            ctrly = starty + 4 * (5 - Math.abs(5 - scale));
+            ctrly = starty + fluctuation;
             mPath.cubicTo(startx, starty, ctrlx, ctrly, endx, endy);
         }
-        canvas.drawPath(mPath, paint_pointer);
+        canvas.drawPath(mPath, paint_rain_drop_inner);
+
+        //绘制概率文字
         String str_show_pro = String.valueOf((int)probability);
         Rect rectf = new Rect();
-        paint_pointer.getTextBounds(str_show_pro, 0, str_show_pro.length(), rectf);
+        paint_text_probability.getTextBounds(str_show_pro, 0, str_show_pro.length(), rectf);
+        float words_width_in_piexl = Math.abs(rectf.right - rectf.left);
+        float words_height_in_piexl = Math.abs(rectf.bottom - rectf.top);
+        canvas.drawText(str_show_pro, x_circle - words_width_in_piexl / 2, y_circle + radius + 60, paint_text_probability);
 
-        canvas.drawText(str_show_pro, x_circle - Math.abs(rect.right - rect.left) / 2, y_circle + radius + 40, paint_pointer);
+        //绘制百分号
+        paint_text_baifenhao.getTextBounds("%", 0, 1, rectf);
+        canvas.drawText("%", x_circle + words_width_in_piexl / 2f, y_circle + radius + 60 - words_height_in_piexl + Math.abs(rectf.bottom - rectf.top) / 2f, paint_text_baifenhao);
+
+        //绘制日期
+        paint_text_date.getTextBounds(date, 0, date.length(), rectf);
+        canvas.drawText(date, x_circle - Math.abs(rectf.right - rectf.left) / 2f, y_circle - radius / (float) Math.cos(60 / 180f * (float) Math.PI) - 60, paint_text_date);
     }
 }

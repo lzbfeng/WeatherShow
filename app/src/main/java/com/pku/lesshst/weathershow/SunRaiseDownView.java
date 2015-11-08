@@ -23,6 +23,7 @@ public class SunRaiseDownView extends View {
     Paint paint_shader = new Paint();
     Paint paint_circle = new Paint();
     Paint paint_bezier = new Paint();
+    Paint paint_circle_fill = new Paint();
     Path path_bezier = new Path();
     Path path_shader = new Path();
     Path path_circle = new Path();
@@ -36,13 +37,16 @@ public class SunRaiseDownView extends View {
         paint_circle.setStrokeWidth(2);
         paint_circle.setStyle(Paint.Style.STROKE);
         paint_circle.setColor(0xffffffff);
-        paint_circle.setTextSize(30);
+
+        paint_circle_fill.setAntiAlias(true);
+        paint_circle_fill.setStrokeWidth(2);
+        paint_circle_fill.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_circle_fill.setColor(0xffffffff);
 
         paint_bezier.setAntiAlias(true);
-        paint_bezier.setStrokeWidth(8);
+        paint_bezier.setStrokeWidth(2);
         paint_bezier.setStyle(Paint.Style.STROKE);
         paint_bezier.setColor(0xffffffff);
-        paint_bezier.setTextSize(30);
     }
 
     float r_animator = 0f;
@@ -155,9 +159,15 @@ public class SunRaiseDownView extends View {
         path_shader.moveTo(startx, starty);
         path_shader.addArc(rect, 270 - angle, (float) time_now_sweep_angle);
 
-        canvas.drawCircle(x_shader, y_shader, 20, paint_circle);
         path_shader.lineTo(x_shader, h);
         path_shader.lineTo(startx, starty);
         canvas.drawPath(path_shader, paint_shader);
+
+        //绘制两个圆
+        canvas.drawCircle(x_shader, y_shader, 25, paint_circle);
+        canvas.drawCircle(x_shader, y_shader, 10, paint_circle_fill);
+
+        //绘制水平线
+        canvas.drawLine(padding / 2, h, w - padding / 2, h, paint_circle);
     }
 }
