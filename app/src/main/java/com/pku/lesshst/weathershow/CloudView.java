@@ -56,7 +56,12 @@ public class CloudView extends View{
                 }
                 break;
             case CLOUDY:
-                drawCloudy(canvas);
+                try {
+                    drawCloudy(canvas);
+                }
+                catch(Exception e){
+                    e.printStackTrace();
+                }
                 break;
             case OVERCAST:
                 drawOvercast(canvas);
@@ -89,24 +94,35 @@ public class CloudView extends View{
 
     }
 
-    private void drawCloudy(Canvas canvas) {
+    private void drawCloudy(Canvas canvas) throws Exception{
+        float w = canvas.getWidth();
+        float h = canvas.getHeight();
+        if(w != h){
+            throw new Exception("Width and Height are not same!");
+        }
+        RectF rect = new RectF();
+        float x_arc1 = w / 2f;
+        float y_arc1 = h * 1f / 3f + 20;
+        float radius1 = 30;
+        rect.set(x_arc1 - radius1, y_arc1 - radius1, x_arc1 + radius1, y_arc1 + radius1);
+        canvas.drawArc(rect, 0, 360, false, paint);
+
+        float x_arc2 = w * 2f / 5f;
+        float y_arc2 = h * 2f / 3f;
+        float radius2 = 25;
+        rect.set(x_arc2 - radius2, y_arc2 - radius2, x_arc2 + radius2, y_arc2 + radius2);
+        canvas.drawArc(rect, 0, 360, false, paint);
+
+        float x_arc3 = w * 3f / 5f;
+        float y_arc3 = h * 2f / 3f;
+        float radius3 = 25;
+        rect.set(x_arc3 - radius3, y_arc3 - radius3, x_arc3 + radius3, y_arc3 + radius3);
+        canvas.drawArc(rect, 0, 360, false, paint);
 
     }
-    private Path mCircle;
-    private Path mCircleInterrupting;
-    Paint paint = new Paint();
-    ValueAnimator anim;
 
-//    private void setAnimator(){
-//        anim = ValueAnimator.ofFloat(0f, 1f);
-//        anim.setRepeatCount(Animation.INFINITE);
-//        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(ValueAnimator animation) {
-////                invalidate();
-//            }
-//        });
-//    }
+    private Path mCircleInterrupting = new Path();;
+    Paint paint = new Paint();
 
     private void drawSunday(Canvas canvas) throws Exception{
 
@@ -115,10 +131,7 @@ public class CloudView extends View{
         if(w != h){
             throw new Exception("Width and Height are not same!");
         }
-//        if(!anim.isRunning()){
-//            anim.start();
-//        }
-        float radius_diff = 30;
+        float radius_diff = 50;
         float radius = w / 2 - radius_diff;
         float x_circle = w / 2;
         float y_circle = h / 2;
@@ -127,6 +140,7 @@ public class CloudView extends View{
         offest += 10;
         if(offest > 100000)
             offest = 0;
+        mCircleInterrupting.reset();
         for(int i = 0; i < 360; i += 45){
             double angle = 2 * Math.PI * (((i + offest) % 360) / 360.0);
             double cos = Math.cos(angle);
