@@ -47,19 +47,107 @@
                 android:text="动态"/>
         </LinearLayout>
         <LinearLayout
-            android:id="@+id/weeks_show"
+            android:id="@+id/weahters_show"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/line_layout"
             android:orientation="horizontal">
-            <TextView
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="周一"
-                android:gravity="center"
-                android:textSize="15sp"
-                android:textColor="@android:color/white"/>
+                android:orientation="vertical">
+
+                <com.pku.lesshst.weathershow.CloudView
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="周一"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.pku.lesshst.weathershow.CloudView
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="周一"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <com.pku.lesshst.weathershow.CloudView
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="周一"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <com.pku.lesshst.weathershow.CloudView
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="周一"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <com.pku.lesshst.weathershow.CloudView
+                    android:layout_width="50dip"
+                    android:layout_height="50dip" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="周一"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/weeks_show"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/weahters_show"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

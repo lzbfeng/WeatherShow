@@ -26,6 +26,7 @@ public class RotateView extends View {
 
     private Path mCircleUpdate;
     private Path mCircleInterruptingUpdate;
+    Paint paint = new Paint();
 
     private void drawCircle(Canvas canvas){
         alpha -= 30;
@@ -52,22 +53,24 @@ public class RotateView extends View {
         for(int i = 0; i < 360; i += 45){
             double angle = 2 * Math.PI * (((i + offest) % 360) / 360.0);
             double r = circleRect.width() / 2.0;
-            double startX = Math.cos(angle) * (r + 10) + centerX;
-            double startY = Math.sin(angle) * (r + 10) + centerY;
-            double endX = Math.cos(angle) * (r + 20) + centerX;
-            double endY = Math.sin(angle) * (r + 20) + centerY;
+            double cos = Math.cos(angle);
+            double sin = Math.sin(angle);
+            double startX = cos * (r + 10) + centerX;
+            double startY = sin * (r + 10) + centerY;
+            double endX = cos * (r + 20) + centerX;
+            double endY = sin * (r + 20) + centerY;
             mCircleInterruptingUpdate.moveTo((float) startX, (float) startY);
             mCircleInterruptingUpdate.lineTo((float) endX, (float)endY);
         }
 
-        Paint p = new Paint();
-        p.setColor(0xffffffff);
+
+        paint.setColor(0xffffffff);
 //        p.setAlpha(alpha);
-        p.setAntiAlias(true);
-        p.setStyle(Paint.Style.STROKE);
-        p.setStrokeWidth(5);
-        canvas.drawPath(mCircleUpdate, p);
-        canvas.drawPath(mCircleInterruptingUpdate, p);
+        paint.setAntiAlias(true);
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(5);
+        canvas.drawPath(mCircleUpdate, paint);
+        canvas.drawPath(mCircleInterruptingUpdate, paint);
     }
     private int alpha = 255;
     private int offest = 0;

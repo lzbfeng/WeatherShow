@@ -150,6 +150,13 @@ public class MainActivity extends Activity {
             }
         });
 
+//        CloudView cloudView = (CloudView)findViewById(R.id.yesterday_weather_show);
+//
+//        LinearLayout weahters_show_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.weahters_show);
+//        CloudView plot_view = new CloudView(this);
+//        weahters_show_layout.addView(plot_view, 50, 50);
+
+
         LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
         grid_view = new GridView(this);
         grid_view_layout.addView(grid_view, 1080, 600);
