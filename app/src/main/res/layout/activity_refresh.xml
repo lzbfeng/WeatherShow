@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/weather_today"
         android:layout_width="fill_parent"
-        android:layout_height="1920dp"
+        android:layout_height="1700dp"
         android:padding="0dp">
 
         <LinearLayout
@@ -35,16 +35,24 @@
             android:id="@+id/weatehr_general_situation"
             layout="@layout/weather_general_situation"/>
         <LinearLayout
+            android:id="@+id/blank1"
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/weatehr_general_situation"
+            android:orientation="vertical">
+
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/line_layout"
             android:layout_width="fill_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/weatehr_general_situation"
+            android:layout_below="@id/blank1"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_line_laout_animator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="动态"/>
+            <!--<Button-->
+                <!--android:id="@+id/btn_line_laout_animator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="动态"/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/weahters_show"
@@ -198,50 +206,51 @@
             android:id="@+id/grid_view_layout"
             android:layout_width="fill_parent"
             android:layout_height="300dp"
+            android:paddingTop="30dp"
             android:layout_below="@id/weahters_show"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_grid_laout_animator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="动态"/>
+            <!--<Button-->
+                <!--android:id="@+id/btn_grid_laout_animator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="动态"/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/pm_view_layout"
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="300dp"
             android:layout_below="@id/grid_view_layout"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_pm_laout_animator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="动态"/>
+            <!--<Button-->
+                <!--android:id="@+id/btn_pm_laout_animator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="动态"/>-->
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/probability_view_layout"
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="200dp"
             android:layout_below="@id/pm_view_layout"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_pro_laout_animator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="动态"/>
+            <!--<Button-->
+                <!--android:id="@+id/btn_pro_laout_animator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="动态"/>-->
         </LinearLayout>
         <LinearLayout
             android:id="@+id/sun_raise_donw_view_layout"
             android:layout_width="fill_parent"
-            android:layout_height="400dp"
+            android:layout_height="200dp"
             android:layout_below="@id/probability_view_layout"
             android:orientation="vertical">
-            <Button
-                android:id="@+id/btn_sun_laout_animator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="动态"/>
+            <!--<Button-->
+                <!--android:id="@+id/btn_sun_laout_animator"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="动态"/>-->
         </LinearLayout>
     </RelativeLayout>
 </RelativeLayout>
