@@ -15,6 +15,27 @@ import android.view.animation.DecelerateInterpolator;
  */
 public class ProbabilityView extends View {
 
+    public class ProbabilityViewInfo{
+        public final String thirdDayName = "11/11";
+        public final String forthDayName = "11/12";
+        private int[] probabilities;
+
+        public String getThirdDayName() {
+            return thirdDayName;
+        }
+
+        public String getForthDayName() {
+            return forthDayName;
+        }
+
+        public int[] getProbabilities() {
+            return probabilities;
+        }
+
+        public void setProbabilities(int[] probabilities) {
+            this.probabilities = probabilities;
+        }
+    }
     float r_animator = 0f;
     Paint paint_rain_drop_inner = new Paint();
     Paint paint_text_probability = new Paint();
@@ -72,14 +93,27 @@ public class ProbabilityView extends View {
         anim.start();
     }
 
+    private int probabilities[] = new int[]{23, 38, 50, 89};
+    private String dates[] = new String[]{"今天", "明天", "11/10", "11/11"};
+
+    public void setProbabilityInfo(ProbabilityViewInfo info){
+        this.probabilities = info.getProbabilities();
+        this.dates[2] = info.getThirdDayName();
+        this.dates[3] = info.getForthDayName();
+    }
+
+    public void setProbabilityInfoAndUpdate(ProbabilityViewInfo info){
+        setProbabilityInfo(info);
+        this.startAnimator();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        int w = 1080;
-        int step = 1080 / 4;
-        int probabilities[] = new int[]{23, 38, 50, 89};
-        String dates[] = new String[]{"11/08", "11/09", "11/10", "11/11"};
+        int w = canvas.getWidth();
+        int step = w / 4;
+
         for(int i = 0; i < 4; i ++){
             drawRaindrop(canvas, i * step + step / 2, 300, 100, probabilities[i], dates[i]);
         }

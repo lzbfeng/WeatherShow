@@ -58,81 +58,7 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
                 <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="昨天"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white"/>
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/simple_weather_icon_01"/>
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="11°/2°"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="今天"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white"/>
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/simple_weather_icon_03"/>
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="11°/2°"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="明天"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white"/>
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/simple_weather_icon_04"/>
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:text="11°/2°"
-                    android:gravity="center"
-                    android:textSize="15sp"
-                    android:textColor="@android:color/white"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-                <TextView
+                    android:id="@+id/first_day_date_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="11/12"
@@ -140,11 +66,41 @@
                     android:textSize="15sp"
                     android:textColor="@android:color/white"/>
                 <ImageView
+                    android:id="@+id/first_day_cloud_show"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/simple_weather_icon_22"/>
+                    android:src="@drawable/simple_weather_icon_01"/>
                 <TextView
+                    android:id="@+id/first_day_temp_show"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11°/2°"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>s
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/second_day_date_show"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11/12"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+                <ImageView
+                    android:id="@+id/second_day_cloud_show"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/simple_weather_icon_03"/>
+                <TextView
+                    android:id="@+id/second_day_temp_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="11°/2°"
@@ -158,18 +114,77 @@
                 android:layout_weight="1"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/third_day_date_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="11/13"
+                    android:text="11/12"
                     android:gravity="center"
                     android:textSize="15sp"
                     android:textColor="@android:color/white"/>
                 <ImageView
+                    android:id="@+id/third_day_cloud_show"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/simple_weather_icon_22"/>
+                <TextView
+                    android:id="@+id/third_day_temp_show"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11°/2°"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/forth_day_date_show"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11/12"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+                <ImageView
+                    android:id="@+id/forth_day_cloud_show"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/simple_weather_icon_04"/>
+                <TextView
+                    android:id="@+id/forth_day_temp_show"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11°/2°"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/fifth_day_date_show"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="11/12"
+                    android:gravity="center"
+                    android:textSize="15sp"
+                    android:textColor="@android:color/white"/>
+                <ImageView
+                    android:id="@+id/fifth_day_cloud_show"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:src="@drawable/simple_weather_icon_26"/>
                 <TextView
+                    android:id="@+id/fifth_day_temp_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="11°/2°"

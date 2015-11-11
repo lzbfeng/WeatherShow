@@ -17,7 +17,77 @@ import android.view.animation.DecelerateInterpolator;
  * Created by lesshst on 2015/11/7.
  */
 public class GridView extends View {
+    public class GridViewInfo {
+        public final static String humidity = "湿度";
+        public final static String visibility = "可见度";
+        public String windDirection = "东风";
+        public final static String UVRays = "紫外线";
+        public final static String pressure = "气压";
+        public final static String bodyFeeling = "体感";
 
+        private String humidityValue = "86";
+        private String visibilityValue = "6.4";
+        private String windDirectionValue = "一级";
+        private String UVRaysValue = "最弱";
+        private String pressureValue = "1022.0";
+        private String bodyFeelingValue = "3.9";
+
+        public void setWindDirection(String windDirection) {
+            this.windDirection = windDirection;
+        }
+
+        public void setHumidityValue(String humidityValue) {
+            this.humidityValue = humidityValue;
+        }
+
+        public void setVisibilityValue(String visibilityValue) {
+            this.visibilityValue = visibilityValue;
+        }
+
+        public void setWindDirectionValue(String windDirectionValue) {
+            this.windDirectionValue = windDirectionValue;
+        }
+
+        public void setUVRaysValue(String UVRaysValue) {
+            this.UVRaysValue = UVRaysValue;
+        }
+
+        public void setPressureValue(String pressureValue) {
+            this.pressureValue = pressureValue;
+        }
+
+        public void setBodyFeelingValue(String bodyFeelingValue) {
+            this.bodyFeelingValue = bodyFeelingValue;
+        }
+
+        public String getWindDirection() {
+            return windDirection;
+        }
+
+        public String getHumidityValue() {
+            return humidityValue;
+        }
+
+        public String getVisibilityValue() {
+            return visibilityValue;
+        }
+
+        public String getWindDirectionValue() {
+            return windDirectionValue;
+        }
+
+        public String getUVRaysValue() {
+            return UVRaysValue;
+        }
+
+        public String getPressureValue() {
+            return pressureValue;
+        }
+
+        public String getBodyFeelingValue() {
+            return bodyFeelingValue;
+        }
+    }
     String[] titles = new String[]{"湿度(%)", "可见度(km)", "北风", "紫外线", "气压", "体感(℃)"};
     String[] values = new String[]{"86", "6.4", "一级", "最弱", "1022.0", "3.9"};
     float r_animator = 0f;
@@ -60,6 +130,21 @@ public class GridView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawGrid(canvas);
+    }
+
+    public void setGridViewInfo(GridViewInfo info){
+        titles[2] = info.getWindDirection();
+        values[0] = info.getHumidityValue();
+        values[1] = info.getVisibilityValue();
+        values[2] = info.getWindDirectionValue();
+        values[3] = info.getUVRaysValue();
+        values[4] = info.getPressureValue();
+        values[5] = info.getBodyFeelingValue();
+    }
+
+    public void setGridViewInfoAndUpdate(GridViewInfo info){
+        this.setGridViewInfo(info);
+        this.startAnimator();
     }
 
     private void drawGrid(Canvas canvas) {

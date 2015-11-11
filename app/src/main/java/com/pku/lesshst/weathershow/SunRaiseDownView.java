@@ -16,6 +16,50 @@ import android.view.animation.DecelerateInterpolator;
  */
 public class SunRaiseDownView extends View {
 
+    public class SunRaiseDownViewInfo{
+        private final String text_show = "日出日落";
+        private String raiseTime = "06:54";
+        private String downTime = "17:03";
+        private String monthModeText = "晦日";
+        private int monthMode = 1;
+
+        public String getText_show() {
+            return text_show;
+        }
+
+        public String getRaiseTime() {
+            return raiseTime;
+        }
+
+        public void setRaiseTime(String raiseTime) {
+            this.raiseTime = raiseTime;
+        }
+
+        public String getDownTime() {
+            return downTime;
+        }
+
+        public void setDownTime(String downTime) {
+            this.downTime = downTime;
+        }
+
+        public String getMonthModeText() {
+            return monthModeText;
+        }
+
+        public void setMonthModeText(String monthModeText) {
+            this.monthModeText = monthModeText;
+        }
+
+        public int getMonthMode() {
+            return monthMode;
+        }
+
+        public void setMonthMode(int monthMode) {
+            this.monthMode = monthMode;
+        }
+    }
+
     float start_angle = 0;
     float end_angle = 70;
     float time_raise = 6;
@@ -25,9 +69,12 @@ public class SunRaiseDownView extends View {
     Paint paint_circle = new Paint();
     Paint paint_bezier = new Paint();
     Paint paint_circle_fill = new Paint();
+
     Path path_bezier = new Path();
     Path path_shader = new Path();
     Path path_circle = new Path();
+
+    Paint paint_text_show = new Paint();
 
     public SunRaiseDownView(Context context) {
         super(context);
@@ -69,6 +116,17 @@ public class SunRaiseDownView extends View {
         anim.setDuration(500);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
+    }
+
+    SunRaiseDownViewInfo info;
+
+    public void setSunRaiseDownViewInfo(SunRaiseDownViewInfo info){
+        this.info = info;
+    }
+
+    public void setSunRaiseDownViewInfoAndUpdate(SunRaiseDownViewInfo info){
+        this.setSunRaiseDownViewInfo(info);
+        this.startAnimator();
     }
 
     @Override
@@ -125,7 +183,6 @@ public class SunRaiseDownView extends View {
         path_shader.lineTo(startx, starty);
         canvas.drawPath(path_bezier, paint_bezier);
         canvas.drawPath(path_shader, paint_shader);
-
     }
 
     private void drawCircle(Canvas canvas){
@@ -170,5 +227,10 @@ public class SunRaiseDownView extends View {
 
         //绘制水平线
         canvas.drawLine(padding / 2, h, w - padding / 2, h, paint_circle);
+
+        //绘制 “日出日落”
+        canvas.drawText(this.info.getText_show(), padding / 2, padding / 2, paint_text_show);
+        //绘制“晦日”
+        canvas.drawText(this.info.getMonthModeText(), padding / 2, padding / 2, paint_text_show);
     }
 }

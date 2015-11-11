@@ -8,6 +8,7 @@ import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PathEffect;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -65,7 +66,17 @@ public class LineView extends View {
         paintTemps(canvas, temps_day, true);
         paintTemps(canvas, temps_night, false);
     }
-
+    public void setTempsAndUpdate(int [] temps_day, int [] temps_night){
+        if(!(temps_day.length == 5 && temps_night.length == 5)){
+            Log.e("LineView", "The length of temps should be 5!");
+            return;
+        }
+        for(int i = 0; i < temps_day.length; i++){
+            this.temps_day[i] = temps_day[i];
+            this.temps_night[i] = temps_night[i];
+        }
+        this.startAnimator();
+    }
     private void paintTemps(Canvas canvas, int [] temps, boolean isDay){
         path.reset();
         int w = 1080;

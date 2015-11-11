@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.SweepGradient;
@@ -16,7 +15,37 @@ import android.view.animation.DecelerateInterpolator;
  * Created by lesshst on 2015/11/7.
  */
 public class PMView extends View {
+    public class PMViewInfo {
+        public final static String monitorStr = "中国环境监测总站 ";
+        public final static String monitorStr1 = "发布";
+        private String date = "11月08日";
+        private String time = "21:00";
+        private int PMValue = 300;
 
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
+        }
+
+        public int getPMValue() {
+            return PMValue;
+        }
+
+        public void setPMValue(int PMValue) {
+            this.PMValue = PMValue;
+        }
+    }
     float r_animator = 0f;
     Paint paint_circle_out = new Paint();
     Paint paint_circle_left = new Paint();
@@ -26,8 +55,10 @@ public class PMView extends View {
     Paint paint_text_pm_value = new Paint();
     Paint paint_text_pm_source = new Paint();
 
-    int all_quality = 500;
-    int quality = 300;
+    private final int all_quality = 500;
+    int pmvalue = 300;
+    String date = "11月08日";
+    String time = "21:00";
     private final int all_angle = 300;
     private final int left_right_circle_stroke_width = 30;
     private String text_pm_source = "中国环境监测总站 11月08日21:00发布";
@@ -78,6 +109,15 @@ public class PMView extends View {
         paint_text_pm_source.setColor(0xcccccccc);
         paint_text_pm_source.setTextSize(40);
     }
+    public void setPMViewInfo(PMViewInfo info){
+        this.pmvalue = info.getPMValue();
+        this.text_pm_source = info.monitorStr + info.getDate() + info.getTime() + info.monitorStr1;
+    }
+
+    public void setPMViewInfoAndUpdate(PMViewInfo info){
+        setPMViewInfo(info);
+        this.startAnimator();
+    }
 
     public void startAnimator(){
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
@@ -115,7 +155,7 @@ public class PMView extends View {
         canvas.drawArc(rect, 120, 180, false, paint_circle_out);
         //画左侧圆
         rect.set(x_circle - radius_left_right, y_circle - radius_left_right, x_circle + radius_left_right, y_circle + radius_left_right);
-        float sweepAngle = quality / (float)all_quality * all_angle * this.r_animator;
+        float sweepAngle = this.pmvalue / (float)all_quality * all_angle * this.r_animator;
         canvas.drawArc(rect, 120, sweepAngle, false, paint_circle_left);
         //画右侧圆，设置渐变色
         int[] colors = {0x55555555, 0xdddddddd};
@@ -140,7 +180,7 @@ public class PMView extends View {
         canvas.drawLine(startx, starty, endx, endy, paint_pointer);
 
         //显示PM值
-        String pm_value = String.valueOf((int)(quality * this.r_animator));
+        String pm_value = String.valueOf((int)(this.pmvalue * this.r_animator));
         Rect text_rect = new Rect();
         paint_text_pm_value.getTextBounds(pm_value, 0, pm_value.length(), text_rect);
         canvas.drawText(pm_value, x_circle - Math.abs(text_rect.right - text_rect.left) / 2f, y_circle + radius_out * 2 / 3f, paint_text_pm_value);
