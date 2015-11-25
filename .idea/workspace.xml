@@ -11,7 +11,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9cc7a1a6-ecd6-4eb1-988d-fb54b7e6d48b" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/MainActivity.java" />
+      <change type="DELETED" beforePath="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow0.0.1\WeatherShow.iml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/cache.properties.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" afterPath="$PROJECT_DIR$/build/intermediates/gradle_project_sync_data.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/outputFileStates.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.4/taskArtifacts/taskArtifacts.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/appcompat_v7_23_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" afterPath="$PROJECT_DIR$/build/intermediates/dex-cache/cache.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" afterPath="$PROJECT_DIR$/.idea/libraries/support_v4_23_1_0.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="WeatherShow.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,13 +56,10 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.048469387">
-              <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.97938144">
+              <caret line="128" column="21" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="21" />
               <folding>
-                <element signature="e#16838#17420#0" expanded="true" />
-                <element signature="e#17419#17420#0" expanded="true" />
-                <element signature="e#17483#17596#0" expanded="true" />
-                <element signature="e#17595#17596#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,56 +83,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="52" column="22" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
-              <folding>
-                <element signature="e#0#76751#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#20355#20356#0" expanded="false" />
-                <element signature="e#20386#20387#0" expanded="false" />
-                <element signature="e#21614#21615#0" expanded="false" />
-                <element signature="e#21647#21648#0" expanded="false" />
-                <element signature="e#21689#21690#0" expanded="false" />
-                <element signature="e#21724#21725#0" expanded="false" />
-                <element signature="e#21776#21777#0" expanded="false" />
-                <element signature="e#21809#21810#0" expanded="false" />
-                <element signature="e#21868#21869#0" expanded="false" />
-                <element signature="e#21901#21902#0" expanded="false" />
-                <element signature="e#25489#25490#0" expanded="false" />
-                <element signature="e#25526#25527#0" expanded="false" />
-                <element signature="e#25785#25786#0" expanded="false" />
-                <element signature="e#25821#25822#0" expanded="false" />
-                <element signature="e#25942#25943#0" expanded="false" />
-                <element signature="e#25974#25975#0" expanded="false" />
-                <element signature="e#31272#31273#0" expanded="false" />
-                <element signature="e#31310#31311#0" expanded="false" />
-                <element signature="e#31373#31374#0" expanded="false" />
-                <element signature="e#31418#31419#0" expanded="false" />
-                <element signature="e#31675#31676#0" expanded="false" />
-                <element signature="e#31709#31710#0" expanded="false" />
-                <element signature="e#35019#35020#0" expanded="false" />
-                <element signature="e#35059#35060#0" expanded="false" />
-                <element signature="e#35258#35259#0" expanded="false" />
-                <element signature="e#35299#35300#0" expanded="false" />
-                <element signature="e#35421#35422#0" expanded="false" />
-                <element signature="e#35461#35462#0" expanded="false" />
-                <element signature="e#38406#38407#0" expanded="false" />
-                <element signature="e#38438#38439#0" expanded="false" />
-                <element signature="e#38828#38829#0" expanded="false" />
-                <element signature="e#38882#38883#0" expanded="false" />
-                <element signature="e#50701#50702#0" expanded="false" />
-                <element signature="e#50733#50734#0" expanded="false" />
-                <element signature="e#51597#51598#0" expanded="false" />
-                <element signature="e#51657#51658#0" expanded="false" />
-                <element signature="e#51993#51994#0" expanded="false" />
-                <element signature="e#52030#52031#0" expanded="false" />
-                <element signature="e#52718#52719#0" expanded="false" />
-                <element signature="e#52755#52756#0" expanded="false" />
-                <element signature="e#54304#54305#0" expanded="false" />
-                <element signature="e#54331#54332#0" expanded="false" />
-                <element signature="e#57058#57059#0" expanded="false" />
-                <element signature="e#57085#57086#0" expanded="false" />
-                <element signature="e#57855#57856#0" expanded="false" />
-                <element signature="e#57882#57883#0" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -163,12 +125,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-              <folding>
-                <element signature="e#3196#3473#0" expanded="true" />
-                <element signature="e#3472#3473#0" expanded="true" />
-                <element signature="e#3806#4083#0" expanded="true" />
-                <element signature="e#4082#4083#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -226,7 +183,7 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="WeatherShow" />
+              <option name="name" value="WeatherShow0.0.1" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
@@ -237,7 +194,7 @@
                 <option name="path" value="$PROJECT_DIR$/app" />
               </ExternalProjectPojo>
               <ExternalProjectPojo>
-                <option name="name" value="WeatherShow" />
+                <option name="name" value="WeatherShow0.0.1" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
             </list>
@@ -251,17 +208,17 @@
           <value>
             <list>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'WeatherShow'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'WeatherShow0.0.1'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'WeatherShow'." />
+                <option name="description" value="Displays all dependencies declared in root project 'WeatherShow0.0.1'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'WeatherShow'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'WeatherShow0.0.1'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -276,22 +233,22 @@
                 <option name="name" value="init" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'WeatherShow'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'WeatherShow0.0.1'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'WeatherShow'." />
+                <option name="description" value="Displays the sub-projects of root project 'WeatherShow0.0.1'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'WeatherShow'." />
+                <option name="description" value="Displays the properties of root project 'WeatherShow0.0.1'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'WeatherShow' (some of the displayed tasks may belong to subprojects)." />
+                <option name="description" value="Displays the tasks runnable from root project 'WeatherShow0.0.1' (some of the displayed tasks may belong to subprojects)." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -1332,6 +1289,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow" value="4340578955775" />
+        <entry key="C:\Users\lesshst\Desktop\tasks\Android\lesshst\WeatherShow0.0.1" value="4345307714705" />
       </map>
     </option>
     <option name="projectBuildClasspath">
@@ -1702,6 +1660,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <PATH>
@@ -1754,7 +1713,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane" />
@@ -1985,10 +1943,10 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3030303" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32854864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33492824" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32854864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33492824" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2028,15 +1986,62 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/ViewUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/PMView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="139" column="26" selection-start-line="139" selection-start-column="26" selection-end-line="139" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/ProbabilityView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/SunRaiseDownView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="213" column="68" selection-start-line="213" selection-start-column="68" selection-end-line="213" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/GridView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="137" column="0" selection-start-line="137" selection-start-column="0" selection-end-line="137" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/LineView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="123" column="0" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="453" column="49" selection-start-line="453" selection-start-column="49" selection-end-line="453" selection-end-column="49" />
           <folding>
-            <element signature="e#16838#17420#0" expanded="true" />
-            <element signature="e#17419#17420#0" expanded="true" />
-            <element signature="e#17483#17596#0" expanded="true" />
-            <element signature="e#17595#17596#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2056,56 +2061,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="22" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#76751#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#20355#20356#0" expanded="false" />
-            <element signature="e#20386#20387#0" expanded="false" />
-            <element signature="e#21614#21615#0" expanded="false" />
-            <element signature="e#21647#21648#0" expanded="false" />
-            <element signature="e#21689#21690#0" expanded="false" />
-            <element signature="e#21724#21725#0" expanded="false" />
-            <element signature="e#21776#21777#0" expanded="false" />
-            <element signature="e#21809#21810#0" expanded="false" />
-            <element signature="e#21868#21869#0" expanded="false" />
-            <element signature="e#21901#21902#0" expanded="false" />
-            <element signature="e#25489#25490#0" expanded="false" />
-            <element signature="e#25526#25527#0" expanded="false" />
-            <element signature="e#25785#25786#0" expanded="false" />
-            <element signature="e#25821#25822#0" expanded="false" />
-            <element signature="e#25942#25943#0" expanded="false" />
-            <element signature="e#25974#25975#0" expanded="false" />
-            <element signature="e#31272#31273#0" expanded="false" />
-            <element signature="e#31310#31311#0" expanded="false" />
-            <element signature="e#31373#31374#0" expanded="false" />
-            <element signature="e#31418#31419#0" expanded="false" />
-            <element signature="e#31675#31676#0" expanded="false" />
-            <element signature="e#31709#31710#0" expanded="false" />
-            <element signature="e#35019#35020#0" expanded="false" />
-            <element signature="e#35059#35060#0" expanded="false" />
-            <element signature="e#35258#35259#0" expanded="false" />
-            <element signature="e#35299#35300#0" expanded="false" />
-            <element signature="e#35421#35422#0" expanded="false" />
-            <element signature="e#35461#35462#0" expanded="false" />
-            <element signature="e#38406#38407#0" expanded="false" />
-            <element signature="e#38438#38439#0" expanded="false" />
-            <element signature="e#38828#38829#0" expanded="false" />
-            <element signature="e#38882#38883#0" expanded="false" />
-            <element signature="e#50701#50702#0" expanded="false" />
-            <element signature="e#50733#50734#0" expanded="false" />
-            <element signature="e#51597#51598#0" expanded="false" />
-            <element signature="e#51657#51658#0" expanded="false" />
-            <element signature="e#51993#51994#0" expanded="false" />
-            <element signature="e#52030#52031#0" expanded="false" />
-            <element signature="e#52718#52719#0" expanded="false" />
-            <element signature="e#52755#52756#0" expanded="false" />
-            <element signature="e#54304#54305#0" expanded="false" />
-            <element signature="e#54331#54332#0" expanded="false" />
-            <element signature="e#57058#57059#0" expanded="false" />
-            <element signature="e#57085#57086#0" expanded="false" />
-            <element signature="e#57855#57856#0" expanded="false" />
-            <element signature="e#57882#57883#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2139,12 +2095,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding>
-            <element signature="e#3196#3473#0" expanded="true" />
-            <element signature="e#3472#3473#0" expanded="true" />
-            <element signature="e#3806#4083#0" expanded="true" />
-            <element signature="e#4082#4083#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2177,10 +2128,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#16838#17420#0" expanded="true" />
-            <element signature="e#17419#17420#0" expanded="true" />
-            <element signature="e#17483#17596#0" expanded="true" />
-            <element signature="e#17595#17596#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2229,12 +2177,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
-          <folding>
-            <element signature="e#3196#3473#0" expanded="true" />
-            <element signature="e#3472#3473#0" expanded="true" />
-            <element signature="e#3806#4083#0" expanded="true" />
-            <element signature="e#4082#4083#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2274,10 +2217,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="144" column="34" selection-start-line="144" selection-start-column="34" selection-end-line="144" selection-end-column="34" />
           <folding>
-            <element signature="e#16838#17420#0" expanded="true" />
-            <element signature="e#17419#17420#0" expanded="true" />
-            <element signature="e#17483#17596#0" expanded="true" />
-            <element signature="e#17595#17596#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2326,12 +2266,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="131" column="27" selection-start-line="131" selection-start-column="27" selection-end-line="131" selection-end-column="27" />
-          <folding>
-            <element signature="e#3196#3473#0" expanded="true" />
-            <element signature="e#3472#3473#0" expanded="true" />
-            <element signature="e#3806#4083#0" expanded="true" />
-            <element signature="e#4082#4083#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2439,12 +2374,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="107" column="0" selection-start-line="107" selection-start-column="0" selection-end-line="107" selection-end-column="0" />
-          <folding>
-            <element signature="e#3196#3473#0" expanded="true" />
-            <element signature="e#3472#3473#0" expanded="true" />
-            <element signature="e#3806#4083#0" expanded="true" />
-            <element signature="e#4082#4083#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2452,56 +2382,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="52" column="22" selection-start-line="52" selection-start-column="22" selection-end-line="52" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#76751#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#20355#20356#0" expanded="false" />
-            <element signature="e#20386#20387#0" expanded="false" />
-            <element signature="e#21614#21615#0" expanded="false" />
-            <element signature="e#21647#21648#0" expanded="false" />
-            <element signature="e#21689#21690#0" expanded="false" />
-            <element signature="e#21724#21725#0" expanded="false" />
-            <element signature="e#21776#21777#0" expanded="false" />
-            <element signature="e#21809#21810#0" expanded="false" />
-            <element signature="e#21868#21869#0" expanded="false" />
-            <element signature="e#21901#21902#0" expanded="false" />
-            <element signature="e#25489#25490#0" expanded="false" />
-            <element signature="e#25526#25527#0" expanded="false" />
-            <element signature="e#25785#25786#0" expanded="false" />
-            <element signature="e#25821#25822#0" expanded="false" />
-            <element signature="e#25942#25943#0" expanded="false" />
-            <element signature="e#25974#25975#0" expanded="false" />
-            <element signature="e#31272#31273#0" expanded="false" />
-            <element signature="e#31310#31311#0" expanded="false" />
-            <element signature="e#31373#31374#0" expanded="false" />
-            <element signature="e#31418#31419#0" expanded="false" />
-            <element signature="e#31675#31676#0" expanded="false" />
-            <element signature="e#31709#31710#0" expanded="false" />
-            <element signature="e#35019#35020#0" expanded="false" />
-            <element signature="e#35059#35060#0" expanded="false" />
-            <element signature="e#35258#35259#0" expanded="false" />
-            <element signature="e#35299#35300#0" expanded="false" />
-            <element signature="e#35421#35422#0" expanded="false" />
-            <element signature="e#35461#35462#0" expanded="false" />
-            <element signature="e#38406#38407#0" expanded="false" />
-            <element signature="e#38438#38439#0" expanded="false" />
-            <element signature="e#38828#38829#0" expanded="false" />
-            <element signature="e#38882#38883#0" expanded="false" />
-            <element signature="e#50701#50702#0" expanded="false" />
-            <element signature="e#50733#50734#0" expanded="false" />
-            <element signature="e#51597#51598#0" expanded="false" />
-            <element signature="e#51657#51658#0" expanded="false" />
-            <element signature="e#51993#51994#0" expanded="false" />
-            <element signature="e#52030#52031#0" expanded="false" />
-            <element signature="e#52718#52719#0" expanded="false" />
-            <element signature="e#52755#52756#0" expanded="false" />
-            <element signature="e#54304#54305#0" expanded="false" />
-            <element signature="e#54331#54332#0" expanded="false" />
-            <element signature="e#57058#57059#0" expanded="false" />
-            <element signature="e#57085#57086#0" expanded="false" />
-            <element signature="e#57855#57856#0" expanded="false" />
-            <element signature="e#57882#57883#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2550,13 +2431,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/pku/lesshst/weathershow/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.048469387">
-          <caret line="1" column="37" selection-start-line="1" selection-start-column="37" selection-end-line="1" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.97938144">
+          <caret line="128" column="21" selection-start-line="128" selection-start-column="21" selection-end-line="128" selection-end-column="21" />
           <folding>
-            <element signature="e#16838#17420#0" expanded="true" />
-            <element signature="e#17419#17420#0" expanded="true" />
-            <element signature="e#17483#17596#0" expanded="true" />
-            <element signature="e#17595#17596#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
