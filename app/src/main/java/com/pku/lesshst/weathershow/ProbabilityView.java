@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
@@ -49,7 +50,10 @@ public class ProbabilityView extends ViewUpdate {
 
     public ProbabilityView(Context context) {
         super(context);
+
         initAllPaints();
+
+        initAllAnimators();
     }
 
     private void initAllPaints(){
@@ -97,7 +101,7 @@ public class ProbabilityView extends ViewUpdate {
         animators[animator_index].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                ProbabilityView.this.r_animator = (float) animation.getAnimatedValue();
+//                ProbabilityView.this.r_animator = (float) animation.getAnimatedValue();
                 invalidate();
             }
         });
@@ -107,25 +111,19 @@ public class ProbabilityView extends ViewUpdate {
     }
 
     public void startAnimator(){
-        ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                ProbabilityView.this.r_animator = (float) animation.getAnimatedValue();
-                invalidate();
-            }
-        });
-        anim.setDuration(1000);
-        anim.setInterpolator(new DecelerateInterpolator());
-        anim.start();
+        initAllAnimators();
+        for (ValueAnimator anim : animators) {
+            anim.start();
+        }
+        updateByHand = false;
     }
 
     public void endAnimator(){
-        ProbabilityView.this.r_animator = 0f;
+        updateByHand = true;
         invalidate();
     }
 
-    private int probabilities[] = new int[]{23, 38, 50, 89};
+    private int probabilities[] = new int[]{78, 38, 50, 29};
     private String dates[] = new String[]{"今天", "明天", "11/10", "11/11"};
 
     public void setProbabilityInfo(ProbabilityViewInfo info){
@@ -139,30 +137,41 @@ public class ProbabilityView extends ViewUpdate {
         this.startAnimator();
     }
 
+    boolean updateByHand = false;
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
         int w = canvas.getWidth();
         int step = w / 4;
-
+        boolean b = true;
         for(int i = 0; i < 4; i ++){
-            drawRaindrop(canvas, i * step + step / 2, 300 * ProbabilityView.this.r_animator, 100, probabilities[i], dates[i]);
+            if(updateByHand)
+                drawNothing();
+            else {
+                drawRaindrop(canvas, i * step + step / 2, (float) animators[i].getAnimatedValue(), 100, probabilities[i], dates[i]);
+            }
         }
     }
+    private void drawNothing(){
 
-    private void drawRaindrop(Canvas canvas, float x, float y, float radius, float probability, String date){
+    }
+    private void drawRaindrop(Canvas canvas, float x, float y_ratio, float radius, float probability, String date){
+
+//        Log.e("drawRaindrop", String.valueOf(y_ratio));
         float x_circle = x;
-        float y_circle = y;
+        float y_circle = 300 * y_ratio;
 
         radius = 50;
         RectF rect = new RectF();
         rect.set(x_circle - radius, y_circle - radius, x_circle + radius, y_circle + radius);
+        paint_rain_drop_outer.setAlpha((int)(255 * y_ratio));
         canvas.drawArc(rect, 330, 240, false, paint_rain_drop_outer);
 
         double angle = 60f / 180 * Math.PI;
         float end_x = x_circle;
         float end_y = (float)(y_circle - radius / Math.cos(angle));
+
         //绘制左边的直线
         float start_x_left = (float)(x_circle - radius * Math.sin(angle));
         float start_y_left = (float)(y_circle - radius * Math.cos(angle));
@@ -227,6 +236,7 @@ public class ProbabilityView extends ViewUpdate {
             ctrly = starty + fluctuation;
             mPath.cubicTo(startx, starty, ctrlx, ctrly, endx, endy);
         }
+        paint_rain_drop_inner.setAlpha((int)(255 * y_ratio));
         canvas.drawPath(mPath, paint_rain_drop_inner);
 
         //绘制概率文字
@@ -235,14 +245,17 @@ public class ProbabilityView extends ViewUpdate {
         paint_text_probability.getTextBounds(str_show_pro, 0, str_show_pro.length(), rectf);
         float words_width_in_piexl = Math.abs(rectf.right - rectf.left);
         float words_height_in_piexl = Math.abs(rectf.bottom - rectf.top);
+        paint_text_probability.setAlpha((int)(255 * y_ratio));
         canvas.drawText(str_show_pro, x_circle - words_width_in_piexl / 2, y_circle + radius + 60, paint_text_probability);
 
         //绘制百分号
         paint_text_baifenhao.getTextBounds("%", 0, 1, rectf);
+        paint_text_baifenhao.setAlpha((int)(255 * y_ratio));
         canvas.drawText("%", x_circle + words_width_in_piexl / 2f, y_circle + radius + 60 - words_height_in_piexl + Math.abs(rectf.bottom - rectf.top) / 2f, paint_text_baifenhao);
 
         //绘制日期
         paint_text_date.getTextBounds(date, 0, date.length(), rectf);
+        paint_text_date.setAlpha((int)(255 * y_ratio));
         canvas.drawText(date, x_circle - Math.abs(rectf.right - rectf.left) / 2f, y_circle - radius / (float) Math.cos(60 / 180f * (float) Math.PI) - 60, paint_text_date);
     }
 }

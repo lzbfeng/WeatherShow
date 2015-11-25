@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.util.Log;
 import android.view.View;
@@ -78,6 +79,7 @@ public class SunRaiseDownView extends ViewUpdate {
     Path path_circle = new Path();
 
     Paint paint_text_show = new Paint();
+    Paint paint_text_show_date = new Paint();
 
     public SunRaiseDownView(Context context) {
         super(context);
@@ -103,6 +105,18 @@ public class SunRaiseDownView extends ViewUpdate {
         paint_bezier.setStrokeWidth(2);
         paint_bezier.setStyle(Paint.Style.STROKE);
         paint_bezier.setColor(0xffffffff);
+
+        paint_text_show.setAntiAlias(true);
+        paint_text_show.setStrokeWidth(1);
+        paint_text_show.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_text_show.setColor(0xffffffff);
+        paint_text_show.setTextSize(45);
+
+        paint_text_show_date.setAntiAlias(true);
+        paint_text_show_date.setStrokeWidth(1);
+        paint_text_show_date.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_text_show_date.setColor(0xffffffff);
+        paint_text_show_date.setTextSize(25);
     }
 
     float r_animator = 0f;
@@ -126,7 +140,7 @@ public class SunRaiseDownView extends ViewUpdate {
         invalidate();
     }
 
-    SunRaiseDownViewInfo info;
+    SunRaiseDownViewInfo info = new SunRaiseDownViewInfo();
 
     public void setSunRaiseDownViewInfo(SunRaiseDownViewInfo info){
         this.info = info;
@@ -148,7 +162,7 @@ public class SunRaiseDownView extends ViewUpdate {
         path_bezier.reset();
         path_shader.reset();
         int w = 1080;
-        int h = 600;
+        int h = 400;
         float x_circle = w / 2;
         float y_circle = h;
 
@@ -197,7 +211,7 @@ public class SunRaiseDownView extends ViewUpdate {
         path_circle.reset();
         path_shader.reset();
         int w = 1080;
-        int h = 600;
+        int h = 500;
         float x_circle = w / 2;
         float y_circle = h;
 
@@ -211,8 +225,11 @@ public class SunRaiseDownView extends ViewUpdate {
         //绘制部分圆
         x_circle = x_circle;
         y_circle = h + circle_width / (float)Math.tan(angle / 180 * (float)Math.PI);
-        canvas.drawCircle(x_circle, y_circle, radius, paint_bezier);
-
+//        canvas.drawCircle(x_circle, y_circle, radius, paint_bezier);
+        RectF rect = new RectF();
+        rect.set(x_circle - radius, y_circle - radius, x_circle + radius, y_circle + radius);
+        canvas.drawArc(rect, 270 - angle, 2 * angle, false, paint_bezier);
+        Log.e("drawArc", String.valueOf(angle));
         //绘制阴影
         float angle_radians = angle / 180 * (float)Math.PI;
         float x_shader = padding + (w - 2 * padding) * this.r_animator * (time_now - time_raise) / (time_down - time_raise);
@@ -220,7 +237,7 @@ public class SunRaiseDownView extends ViewUpdate {
         float y_shader = y_circle - radius * (float)Math.cos(angle_temp);
         double time_now_sweep_angle = (angle_radians - angle_temp) / Math.PI * 180;
 
-        RectF rect = new RectF();
+        rect = new RectF();
         rect.set(x_circle - radius, y_circle - radius, x_circle + radius, y_circle + radius);
         path_shader.moveTo(startx, starty);
         path_shader.addArc(rect, 270 - angle, (float) time_now_sweep_angle);
@@ -237,8 +254,25 @@ public class SunRaiseDownView extends ViewUpdate {
         canvas.drawLine(padding / 2, h, w - padding / 2, h, paint_circle);
 
         //绘制 “日出日落”
-//        canvas.drawText(this.info.getText_show(), padding / 2, padding / 2, paint_text_show);
+        Rect rectf = new Rect();
+        String data = this.info.getText_show();
+        paint_text_show.getTextBounds(data, 0, data.length(), rectf);
+        canvas.drawText(data, padding / 3, rectf.height(), paint_text_show);
         //绘制“晦日”
-//        canvas.drawText(this.info.getMonthModeText(), padding / 2, padding / 2, paint_text_show);
+        data = this.info.getMonthModeText();
+        paint_text_show.getTextBounds(data, 0, data.length(), rectf);
+        paint_text_show.setColor(0xffcccccc);
+        canvas.drawText(data, w - padding / 3 - rectf.width(), rectf.height(), paint_text_show);
+        paint_text_show.setColor(0xffffffff);
+
+        //绘制初升时间
+        data = this.info.getRaiseTime();
+        paint_text_show.getTextBounds(data, 0, data.length(), rectf);
+        canvas.drawText(data, startx - rectf.width() / 2f, h + rectf.height() + 30, paint_text_show);
+
+        //绘制降落时间
+        data = this.info.getDownTime();
+        paint_text_show.getTextBounds(data, 0, data.length(), rectf);
+        canvas.drawText(data, w - padding - rectf.width() / 2f, h + rectf.height() + 30, paint_text_show);
     }
 }

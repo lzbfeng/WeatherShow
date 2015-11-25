@@ -177,15 +177,15 @@ public class MainActivity extends Activity implements ScrollViewListener{
     int grid_view_up_start = 2672;
     int grid_view_up_end = 106;
 
-    int pm_view_down_start = 905;
+    int pm_view_down_start = 1288;
     int pm_view_down_end = 3600;
     int pm_view_up_start = 3600;
-    int pm_view_up_end = 905;
+    int pm_view_up_end = 1288;
 
-    int pro_view_down_start = 1700;
+    int pro_view_down_start = 2459;
     int pro_view_down_end = 4175;
     int pro_view_up_start = 4175;
-    int pro_view_up_end = 1700;
+    int pro_view_up_end = 1759;
 //
     int sun_view_down_start = 2558;
     int sun_view_down_end = 5055;
@@ -266,13 +266,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
     private LineView lineView;
     private void setCurrentView(){
-//        Button btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
-//        btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+
     }
 
     private void setCurrentTitle_City(String city_name, float alpha){
