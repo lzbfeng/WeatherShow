@@ -1,5 +1,5 @@
 package com.pku.lesshst.weathershow;
-//update this file at time: 20151125.15.24
+//update this file at time: 20151125.15.28
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
