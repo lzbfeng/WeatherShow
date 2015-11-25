@@ -467,6 +467,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
             }
         }
     };
+
     private String _weatherInfoStr;
     Runnable runnable = new Runnable(){
         @Override
