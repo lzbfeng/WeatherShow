@@ -15,8 +15,10 @@ import android.view.animation.DecelerateInterpolator;
 /**
  * Created by lesshst on 2015/11/7.
  */
-public class LineView extends View {
+public class LineView extends ViewUpdate {
 
+    public static final int startInvalid = 50;
+    public static final int endInvalid = 540;
     private final int count_days = 5;
     Paint paint = new Paint();
     Path path = new Path();
@@ -44,20 +46,24 @@ public class LineView extends View {
 
         PathEffect effects = new DashPathEffect(new float[] { 10, 5, 5, 5}, 1);
         paint_dashline.setPathEffect(effects);
-
     }
+
     public void startAnimator(){
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                LineView.this.r_animator = (float)animation.getAnimatedValue();
+                LineView.this.r_animator = (float) animation.getAnimatedValue();
                 invalidate();
             }
         });
         anim.setDuration(500);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
+    }
+    public void endAnimator(){
+        LineView.this.r_animator = 0f;
+        invalidate();
     }
     @Override
     protected void onDraw(Canvas canvas) {
@@ -66,6 +72,7 @@ public class LineView extends View {
         paintTemps(canvas, temps_day, true);
         paintTemps(canvas, temps_night, false);
     }
+
     public void setTempsAndUpdate(int [] temps_day, int [] temps_night){
         if(!(temps_day.length == 5 && temps_night.length == 5)){
             Log.e("LineView", "The length of temps should be 5!");
@@ -77,6 +84,7 @@ public class LineView extends View {
         }
         this.startAnimator();
     }
+
     private void paintTemps(Canvas canvas, int [] temps, boolean isDay){
         path.reset();
         int w = 1080;
@@ -113,4 +121,5 @@ public class LineView extends View {
             canvas.drawText("5℃", x + 20, y - 20, paint);
         }
     }
+
 }

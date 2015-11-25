@@ -14,7 +14,11 @@ import android.view.animation.DecelerateInterpolator;
 /**
  * Created by lesshst on 2015/11/7.
  */
-public class PMView extends View {
+public class PMView extends ViewUpdate {
+
+    public static final int startInvalid = 0;
+    public static final int endInvalid = 50;
+
     public class PMViewInfo {
         public final static String monitorStr = "中国环境监测总站 ";
         public final static String monitorStr1 = "发布";
@@ -114,6 +118,11 @@ public class PMView extends View {
         this.text_pm_source = info.monitorStr + info.getDate() + info.getTime() + info.monitorStr1;
     }
 
+    public void endAnimator(){
+        PMView.this.r_animator = 0f;
+        invalidate();
+    }
+
     public void setPMViewInfoAndUpdate(PMViewInfo info){
         setPMViewInfo(info);
         this.startAnimator();
@@ -128,7 +137,7 @@ public class PMView extends View {
                 invalidate();
             }
         });
-        anim.setDuration(500);
+        anim.setDuration(800);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
     }

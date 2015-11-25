@@ -16,7 +16,11 @@ import android.view.animation.DecelerateInterpolator;
 /**
  * Created by lesshst on 2015/11/7.
  */
-public class GridView extends View {
+public class GridView extends ViewUpdate {
+
+    public static final int startInvalid = 0;
+    public static final int endInvalid = 50;
+
     public class GridViewInfo {
         public final static String humidity = "湿度";
         public final static String visibility = "可见度";
@@ -126,6 +130,12 @@ public class GridView extends View {
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
     }
+
+    public void endAnimator(){
+        GridView.this.r_animator = 0f;
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);

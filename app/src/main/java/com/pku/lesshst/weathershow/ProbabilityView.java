@@ -13,7 +13,10 @@ import android.view.animation.DecelerateInterpolator;
 /**
  * Created by lesshst on 2015/11/7.
  */
-public class ProbabilityView extends View {
+public class ProbabilityView extends ViewUpdate {
+
+    public static final int startInvalid = 0;
+    public static final int endInvalid = 50;
 
     public class ProbabilityViewInfo{
         public final String thirdDayName = "11/11";
@@ -79,6 +82,30 @@ public class ProbabilityView extends View {
         paint_text_date.setTextSize(40);
     }
 
+    ValueAnimator animators[] = new ValueAnimator[4];
+    int durations[] = {1000, 1000, 1000, 1000};
+    int startDelays[] = {0, 200, 400, 600};
+    
+    public void initAllAnimators(){
+        for(int i = 0; i < animators.length; i++){
+            initAnimator(i, durations[i], startDelays[i]);
+        }
+    }
+
+    private void initAnimator(int animator_index, int duration, int startDelay){
+        animators[animator_index] = ValueAnimator.ofFloat(0f, 1f);
+        animators[animator_index].addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                ProbabilityView.this.r_animator = (float) animation.getAnimatedValue();
+                invalidate();
+            }
+        });
+        animators[animator_index].setDuration(duration);
+        animators[animator_index].setStartDelay(startDelay);
+        animators[animator_index].setInterpolator(new DecelerateInterpolator());
+    }
+
     public void startAnimator(){
         ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);
         anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -91,6 +118,11 @@ public class ProbabilityView extends View {
         anim.setDuration(1000);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
+    }
+
+    public void endAnimator(){
+        ProbabilityView.this.r_animator = 0f;
+        invalidate();
     }
 
     private int probabilities[] = new int[]{23, 38, 50, 89};
@@ -115,7 +147,7 @@ public class ProbabilityView extends View {
         int step = w / 4;
 
         for(int i = 0; i < 4; i ++){
-            drawRaindrop(canvas, i * step + step / 2, 300, 100, probabilities[i], dates[i]);
+            drawRaindrop(canvas, i * step + step / 2, 300 * ProbabilityView.this.r_animator, 100, probabilities[i], dates[i]);
         }
     }
 

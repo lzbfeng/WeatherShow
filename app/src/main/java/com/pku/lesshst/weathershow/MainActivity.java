@@ -3,7 +3,6 @@ package com.pku.lesshst.weathershow;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -52,7 +51,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements ScrollViewListener{
     public class InfoToShow {
         public WeatherInfo weatherInfo;
         public String locationName;
@@ -78,12 +77,14 @@ public class MainActivity extends Activity {
         }
     };
 
+    private ObservableScrollView scrollView = null;
     //PagerView
     private ViewPager viewPager;//viewpager
     private PagerTitleStrip pagerTitleStrip;//viewpager的标题
     ArrayList<View> viewList;
     ArrayList<String> citiesList;
     int currentIndex = 0;
+    int conntOfCities = 5;
     private void initViewPager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
@@ -134,75 +135,109 @@ public class MainActivity extends Activity {
         viewPager.setAdapter(pagerAdapter);
         currentIndex = 0;
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
-
-        initAllLayouts();
+        for(int i = 0; i < citiesList.size(); i++){
+            currentIndex = i;
+            initAllLayouts();
+        }
+        currentIndex = 0;
     }
 
     private void initAllLayouts(){
         LinearLayout scroll_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
-        plot_view = new LineView(this);
-        scroll_layout.addView(plot_view, 1080, 400);
-        Button btn_line = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
-        btn_line.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                plot_view.startAnimator();
-            }
-        });
-
-//        CloudView cloudView = (CloudView)viewList.get(currentIndex).findViewById(R.id.cloud5);
-//        cloudView.setMode(CloudView.SUNDAY);
-
+        plot_views[currentIndex] = new LineView(this);
+        scroll_layout.addView(plot_views[currentIndex], 1080, 400);
+        plot_views[currentIndex].startAnimator();
 
         LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
-        grid_view = new GridView(this);
-        grid_view_layout.addView(grid_view, 1080, 600);
-        Button btn_grid = (Button)viewList.get(currentIndex).findViewById(R.id.btn_grid_laout_animator);
-        btn_grid.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                grid_view.startAnimator();
-            }
-        });
+        grid_views[currentIndex] = new GridView(this);
+        grid_view_layout.addView(grid_views[currentIndex], 1080, 600);
 
         LinearLayout pm_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.pm_view_layout);
-        pm_view = new PMView(this);
-        pm_view_layout.addView(pm_view, 1080, 700);
-        Button btn_PM = (Button)viewList.get(currentIndex).findViewById(R.id.btn_pm_laout_animator);
-        btn_PM.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pm_view.startAnimator();
-            }
-        });
+        pm_views[currentIndex] = new PMView(this);
+        pm_view_layout.addView(pm_views[currentIndex], 1080, 700);
 
         LinearLayout pro_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.probability_view_layout);
-        pro_view = new ProbabilityView(this);
-        pro_view_layout.addView(pro_view, 1080, 600);
-        Button btn_pro = (Button)viewList.get(currentIndex).findViewById(R.id.btn_pro_laout_animator);
-        btn_pro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pro_view.startAnimator();
-            }
-        });
+        pro_views[currentIndex] = new ProbabilityView(this);
+        pro_view_layout.addView(pro_views[currentIndex], 1080, 600);
 
         LinearLayout sun_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.sun_raise_donw_view_layout);
-        sun_view = new SunRaiseDownView(this);
-        sun_view_layout.addView(sun_view, 1080, 600);
-        Button btn_sun = (Button)viewList.get(currentIndex).findViewById(R.id.btn_sun_laout_animator);
-        btn_sun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sun_view.startAnimator();
-            }
-        });
+        sun_views[currentIndex] = new SunRaiseDownView(this);
+        sun_view_layout.addView(sun_views[currentIndex], 1080, 600);
     }
-    LineView plot_view;
-    GridView grid_view;
-    PMView pm_view;
-    ProbabilityView pro_view;
-    SunRaiseDownView sun_view;
+
+    boolean scrool_direction_down = true;
+
+    int plot_view_down_start = -40;
+    int plot_view_down_end = 1630;
+    int plot_view_up_start = 1630;
+    int plot_view_up_end = -40;
+
+    int grid_view_down_start = 106;
+    int grid_view_down_end = 2672;
+    int grid_view_up_start = 2672;
+    int grid_view_up_end = 106;
+
+    int pm_view_down_start = 905;
+    int pm_view_down_end = 3600;
+    int pm_view_up_start = 3600;
+    int pm_view_up_end = 905;
+
+    int pro_view_down_start = 1700;
+    int pro_view_down_end = 4175;
+    int pro_view_up_start = 4175;
+    int pro_view_up_end = 1700;
+//
+    int sun_view_down_start = 2558;
+    int sun_view_down_end = 5055;
+    int sun_view_up_start = 5055;
+    int sun_view_up_end = 2558;
+
+
+    public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
+        if(y - oldy > 0)
+            scrool_direction_down = true;
+        else
+            scrool_direction_down = false;
+
+        updateView(plot_views[currentIndex], y, plot_view_down_start,
+                plot_view_down_end, plot_view_up_start, plot_view_up_end);
+        updateView(grid_views[currentIndex], y, grid_view_down_start,
+                grid_view_down_end, grid_view_up_start, grid_view_up_end);
+        updateView(pm_views[currentIndex], y, pm_view_down_start,
+                pm_view_down_end, pm_view_up_start, pm_view_up_end);
+        updateView(pro_views[currentIndex], y, pro_view_down_start,
+                pro_view_down_end, pro_view_up_start, pro_view_up_end);
+        updateView(sun_views[currentIndex], y, sun_view_down_start,
+                sun_view_down_end, sun_view_up_start, sun_view_up_end);
+    }
+    private void updateView(ViewUpdate view, int y,
+                                int down_start, int down_end, int up_start, int up_end){
+        if(scrool_direction_down == true) {
+            if (y > down_start && y < down_end && !view.isUpdate) {
+                view.startAnimator();
+                view.isUpdate = true;
+            }else if( y > down_end){
+                view.endAnimator();
+                view.isUpdate = false;
+            }
+        }
+        else {
+            if(y < up_start && y > up_end && !view.isUpdate){
+                view.startAnimator();
+                view.isUpdate = true;
+            }else if(y < up_end){
+                view.endAnimator();
+                view.isUpdate = false;
+            }
+        }
+        Log.e("onScrollChanged", String.valueOf(y) + "--" + String.valueOf(view.isUpdate) + "--" + String.valueOf(scrool_direction_down) );
+    }
+    LineView plot_views[] = new LineView[conntOfCities];
+    GridView grid_views[] = new GridView[conntOfCities];
+    PMView pm_views[] = new PMView[conntOfCities];
+    ProbabilityView pro_views[] = new ProbabilityView[conntOfCities];
+    SunRaiseDownView sun_views[] = new SunRaiseDownView[conntOfCities];
+
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         public void onPageScrollStateChanged(int arg0) {
@@ -227,27 +262,31 @@ public class MainActivity extends Activity {
             currentIndex = arg0;
             setCurrentView();
         }
-
     }
+
     private LineView lineView;
     private void setCurrentView(){
-        Button btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        Button btn = (Button)viewList.get(currentIndex).findViewById(R.id.btn_line_laout_animator);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
     }
+
     private void setCurrentTitle_City(String city_name, float alpha){
         TextView city_name_textview = (TextView)findViewById(R.id.city_name);
         city_name_textview.setText(city_name);
         city_name_textview.setAlpha(alpha);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        scrollView = (ObservableScrollView) findViewById(R.id.scrollview);
+        scrollView.setScrollViewListener(this);
         initBaseInfo();
         initViewPager();
     }
@@ -415,7 +454,6 @@ public class MainActivity extends Activity {
     Runnable runGetLocationInfo = new Runnable(){
         @Override
         public void run(){
-
             try{
                 Location location = mLocation;
                 GetLocation loc = new GetLocation();
@@ -436,6 +474,7 @@ public class MainActivity extends Activity {
             getWeatherInfoFromXML();
         }
     };
+
     private void getWeatherInfo(){
         String weatherJson = GetWeather.getWeather(mAddressCityName);
         String latLongString = "";
@@ -595,8 +634,8 @@ public class MainActivity extends Activity {
                 Log.d(e.toString(), "error!");
             }
         }
-
     }
+
     private void getLocation()
     {
         try {
@@ -636,6 +675,7 @@ public class MainActivity extends Activity {
         }
 
     }
+
     public void changeCity(String cityName){
         mAddressCityNameHan = cityName;
         mAdminArea = cityDB.getCityProvince(mAddressCityNameHan).getProvince();

@@ -14,7 +14,10 @@ import android.view.animation.DecelerateInterpolator;
 /**
  * Created by lesshst on 2015/11/8.
  */
-public class SunRaiseDownView extends View {
+public class SunRaiseDownView extends ViewUpdate {
+
+    public static final int startInvalid = 0;
+    public static final int endInvalid = 50;
 
     public class SunRaiseDownViewInfo{
         private final String text_show = "日出日落";
@@ -116,6 +119,11 @@ public class SunRaiseDownView extends View {
         anim.setDuration(500);
         anim.setInterpolator(new DecelerateInterpolator());
         anim.start();
+    }
+
+    public void endAnimator(){
+        SunRaiseDownView.this.r_animator = 0f;
+        invalidate();
     }
 
     SunRaiseDownViewInfo info;
@@ -229,8 +237,8 @@ public class SunRaiseDownView extends View {
         canvas.drawLine(padding / 2, h, w - padding / 2, h, paint_circle);
 
         //绘制 “日出日落”
-        canvas.drawText(this.info.getText_show(), padding / 2, padding / 2, paint_text_show);
+//        canvas.drawText(this.info.getText_show(), padding / 2, padding / 2, paint_text_show);
         //绘制“晦日”
-        canvas.drawText(this.info.getMonthModeText(), padding / 2, padding / 2, paint_text_show);
+//        canvas.drawText(this.info.getMonthModeText(), padding / 2, padding / 2, paint_text_show);
     }
 }
