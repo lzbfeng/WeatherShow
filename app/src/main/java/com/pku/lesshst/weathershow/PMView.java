@@ -19,12 +19,21 @@ public class PMView extends ViewUpdate {
     public static final int startInvalid = 0;
     public static final int endInvalid = 50;
 
-    public class PMViewInfo {
+    public static class PMViewInfo {
         public final static String monitorStr = "中国环境监测总站 ";
         public final static String monitorStr1 = "发布";
         private String date = "11月08日";
         private String time = "21:00";
         private int PMValue = 300;
+        private int PM2_5Value = 250;
+
+        public int getPM2_5Value() {
+            return PM2_5Value;
+        }
+
+        public void setPM2_5Value(int PM2_5Value) {
+            this.PM2_5Value = PM2_5Value;
+        }
 
         public String getDate() {
             return date;
@@ -57,10 +66,12 @@ public class PMView extends ViewUpdate {
     Paint paint_pointer = new Paint();
     Paint paint_circle_inner = new Paint();
     Paint paint_text_pm_value = new Paint();
+    Paint paint_text_pm_25_value = new Paint();
     Paint paint_text_pm_source = new Paint();
 
     private final int all_quality = 500;
     int pmvalue = 300;
+    int pm2_5value = 250;
     String date = "11月08日";
     String time = "21:00";
     private final int all_angle = 300;
@@ -107,6 +118,12 @@ public class PMView extends ViewUpdate {
         paint_text_pm_value.setColor(0xffffffff);
         paint_text_pm_value.setTextSize(50);
 
+        paint_text_pm_25_value.setAntiAlias(true);
+        paint_text_pm_25_value.setStrokeWidth(1);
+        paint_text_pm_25_value.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint_text_pm_25_value.setColor(0xffffffff);
+        paint_text_pm_25_value.setTextSize(30);
+
         paint_text_pm_source.setAntiAlias(true);
         paint_text_pm_source.setStrokeWidth(1);
         paint_text_pm_source.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -115,6 +132,7 @@ public class PMView extends ViewUpdate {
     }
     public void setPMViewInfo(PMViewInfo info){
         this.pmvalue = info.getPMValue();
+        this.pm2_5value = info.getPM2_5Value();
         this.text_pm_source = info.monitorStr + info.getDate() + info.getTime() + info.monitorStr1;
     }
 
@@ -194,8 +212,20 @@ public class PMView extends ViewUpdate {
         paint_text_pm_value.getTextBounds(pm_value, 0, pm_value.length(), text_rect);
         canvas.drawText(pm_value, x_circle - Math.abs(text_rect.right - text_rect.left) / 2f, y_circle + radius_out * 2 / 3f, paint_text_pm_value);
 
+        pm_value = "PM2.5: " + String.valueOf((int)(this.pm2_5value * this.r_animator));
+        paint_text_pm_25_value.getTextBounds(pm_value, 0, pm_value.length(), text_rect);
+        canvas.drawText(pm_value, x_circle - Math.abs(text_rect.right - text_rect.left) / 2f, y_circle + radius_out * 2 / 3f + 50, paint_text_pm_25_value);
+
         //显示数据来源
         paint_text_pm_source.getTextBounds(text_pm_source, 0, text_pm_source.length(), text_rect);
         canvas.drawText(text_pm_source, x_circle - Math.abs(text_rect.right - text_rect.left) / 2f, y_circle + radius_out + 30, paint_text_pm_source);
+
+        //绘制 “降水概率”
+        Rect rectf = new Rect();
+        String data = "空气质量";
+        paint_text_pm_source.setTextSize(45);
+        paint_text_pm_source.getTextBounds(data, 0, data.length(), rectf);
+        canvas.drawText(data, 160 / 2, rectf.height() + 30, paint_text_pm_source);
+        paint_text_pm_source.setTextSize(40);
     }
 }

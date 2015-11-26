@@ -7,9 +7,10 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.util.Log;
-import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by lesshst on 2015/11/7.
@@ -19,11 +20,21 @@ public class ProbabilityView extends ViewUpdate {
     public static final int startInvalid = 0;
     public static final int endInvalid = 50;
 
-    public class ProbabilityViewInfo{
-        public final String thirdDayName = "11/11";
-        public final String forthDayName = "11/12";
+    public static class ProbabilityViewInfo{
+        public String thirdDayName = "11/11";
+        public String forthDayName = "11/12";
         private int[] probabilities;
+        public ProbabilityViewInfo(){
+            Date dNow = new Date( );
+            long timeCount = (dNow.getTime() / 1000) + 60 * 60 * 24;
+            dNow.setTime(timeCount * 1000);
+            SimpleDateFormat ft = new SimpleDateFormat ("MM/dd");
+            thirdDayName = ft.format(dNow);
 
+            timeCount = (dNow.getTime() / 1000) + 60 * 60 * 24;
+            dNow.setTime(timeCount * 1000);
+            forthDayName = ft.format(dNow);
+        }
         public String getThirdDayName() {
             return thirdDayName;
         }
@@ -160,7 +171,7 @@ public class ProbabilityView extends ViewUpdate {
 
 //        Log.e("drawRaindrop", String.valueOf(y_ratio));
         float x_circle = x;
-        float y_circle = 300 * y_ratio;
+        float y_circle = 100 + 300 * y_ratio;
 
         radius = 50;
         RectF rect = new RectF();
@@ -245,17 +256,25 @@ public class ProbabilityView extends ViewUpdate {
         paint_text_probability.getTextBounds(str_show_pro, 0, str_show_pro.length(), rectf);
         float words_width_in_piexl = Math.abs(rectf.right - rectf.left);
         float words_height_in_piexl = Math.abs(rectf.bottom - rectf.top);
-        paint_text_probability.setAlpha((int)(255 * y_ratio));
+        paint_text_probability.setAlpha((int) (255 * y_ratio));
         canvas.drawText(str_show_pro, x_circle - words_width_in_piexl / 2, y_circle + radius + 60, paint_text_probability);
 
         //绘制百分号
         paint_text_baifenhao.getTextBounds("%", 0, 1, rectf);
-        paint_text_baifenhao.setAlpha((int)(255 * y_ratio));
+        paint_text_baifenhao.setAlpha((int) (255 * y_ratio));
         canvas.drawText("%", x_circle + words_width_in_piexl / 2f, y_circle + radius + 60 - words_height_in_piexl + Math.abs(rectf.bottom - rectf.top) / 2f, paint_text_baifenhao);
 
         //绘制日期
         paint_text_date.getTextBounds(date, 0, date.length(), rectf);
-        paint_text_date.setAlpha((int)(255 * y_ratio));
+        paint_text_date.setAlpha((int) (255 * y_ratio));
         canvas.drawText(date, x_circle - Math.abs(rectf.right - rectf.left) / 2f, y_circle - radius / (float) Math.cos(60 / 180f * (float) Math.PI) - 60, paint_text_date);
+
+        //绘制 “降水概率”
+        rectf = new Rect();
+        String data = "降水概率";
+        paint_text_date.setTextSize(45);
+        paint_text_date.getTextBounds(data, 0, data.length(), rectf);
+        canvas.drawText(data, 160 / 2, rectf.height() + 30, paint_text_date);
+        paint_text_date.setTextSize(40);
     }
 }

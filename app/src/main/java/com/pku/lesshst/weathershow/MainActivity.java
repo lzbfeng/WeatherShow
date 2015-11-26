@@ -143,26 +143,86 @@ public class MainActivity extends Activity implements ScrollViewListener{
     }
 
     private void initAllLayouts(){
-        LinearLayout scroll_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
-        plot_views[currentIndex] = new LineView(this);
-        scroll_layout.addView(plot_views[currentIndex], 1080, 400);
-        plot_views[currentIndex].startAnimator();
+        //tem_view
+        LinearLayout tem_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.tem_layout);
+        tem_views[currentIndex] = new TemperatureView(this);
+        tem_layout.addView(tem_views[currentIndex], 1080, 900);
 
+        //plot_view
+        LinearLayout plot_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
+        plot_views[currentIndex] = new LineView(this);
+        plot_layout.addView(plot_views[currentIndex], 1080, 600);
+
+        Date dNow = new Date();
+        long timeCount = (dNow.getTime() / 1000) + 60 * 60 * 24 * 2;
+        dNow.setTime(timeCount * 1000);
+        SimpleDateFormat ft = new SimpleDateFormat ("MM/dd");
+        String forthDayName = ft.format(dNow);
+        ((TextView)viewList.get(currentIndex).findViewById(R.id.forth_day_date_show)).setText(forthDayName);
+
+        timeCount = (dNow.getTime() / 1000) + 60 * 60 * 24;
+        dNow.setTime(timeCount * 1000);
+        String fifthDayName = ft.format(dNow);
+        ((TextView)viewList.get(currentIndex).findViewById(R.id.fifth_day_date_show)).setText(fifthDayName);
+
+        //grid_view
         LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
         grid_views[currentIndex] = new GridView(this);
         grid_view_layout.addView(grid_views[currentIndex], 1080, 600);
 
+        //pm_view
         LinearLayout pm_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.pm_view_layout);
         pm_views[currentIndex] = new PMView(this);
         pm_view_layout.addView(pm_views[currentIndex], 1080, 700);
 
+        //pro_view
         LinearLayout pro_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.probability_view_layout);
         pro_views[currentIndex] = new ProbabilityView(this);
         pro_view_layout.addView(pro_views[currentIndex], 1080, 600);
 
+        //sun_view
         LinearLayout sun_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.sun_raise_donw_view_layout);
         sun_views[currentIndex] = new SunRaiseDownView(this);
         sun_view_layout.addView(sun_views[currentIndex], 1080, 600);
+
+        //init all views and update data
+        int temp = 10;
+        String weather = "阴天";
+        String air_quality = "空气良好";
+        tem_views[currentIndex].setTemp(temp);
+        tem_views[currentIndex].setWeather(weather);
+        tem_views[currentIndex].setAir_quality(air_quality);
+
+        int[] temps_day = new int[]{23, 34, 12, 34, 21};
+        int[] temps_night = new int[]{12, 14, 10, 8, 11};
+        plot_views[currentIndex].setTemps_day(temps_day);
+        plot_views[currentIndex].setTemps_night(temps_night);
+        plot_views[currentIndex].startAnimator();
+
+        GridView.GridViewInfo gridViewInfo = new GridView.GridViewInfo();
+        gridViewInfo.setHumidityValue("75");
+        gridViewInfo.setVisibilityValue("6.4");
+        gridViewInfo.setWindDirection("南风");
+        gridViewInfo.setWindDirectionValue("三级");
+        gridViewInfo.setUVRaysValue("最强");
+        gridViewInfo.setPressureValue("1027.3");
+        gridViewInfo.setBodyFeelingValue("4.5");
+        grid_views[currentIndex].setGridViewInfo(gridViewInfo);
+        grid_views[currentIndex].startAnimator();
+
+        PMView.PMViewInfo pminfo = new PMView.PMViewInfo();
+        pminfo.setPMValue(70);
+        pminfo.setPM2_5Value(54);
+        pminfo.setDate("11月25日");
+        pminfo.setTime("20:00");
+        pm_views[currentIndex].setPMViewInfo(pminfo);
+        pm_views[currentIndex].startAnimator();
+
+        int probabilities[] = new int[]{12, 45, 76, 29};
+        ProbabilityView.ProbabilityViewInfo probabilityViewInfo = new ProbabilityView.ProbabilityViewInfo();
+        probabilityViewInfo.setProbabilities(probabilities);
+        pro_views[currentIndex].setProbabilityInfo(probabilityViewInfo);
+        pro_views[currentIndex].startAnimator();
     }
 
     boolean scrool_direction_down = true;
@@ -191,7 +251,6 @@ public class MainActivity extends Activity implements ScrollViewListener{
     int sun_view_down_end = 5055;
     int sun_view_up_start = 5055;
     int sun_view_up_end = 2558;
-
 
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
         if(y - oldy > 0)
@@ -232,6 +291,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
         }
         Log.e("onScrollChanged", String.valueOf(y) + "--" + String.valueOf(view.isUpdate) + "--" + String.valueOf(scrool_direction_down) );
     }
+    TemperatureView tem_views[] = new TemperatureView[conntOfCities];
     LineView plot_views[] = new LineView[conntOfCities];
     GridView grid_views[] = new GridView[conntOfCities];
     PMView pm_views[] = new PMView[conntOfCities];
@@ -278,6 +338,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Global.myAsset = getAssets();
         setContentView(R.layout.activity_main);
         scrollView = (ObservableScrollView) findViewById(R.id.scrollview);
         scrollView.setScrollViewListener(this);
@@ -362,38 +423,38 @@ public class MainActivity extends Activity implements ScrollViewListener{
         }
     }
     private void updateControls() {
-        Log.d("updateControls", "开始更新controls的数据");
-        TextView city_name = (TextView) findViewById(R.id.city_name);
-        city_name.setText(infoToShow.locationName);
-
-        WeatherInfo weatherInfo = infoToShow.weatherInfo;
-
-        String show;
-        TextView date_time = (TextView) findViewById(R.id.date_time);
-        show = weatherInfo.hourlyWeatherList.get(0).date.split(" ")[1];
-        date_time.setText("今天" + show + "发布");
-
-        TextView humidity_value = (TextView) findViewById(R.id.humidity_value);
-        show = weatherInfo.hourlyWeatherList.get(0).hum;
-        humidity_value.setText("湿度：" + show + "%");
-
-        TextView temperature = (TextView) findViewById(R.id.temperature);
-        show = weatherInfo.dailyWeatherList.get(1).tmp_min + "℃~" +
-                weatherInfo.dailyWeatherList.get(1).tmp_max + "℃";
-        temperature.setText(show);
-
-        TextView today_week = (TextView) findViewById(R.id.today_week);
-        show = "" + getDayOfWeek();
-        today_week.setText(show);
-
-        TextView climate = (TextView) findViewById(R.id.climate);
-        show = "" + weatherInfo.dailyWeatherList.get(1).txt_d + "/" +
-                weatherInfo.dailyWeatherList.get(1).txt_n;
-        climate.setText(show);
-
-        TextView wind = (TextView) findViewById(R.id.wind);
-        show = "" + weatherInfo.dailyWeatherList.get(1).wind_sc;
-        wind.setText(show);
+//        Log.d("updateControls", "开始更新controls的数据");
+//        TextView city_name = (TextView) findViewById(R.id.city_name);
+//        city_name.setText(infoToShow.locationName);
+//
+//        WeatherInfo weatherInfo = infoToShow.weatherInfo;
+//
+//        String show;
+//        TextView date_time = (TextView) findViewById(R.id.date_time);
+//        show = weatherInfo.hourlyWeatherList.get(0).date.split(" ")[1];
+//        date_time.setText("今天" + show + "发布");
+//
+//        TextView humidity_value = (TextView) findViewById(R.id.humidity_value);
+//        show = weatherInfo.hourlyWeatherList.get(0).hum;
+//        humidity_value.setText("湿度：" + show + "%");
+//
+//        TextView temperature = (TextView) findViewById(R.id.temperature);
+//        show = weatherInfo.dailyWeatherList.get(1).tmp_min + "℃~" +
+//                weatherInfo.dailyWeatherList.get(1).tmp_max + "℃";
+//        temperature.setText(show);
+//
+//        TextView today_week = (TextView) findViewById(R.id.today_week);
+//        show = "" + getDayOfWeek();
+//        today_week.setText(show);
+//
+//        TextView climate = (TextView) findViewById(R.id.climate);
+//        show = "" + weatherInfo.dailyWeatherList.get(1).txt_d + "/" +
+//                weatherInfo.dailyWeatherList.get(1).txt_n;
+//        climate.setText(show);
+//
+//        TextView wind = (TextView) findViewById(R.id.wind);
+//        show = "" + weatherInfo.dailyWeatherList.get(1).wind_sc;
+//        wind.setText(show);
     }
 
     private String getDayOfWeek(){
@@ -545,13 +606,13 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
         String show;
 
-        TextView date_time = (TextView) currentView.findViewById(R.id.date_time);
-        show = "今天" + todayWeather.getUpdatetime() + "发布";
-        date_time.setText(show);
-
-        TextView humidity_value = (TextView) currentView.findViewById(R.id.humidity_value);
-        show = todayWeather.getShidu();
-        humidity_value.setText("湿度：" + show);
+//        TextView date_time = (TextView) currentView.findViewById(R.id.date_time);
+//        show = "今天" + todayWeather.getUpdatetime() + "发布";
+//        date_time.setText(show);
+//
+//        TextView humidity_value = (TextView) currentView.findViewById(R.id.humidity_value);
+//        show = todayWeather.getShidu();
+//        humidity_value.setText("湿度：" + show);
 
 //        //pm2.5
 //        TextView pm25_value = (TextView) findViewById(R.id.pm2_5_value);
@@ -562,23 +623,54 @@ public class MainActivity extends Activity implements ScrollViewListener{
 //        show = todayWeather.getQuality();
 //        pm25_desc.setText("desc: " + show);
 
-        TextView temperature = (TextView) currentView.findViewById(R.id.temperature);
-        show = todayWeather.getLow() + "/" +
-                todayWeather.getHigh();
-        temperature.setText(show);
+//        TextView temperature = (TextView) currentView.findViewById(R.id.temperature);
+//        show = todayWeather.getLow() + "/" +
+//                todayWeather.getHigh();
+//        temperature.setText(show);
+//
+//        TextView today_week = (TextView) currentView.findViewById(R.id.today_week);
+//        show = todayWeather.getDate();
+//        today_week.setText(show);
+//
+//        TextView climate = (TextView) currentView.findViewById(R.id.climate);
+//        show = "" + todayWeather.getNightType() + "/" +
+//                todayWeather.getDayType();
+//        climate.setText(show);
+//
+//        TextView wind = (TextView) currentView.findViewById(R.id.wind);
+//        show = "" + todayWeather.getFengxiang();
+//        wind.setText(show);
 
-        TextView today_week = (TextView) currentView.findViewById(R.id.today_week);
-        show = todayWeather.getDate();
-        today_week.setText(show);
+        int[] temps_day = new int[]{23, 34, 12, 34, 21};
+        int[] temps_night = new int[]{12, 14, 10, 8, 11};
+        plot_views[currentIndex].setTemps_day(temps_day);
+        plot_views[currentIndex].setTemps_night(temps_night);
+        plot_views[currentIndex].startAnimator();
 
-        TextView climate = (TextView) currentView.findViewById(R.id.climate);
-        show = "" + todayWeather.getNightType() + "/" +
-                todayWeather.getDayType();
-        climate.setText(show);
+        GridView.GridViewInfo gridViewInfo = new GridView.GridViewInfo();
+        gridViewInfo.setHumidityValue("75");
+        gridViewInfo.setVisibilityValue("6.4");
+        gridViewInfo.setWindDirection("南风");
+        gridViewInfo.setWindDirectionValue("三级");
+        gridViewInfo.setUVRaysValue("最强");
+        gridViewInfo.setPressureValue("1027.3");
+        gridViewInfo.setBodyFeelingValue("4.5");
+        grid_views[currentIndex].setGridViewInfo(gridViewInfo);
+        grid_views[currentIndex].startAnimator();
 
-        TextView wind = (TextView) currentView.findViewById(R.id.wind);
-        show = "" + todayWeather.getFengxiang();
-        wind.setText(show);
+        PMView.PMViewInfo pminfo = new PMView.PMViewInfo();
+        pminfo.setPMValue(70);
+        pminfo.setPM2_5Value(54);
+        pminfo.setDate("11月25日");
+        pminfo.setTime("20:00");
+        pm_views[currentIndex].setPMViewInfo(pminfo);
+        pm_views[currentIndex].startAnimator();
+
+        int probabilities[] = new int[]{12, 45, 76, 29};
+        ProbabilityView.ProbabilityViewInfo probabilityViewInfo = new ProbabilityView.ProbabilityViewInfo();
+        probabilityViewInfo.setProbabilities(probabilities);
+        pro_views[currentIndex].setProbabilityInfo(probabilityViewInfo);
+        pro_views[currentIndex].startAnimator();
     }
 
     private final LocationListener locationListener = new LocationListener() {
@@ -704,6 +796,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
                 }
                 if(!db.exists())
                     db.createNewFile();
+
                 InputStream is = getAssets().open("city.db");
                 FileOutputStream fos = new FileOutputStream(db);
                 int len = -1;

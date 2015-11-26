@@ -65,7 +65,7 @@ public class SunRaiseDownView extends ViewUpdate {
     }
 
     float start_angle = 0;
-    float end_angle = 70;
+    float end_angle = 80;
     float time_raise = 6;
     float time_down = 18;
     float time_now = 16;
@@ -257,12 +257,12 @@ public class SunRaiseDownView extends ViewUpdate {
         Rect rectf = new Rect();
         String data = this.info.getText_show();
         paint_text_show.getTextBounds(data, 0, data.length(), rectf);
-        canvas.drawText(data, padding / 3, rectf.height(), paint_text_show);
+        canvas.drawText(data, padding / 2, rectf.height() + 30, paint_text_show);
         //绘制“晦日”
         data = this.info.getMonthModeText();
         paint_text_show.getTextBounds(data, 0, data.length(), rectf);
         paint_text_show.setColor(0xffcccccc);
-        canvas.drawText(data, w - padding / 3 - rectf.width(), rectf.height(), paint_text_show);
+        canvas.drawText(data, w - padding / 2 - rectf.width(), rectf.height() + 30, paint_text_show);
         paint_text_show.setColor(0xffffffff);
 
         //绘制初升时间

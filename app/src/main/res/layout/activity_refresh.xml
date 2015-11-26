@@ -11,42 +11,41 @@
         android:layout_height="1700dp"
         android:padding="0dp">
 
-        <LinearLayout
-            android:id="@+id/main_info"
-            android:layout_width="fill_parent"
-            android:layout_height="60dp">
-            <TextView
-                android:id="@+id/temperature"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="17℃"
-                android:textSize="50sp"
-                android:gravity="center"
-                android:textColor="@android:color/white"/>
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/main_info"-->
+            <!--android:layout_width="fill_parent"-->
+            <!--android:layout_height="60dp">-->
+            <!--<TextView-->
+                <!--android:id="@+id/temperature"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="17℃"-->
+                <!--android:textSize="50sp"-->
+                <!--android:gravity="center"-->
+                <!--android:textColor="@android:color/white"/>-->
+        <!--</LinearLayout>-->
 
-        <include
-            android:id="@+id/weather_current"
-            layout="@layout/weather_cur" />
-        <include
-            android:id="@+id/weatehr_pm25"
-            layout="@layout/weather_pm25" />
-        <include
-            android:id="@+id/weatehr_general_situation"
-            layout="@layout/weather_general_situation"/>
-        <LinearLayout
-            android:id="@+id/blank1"
-            android:layout_width="fill_parent"
-            android:layout_height="100dp"
-            android:layout_below="@+id/weatehr_general_situation"
-            android:orientation="vertical">
+        <!--<include-->
+            <!--android:id="@+id/weather_current"-->
+            <!--layout="@layout/weather_cur" />-->
+        <!--<include-->
+            <!--android:id="@+id/weatehr_pm25"-->
+            <!--layout="@layout/weather_pm25" />-->
+        <!--<include-->
+            <!--android:id="@+id/weatehr_general_situation"-->
+            <!--layout="@layout/weather_general_situation"/>-->
+         <LinearLayout
+             android:id="@+id/tem_layout"
+             android:layout_width="fill_parent"
+             android:layout_height="300dp"
+             android:orientation="vertical">
+         </LinearLayout>
 
-        </LinearLayout>
         <LinearLayout
             android:id="@+id/line_layout"
             android:layout_width="fill_parent"
             android:layout_height="200dp"
-            android:layout_below="@id/blank1"
+            android:layout_below="@id/tem_layout"
             android:orientation="vertical">
             <!--<Button-->
                 <!--android:id="@+id/btn_line_laout_animator"-->
@@ -69,14 +68,14 @@
                     android:id="@+id/first_day_date_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="11/12"
+                    android:text="昨天"
                     android:gravity="center"
                     android:textSize="15sp"
                     android:textColor="@android:color/white"/>
                 <ImageView
                     android:id="@+id/first_day_cloud_show"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/simple_weather_icon_01"/>
                 <TextView
@@ -97,14 +96,14 @@
                     android:id="@+id/second_day_date_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="11/12"
+                    android:text="今天"
                     android:gravity="center"
                     android:textSize="15sp"
                     android:textColor="@android:color/white"/>
                 <ImageView
                     android:id="@+id/second_day_cloud_show"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/simple_weather_icon_03"/>
                 <TextView
@@ -125,14 +124,14 @@
                     android:id="@+id/third_day_date_show"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="11/12"
+                    android:text="明天"
                     android:gravity="center"
                     android:textSize="15sp"
                     android:textColor="@android:color/white"/>
                 <ImageView
                     android:id="@+id/third_day_cloud_show"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/simple_weather_icon_22"/>
                 <TextView
@@ -159,8 +158,8 @@
                     android:textColor="@android:color/white"/>
                 <ImageView
                     android:id="@+id/forth_day_cloud_show"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/simple_weather_icon_04"/>
                 <TextView
@@ -187,8 +186,8 @@
                     android:textColor="@android:color/white"/>
                 <ImageView
                     android:id="@+id/fifth_day_cloud_show"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
                     android:src="@drawable/simple_weather_icon_26"/>
                 <TextView
@@ -205,7 +204,7 @@
         <LinearLayout
             android:id="@+id/grid_view_layout"
             android:layout_width="fill_parent"
-            android:layout_height="300dp"
+            android:layout_height="260dp"
             android:paddingTop="30dp"
             android:layout_below="@id/weahters_show"
             android:orientation="vertical">

@@ -21,7 +21,7 @@ public class GridView extends ViewUpdate {
     public static final int startInvalid = 0;
     public static final int endInvalid = 50;
 
-    public class GridViewInfo {
+    public static class GridViewInfo {
         public final static String humidity = "湿度";
         public final static String visibility = "可见度";
         public String windDirection = "东风";

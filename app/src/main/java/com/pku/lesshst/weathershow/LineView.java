@@ -22,11 +22,21 @@ public class LineView extends ViewUpdate {
     private final int count_days = 5;
     Paint paint = new Paint();
     Path path = new Path();
+
     int[] temps_day = new int[]{23, 34, 12, 34, 21};
     int[] temps_night = new int[]{12, 14, 10, 8, 11};
+
     float r_animator = 0f;
     Paint paint_yuandian = new Paint();
     Paint paint_dashline = new Paint();
+
+    public void setTemps_day(int[] temps_day) {
+        this.temps_day = temps_day;
+    }
+
+    public void setTemps_night(int[] temps_night) {
+        this.temps_night = temps_night;
+    }
 
     public LineView(Context context) {
         super(context);
@@ -89,7 +99,7 @@ public class LineView extends ViewUpdate {
         path.reset();
         int w = 1080;
         int step = w / count_days;
-        int canvas_height = 400;
+        int canvas_height = 600;
         double ratio = 10;
 
         int x = 0;
@@ -121,5 +131,4 @@ public class LineView extends ViewUpdate {
             canvas.drawText("5℃", x + 20, y - 20, paint);
         }
     }
-
 }
