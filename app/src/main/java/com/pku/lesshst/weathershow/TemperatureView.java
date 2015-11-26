@@ -20,7 +20,6 @@ public class TemperatureView extends ViewUpdate  {
         paint_temp.setColor(Color.WHITE);
         paint_temp.setTextSize(200);
 
-
         paint_weather.setStrokeWidth(1);
         paint_weather.setStyle(Paint.Style.FILL_AND_STROKE);
         paint_weather.setColor(0xffdddddd);

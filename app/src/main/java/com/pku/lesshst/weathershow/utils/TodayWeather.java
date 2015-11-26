@@ -10,6 +10,7 @@ public class TodayWeather {
     private String shidu;
     private String pm25;
     private String quality;
+    private String aqi;
     private String fengxiang;
     private String fengli;
     private String date;
@@ -18,6 +19,41 @@ public class TodayWeather {
     private String type;
     private String dayType;
     private String nightType;
+    private String sunrise;
+    private String sunset;
+    private String time;
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setAqi(String aqi) {
+        this.aqi = aqi;
+    }
+
+    public String getAqi() {
+        return aqi;
+    }
+
+    public void setSunrise(String sunrise) {
+        this.sunrise = sunrise;
+    }
+
+    public void setSunset(String sunset) {
+        this.sunset = sunset;
+    }
+
+    public String getSunrise() {
+        return sunrise;
+    }
+
+    public String getSunset() {
+        return sunset;
+    }
 
     public String getCity() {
         return city;

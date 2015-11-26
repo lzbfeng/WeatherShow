@@ -50,7 +50,13 @@ public class ParseXML {
                             } else if (xmlPullParser.getName().equals("updatetime")) {
                                 eventType = xmlPullParser.next();
                                 todayWeather.setUpdatetime(xmlPullParser.getText());
-                            } else if (xmlPullParser.getName().equals("wendu")) {
+                            } else if (xmlPullParser.getName().equals("sunrise_1")) {
+                                eventType = xmlPullParser.next();
+                                todayWeather.setSunrise(xmlPullParser.getText());
+                            }else if (xmlPullParser.getName().equals("sunset_1")) {
+                                eventType = xmlPullParser.next();
+                                todayWeather.setSunset(xmlPullParser.getText());
+                            }else if (xmlPullParser.getName().equals("wendu")) {
                                 eventType = xmlPullParser.next();
                                 todayWeather.setWendu(xmlPullParser.getText());
                             } else if (xmlPullParser.getName().equals("shidu")) {
@@ -62,6 +68,12 @@ public class ParseXML {
                             } else if (xmlPullParser.getName().equals("quality")) {
                                 eventType = xmlPullParser.next();
                                 todayWeather.setQuality(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("aqi")) {
+                                eventType = xmlPullParser.next();
+                                todayWeather.setAqi(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("time")) {
+                                eventType = xmlPullParser.next();
+                                todayWeather.setTime(xmlPullParser.getText());
                             } else if (xmlPullParser.getName().equals("fengxiang") && fengxiangCount == 0) {
                                 eventType = xmlPullParser.next();
                                 todayWeather.setFengxiang(xmlPullParser.getText());

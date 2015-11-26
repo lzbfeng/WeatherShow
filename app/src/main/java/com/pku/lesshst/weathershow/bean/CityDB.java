@@ -107,4 +107,17 @@ public class CityDB {
         }
         return null;
     }
+    public String getCityFromQu(String qu){
+        try {
+            Cursor c = db.rawQuery("SELECT * FROM " + "cityqu" + " WHERE qu = ?", new String[]{qu});
+            while (c.moveToNext()) {
+                return c.getString(c.getColumnIndex("city"));
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.d("Lesshst, exception", e.toString());
+        }
+        return null;
+    }
 }
