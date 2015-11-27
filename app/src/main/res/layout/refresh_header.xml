@@ -3,7 +3,8 @@
     android:id="@+id/pull_to_refresh_head"
     android:layout_width="fill_parent"
     android:layout_height="60dip"
-    android:background="@drawable/biz_plugin_weather_shenzhen_bg">
+    android:background="#244765"
+    >
 
     <LinearLayout
         android:layout_width="200dip"
