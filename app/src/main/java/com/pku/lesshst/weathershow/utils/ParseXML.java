@@ -33,6 +33,8 @@ public class ParseXML {
 
             int eventType = xmlPullParser.getEventType();
             Log.d("wuapp", "parseXML");
+            TodayWeather.ForcastWeather forcastWeathers[] = new TodayWeather.ForcastWeather[6];
+            int index = -1;
             while (eventType != XmlPullParser.END_DOCUMENT){
                 switch (eventType) {
                     //判断当前事件是否为文档开始事件
@@ -43,10 +45,38 @@ public class ParseXML {
                         if (xmlPullParser.getName().equals("resp")) {
                             todayWeather = new TodayWeather();
                         }
+                        if(xmlPullParser.getName().equals("yesterday")){
+                            index++;
+                            forcastWeathers[index] = new TodayWeather.ForcastWeather();
+                        }
+                        if(xmlPullParser.getName().equals("weather")){
+                            index++;
+                            forcastWeathers[index] = new TodayWeather.ForcastWeather();
+                        }
                         if (todayWeather != null){
                             if (xmlPullParser.getName().equals("city")) {
                                 eventType = xmlPullParser.next();
                                 todayWeather.setCity(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("high_1")) {
+                                eventType = xmlPullParser.next();
+                                forcastWeathers[index].setHigh(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("low_1")) {
+                                eventType = xmlPullParser.next();
+                                forcastWeathers[index].setLow(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("type_1")) {
+                                eventType = xmlPullParser.next();
+                                if(forcastWeathers[index].getType() == null)
+                                    forcastWeathers[index].setType(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("high")) {
+                                eventType = xmlPullParser.next();
+                                forcastWeathers[index].setHigh(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("low")) {
+                                eventType = xmlPullParser.next();
+                                forcastWeathers[index].setLow(xmlPullParser.getText());
+                            } else if (xmlPullParser.getName().equals("type")) {
+                                eventType = xmlPullParser.next();
+                                if(forcastWeathers[index].getType() == null)
+                                    forcastWeathers[index].setType(xmlPullParser.getText());
                             } else if (xmlPullParser.getName().equals("updatetime")) {
                                 eventType = xmlPullParser.next();
                                 todayWeather.setUpdatetime(xmlPullParser.getText());
@@ -109,6 +139,8 @@ public class ParseXML {
                 }
                 eventType = xmlPullParser.next();
             }
+
+            todayWeather.setForcastWeathers(forcastWeathers);
         }catch (Exception e){
             e.printStackTrace();
         }

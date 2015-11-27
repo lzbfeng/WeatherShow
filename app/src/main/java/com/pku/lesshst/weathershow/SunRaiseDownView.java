@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * Created by lesshst on 2015/11/8.
  */
@@ -20,7 +23,7 @@ public class SunRaiseDownView extends ViewUpdate {
     public static final int startInvalid = 0;
     public static final int endInvalid = 50;
 
-    public class SunRaiseDownViewInfo{
+    public static class SunRaiseDownViewInfo{
         private final String text_show = "日出日落";
         private String raiseTime = "06:54";
         private String downTime = "17:03";
@@ -144,6 +147,16 @@ public class SunRaiseDownView extends ViewUpdate {
 
     public void setSunRaiseDownViewInfo(SunRaiseDownViewInfo info){
         this.info = info;
+        String raise = info.getRaiseTime();
+        this.time_raise = Integer.parseInt(raise.substring(0, 2)) * 60 + Integer.parseInt(raise.substring(raise.length() - 2, raise.length()));
+
+        String down = info.getDownTime();
+        this.time_raise = Integer.parseInt(down.substring(0, 2)) * 60 + Integer.parseInt(down.substring(down.length() - 2, down.length()));
+
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat ("hh:mm");
+        String now = ft.format(dNow);
+        this.time_now = Integer.parseInt(now.substring(0, 2)) * 60 + Integer.parseInt(now.substring(now.length() - 2, now.length()));
     }
 
     public void setSunRaiseDownViewInfoAndUpdate(SunRaiseDownViewInfo info){

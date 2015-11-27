@@ -211,7 +211,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
         grid_views[currentIndex].startAnimator();
 
         PMView.PMViewInfo pminfo = new PMView.PMViewInfo();
-        pminfo.setPMValue(70);
+        pminfo.setAQI(70);
         pminfo.setPM2_5Value(54);
         pminfo.setDate("11月25日");
         pminfo.setTime("20:00");
@@ -603,74 +603,33 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
     private void updateTodayWeather(TodayWeather todayWeather){
         View currentView = viewList.get(currentIndex);
+        tem_views[currentIndex].setTemp(Integer.parseInt(todayWeather.getWendu()));
+        tem_views[currentIndex].setWeather(todayWeather.getForcastWeathers()[1].getType());
+        tem_views[currentIndex].setAir_quality(todayWeather.getQuality());
+        tem_views[currentIndex].invalidate();
 
-        String show;
-
-//        TextView date_time = (TextView) currentView.findViewById(R.id.date_time);
-//        show = "今天" + todayWeather.getUpdatetime() + "发布";
-//        date_time.setText(show);
-//
-//        TextView humidity_value = (TextView) currentView.findViewById(R.id.humidity_value);
-//        show = todayWeather.getShidu();
-//        humidity_value.setText("湿度：" + show);
-
-//        //pm2.5
-//        TextView pm25_value = (TextView) findViewById(R.id.pm2_5_value);
-//        show = todayWeather.getPm25();
-//        pm25_value.setText("value: " + show);
-//
-//        TextView pm25_desc = (TextView) findViewById(R.id.pm2_5_desc);
-//        show = todayWeather.getQuality();
-//        pm25_desc.setText("desc: " + show);
-
-//        TextView temperature = (TextView) currentView.findViewById(R.id.temperature);
-//        show = todayWeather.getLow() + "/" +
-//                todayWeather.getHigh();
-//        temperature.setText(show);
-//
-//        TextView today_week = (TextView) currentView.findViewById(R.id.today_week);
-//        show = todayWeather.getDate();
-//        today_week.setText(show);
-//
-//        TextView climate = (TextView) currentView.findViewById(R.id.climate);
-//        show = "" + todayWeather.getNightType() + "/" +
-//                todayWeather.getDayType();
-//        climate.setText(show);
-//
-//        TextView wind = (TextView) currentView.findViewById(R.id.wind);
-//        show = "" + todayWeather.getFengxiang();
-//        wind.setText(show);
-
-        int[] temps_day = new int[]{23, 34, 12, 34, 21};
-        int[] temps_night = new int[]{12, 14, 10, 8, 11};
+        int[] temps_day = todayWeather.getTempsHighDay();
+        int[] temps_night = todayWeather.getTempsLowDay();
         plot_views[currentIndex].setTemps_day(temps_day);
         plot_views[currentIndex].setTemps_night(temps_night);
         plot_views[currentIndex].startAnimator();
 
-        GridView.GridViewInfo gridViewInfo = new GridView.GridViewInfo();
-        gridViewInfo.setHumidityValue("75");
-        gridViewInfo.setVisibilityValue("6.4");
-        gridViewInfo.setWindDirection("南风");
-        gridViewInfo.setWindDirectionValue("三级");
-        gridViewInfo.setUVRaysValue("最强");
-        gridViewInfo.setPressureValue("1027.3");
-        gridViewInfo.setBodyFeelingValue("4.5");
-        grid_views[currentIndex].setGridViewInfo(gridViewInfo);
+        ((TextView)currentView.findViewById(R.id.first_day_temp_show)).setText(String.valueOf(temps_day[0]) + "°/" + temps_night[0] + "°");
+        ((TextView)currentView.findViewById(R.id.second_day_temp_show)).setText(String.valueOf(temps_day[1]) + "°/" + temps_night[1] + "°");
+        ((TextView)currentView.findViewById(R.id.third_day_temp_show)).setText(String.valueOf(temps_day[2]) + "°/" + temps_night[2] + "°");
+        ((TextView)currentView.findViewById(R.id.forth_day_temp_show)).setText(String.valueOf(temps_day[3]) + "°/" + temps_night[3] + "°");
+        ((TextView)currentView.findViewById(R.id.fifth_day_temp_show)).setText(String.valueOf(temps_day[4]) + "°/" + temps_night[4] + "°");
+
+        grid_views[currentIndex].setGridViewInfo(todayWeather.getGridViewInfo());
         grid_views[currentIndex].startAnimator();
 
-        PMView.PMViewInfo pminfo = new PMView.PMViewInfo();
-        pminfo.setPMValue(70);
-        pminfo.setPM2_5Value(54);
-        pminfo.setDate("11月25日");
-        pminfo.setTime("20:00");
-        pm_views[currentIndex].setPMViewInfo(pminfo);
+        pm_views[currentIndex].setPMViewInfo(todayWeather.getPMViewInfo());
         pm_views[currentIndex].startAnimator();
 
-        int probabilities[] = new int[]{12, 45, 76, 29};
-        ProbabilityView.ProbabilityViewInfo probabilityViewInfo = new ProbabilityView.ProbabilityViewInfo();
-        probabilityViewInfo.setProbabilities(probabilities);
-        pro_views[currentIndex].setProbabilityInfo(probabilityViewInfo);
+        pro_views[currentIndex].setProbabilityInfo(todayWeather.getProbabilityViewInfo());
         pro_views[currentIndex].startAnimator();
+
+        sun_views[currentIndex].setSunRaiseDownViewInfo(todayWeather.getSunRaiseDownViewInfo());
     }
 
     private final LocationListener locationListener = new LocationListener() {
