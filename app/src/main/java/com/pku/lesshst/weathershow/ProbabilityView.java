@@ -51,6 +51,7 @@ public class ProbabilityView extends ViewUpdate {
             this.probabilities = probabilities;
         }
     }
+
     float r_animator = 0f;
     Paint paint_rain_drop_inner = new Paint();
     Paint paint_text_probability = new Paint();

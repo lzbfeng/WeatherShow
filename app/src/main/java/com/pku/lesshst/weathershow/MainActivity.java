@@ -131,6 +131,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
                 container.addView(viewList.get(position));
                 return viewList.get(position);
             }
+
         };
         viewPager.setAdapter(pagerAdapter);
         currentIndex = 0;
@@ -423,38 +424,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
         }
     }
     private void updateControls() {
-//        Log.d("updateControls", "开始更新controls的数据");
-//        TextView city_name = (TextView) findViewById(R.id.city_name);
-//        city_name.setText(infoToShow.locationName);
-//
-//        WeatherInfo weatherInfo = infoToShow.weatherInfo;
-//
-//        String show;
-//        TextView date_time = (TextView) findViewById(R.id.date_time);
-//        show = weatherInfo.hourlyWeatherList.get(0).date.split(" ")[1];
-//        date_time.setText("今天" + show + "发布");
-//
-//        TextView humidity_value = (TextView) findViewById(R.id.humidity_value);
-//        show = weatherInfo.hourlyWeatherList.get(0).hum;
-//        humidity_value.setText("湿度：" + show + "%");
-//
-//        TextView temperature = (TextView) findViewById(R.id.temperature);
-//        show = weatherInfo.dailyWeatherList.get(1).tmp_min + "℃~" +
-//                weatherInfo.dailyWeatherList.get(1).tmp_max + "℃";
-//        temperature.setText(show);
-//
-//        TextView today_week = (TextView) findViewById(R.id.today_week);
-//        show = "" + getDayOfWeek();
-//        today_week.setText(show);
-//
-//        TextView climate = (TextView) findViewById(R.id.climate);
-//        show = "" + weatherInfo.dailyWeatherList.get(1).txt_d + "/" +
-//                weatherInfo.dailyWeatherList.get(1).txt_n;
-//        climate.setText(show);
-//
-//        TextView wind = (TextView) findViewById(R.id.wind);
-//        show = "" + weatherInfo.dailyWeatherList.get(1).wind_sc;
-//        wind.setText(show);
+
     }
 
     private String getDayOfWeek(){
@@ -568,7 +538,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
                     break;
 //                case GetWeatherInfo.UPDATE_PM_VALUE:
 //                    updateAdminAreaPMValue((TodayWeather)msg.obj);
-//                    break;
+//                    break;】}
                 default:
                     break;
             }
@@ -634,11 +604,11 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
     private final LocationListener locationListener = new LocationListener() {
         public void onLocationChanged(Location location) {
-            //updateWithNewLocation(location);
+
         }
 
         public void onProviderDisabled(String provider) {
-            //updateWithNewLocation(null);
+
         }
 
         public void onProviderEnabled(String provider) {
@@ -717,9 +687,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
             String result_value = data.getStringExtra("city");
             Log.d("Lesshst: ret value, city:", result_value);
             changeCity(result_value);
-
         }
-
     }
 
     public void changeCity(String cityName){
