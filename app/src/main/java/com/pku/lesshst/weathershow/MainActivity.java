@@ -280,10 +280,10 @@ public class MainActivity extends Activity implements ScrollViewListener{
     int grid_view_up_start = 2672;
     int grid_view_up_end = 106;
 
-    int pm_view_down_start = 1288;
-    int pm_view_down_end = 3600;
-    int pm_view_up_start = 3600;
-    int pm_view_up_end = 1288;
+    int pm_view_down_start = 1300;
+    int pm_view_down_end = 3200;
+    int pm_view_up_start = 2600;
+    int pm_view_up_end = 677;
 
     int pro_view_down_start = 2459;
     int pro_view_down_end = 4175;
@@ -762,11 +762,6 @@ public class MainActivity extends Activity implements ScrollViewListener{
         for(int index = 0; index < temps_night.length; index++){
             ((TextView)currentView.findViewById(img_day_temp_ids[index])).setText(String.valueOf(temps_day[index]) + "°/" + temps_night[index] + "°");
         }
-//        ((TextView)currentView.findViewById(R.id.first_day_temp_show)).setText(String.valueOf(temps_day[0]) + "°/" + temps_night[0] + "°");
-//        ((TextView)currentView.findViewById(R.id.second_day_temp_show)).setText(String.valueOf(temps_day[1]) + "°/" + temps_night[1] + "°");
-//        ((TextView)currentView.findViewById(R.id.third_day_temp_show)).setText(String.valueOf(temps_day[2]) + "°/" + temps_night[2] + "°");
-//        ((TextView)currentView.findViewById(R.id.forth_day_temp_show)).setText(String.valueOf(temps_day[3]) + "°/" + temps_night[3] + "°");
-//        ((TextView)currentView.findViewById(R.id.fifth_day_temp_show)).setText(String.valueOf(temps_day[4]) + "°/" + temps_night[4] + "°");
 
         String[] types = todayWeather.getForcastDayTypes();
 
@@ -777,14 +772,6 @@ public class MainActivity extends Activity implements ScrollViewListener{
             else
                 imgView.setImageResource(type_imgs.get("无"));
         }
-
-//        String str_show = "";
-//        for(String str : types){
-//            str_show += "-" + str;
-//        }
-//
-//
-//        Log.e("first_day_cloud_show", str_show);
 
         grid_views.get(currentIndex).setGridViewInfo(todayWeather.getGridViewInfo());
         grid_views.get(currentIndex).startAnimator();

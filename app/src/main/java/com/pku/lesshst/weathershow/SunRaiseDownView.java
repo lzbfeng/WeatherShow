@@ -151,7 +151,7 @@ public class SunRaiseDownView extends ViewUpdate {
         this.time_raise = Integer.parseInt(raise.substring(0, 2)) * 60 + Integer.parseInt(raise.substring(raise.length() - 2, raise.length()));
 
         String down = info.getDownTime();
-        this.time_raise = Integer.parseInt(down.substring(0, 2)) * 60 + Integer.parseInt(down.substring(down.length() - 2, down.length()));
+        this.time_down = Integer.parseInt(down.substring(0, 2)) * 60 + Integer.parseInt(down.substring(down.length() - 2, down.length()));
 
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat ("hh:mm");
