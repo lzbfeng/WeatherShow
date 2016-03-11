@@ -13,4 +13,8 @@
         android:id="@+id/ItemTitle"
         android:textSize="30dip">
     </TextView>
+    <TextView
+        android:id="@+id/dangqian"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 </LinearLayout>  

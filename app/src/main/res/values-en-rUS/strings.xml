@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">WeatherShow</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_weather_info">WeatherInfoActivity</string>
+    <string name="MainActivity_name">这是我的第三个应用程序，哈哈！</string>
+    <string name="Monday">Monday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Friday">Friday</string>
+    <string name="Saturday">Saturday</string>
+    <string name="Sunday">Sunday</string>
+    <string name="pull_to_refresh">Drag down to fresh</string>
+    <string name="release_to_refresh">Release to fresh</string>
+    <string name="refreshing">Fresh…</string>
+    <string name="not_updated_yet">Never Update</string>
+    <string name="updated_at">Last update %1$s</string>
+    <string name="updated_just_now">Update just now</string>
+    <string name="time_error">Time problem</string>
+    <string name="minute"> Minute</string>
+    <string name="hour"> Hour</string>
+    <string name="day"> Day</string>
+    <string name="month"> Month</string>
+    <string name="year"> Year</string>
+    <string name="title_activity_province_list">ProvinceListActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

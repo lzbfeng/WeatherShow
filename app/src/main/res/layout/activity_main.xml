@@ -30,7 +30,7 @@
                     android:layout_weight="1"
                     android:layout_alignParentLeft="true"
                     android:onClick="OnClickOtherActivity"
-                    android:background="@drawable/base_action_bar_action_city"
+                    android:background="@drawable/title_city"
                     android:textColor="@android:color/white"/>
 
                 <TextView
@@ -48,7 +48,7 @@
                     android:layout_height="30dp"
                     android:layout_weight="1"
                     android:layout_alignParentLeft="true"
-                    android:onClick="OnClickOtherActivity"
+                    android:onClick="OnClickOtherActivity1"
                     android:background="@drawable/base_action_bar_action_city"
                     android:textColor="@android:color/white"/>
 

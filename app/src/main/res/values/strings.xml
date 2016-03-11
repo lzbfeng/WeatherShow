@@ -19,8 +19,15 @@
     <string name="updated_at">上次更新于%1$s前</string>
     <string name="updated_just_now">刚刚更新</string>
     <string name="time_error">时间有问题</string>
-
+    <string name="minute">分钟</string>
+    <string name="hour">小时</string>
+    <string name="day">天</string>
+    <string name="month">月</string>
+    <string name="year">年</string>
+    <string name="startWeather">开启App</string>
+    <string name="current_city_name">大兴</string>
     <string name="title_activity_province_list">ProvinceListActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="hint_words">City of China（Chinese）</string>
 </resources>

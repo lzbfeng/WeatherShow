@@ -1,14 +1,21 @@
 package com.pku.lesshst.weathershow;
 //update this file at time: 20151125.15.28
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.RingtoneManager;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
@@ -16,6 +23,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +31,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.pku.lesshst.weathershow.MyRefresh.MyRefreshView;
@@ -48,6 +57,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Dictionary;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -83,13 +95,33 @@ public class MainActivity extends Activity implements ScrollViewListener{
     private PagerTitleStrip pagerTitleStrip;//viewpager的标题
     ArrayList<View> viewList;
     ArrayList<String> citiesList;
+
+    ArrayList<TemperatureView> tem_views = new ArrayList<TemperatureView>();
+    ArrayList<LineView> plot_views = new ArrayList<LineView>();
+    ArrayList<GridView> grid_views = new ArrayList<GridView>();
+    ArrayList<PMView> pm_views = new ArrayList<PMView>();
+    ArrayList<ProbabilityView> pro_views = new ArrayList<ProbabilityView>();
+    ArrayList<SunRaiseDownView> sun_views = new ArrayList<SunRaiseDownView>();
+
     int currentIndex = 0;
-    int conntOfCities = 5;
+    int conntOfCities = 6;
+    PagerAdapter pagerAdapter;
+
+    //晴，多云，小雨，大雨，中雨，阵雨，阴
+    HashMap<String, Integer> type_imgs = new HashMap<String, Integer>();
+
+    int[] img_day_temp_ids = new int[]{R.id.first_day_temp_show, R.id.second_day_temp_show, R.id.third_day_temp_show,
+            R.id.forth_day_temp_show, R.id.fifth_day_temp_show};
+
+    int[] img_day_cloud_ids = new int[]{R.id.first_day_cloud_show, R.id.second_day_cloud_show, R.id.third_day_cloud_show,
+            R.id.forth_day_cloud_show, R.id.fifth_day_cloud_show};
+
     private void initViewPager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         LayoutInflater lf = getLayoutInflater().from(this);
-        String [] citiesNames = new String[]{"北京", "上海", "广州", "深圳", "杭州"};
+        String [] citiesNames = new String[]{"大兴", "北京", "上海", "广州", "深圳", "杭州"};
+        conntOfCities = citiesNames.length;
         viewList = new ArrayList<View>();// 将要分页显示的View装入数组
         citiesList = new ArrayList<String>();// 每个页面的Title数据
         View view;
@@ -99,7 +131,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
             citiesList.add(citiesNames[i]);
         }
 
-        PagerAdapter pagerAdapter = new PagerAdapter() {
+        pagerAdapter = new PagerAdapter() {
             @Override
             public boolean isViewFromObject(View arg0, Object arg1) {
                 return arg0 == arg1;
@@ -128,6 +160,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
             @Override
             public Object instantiateItem(ViewGroup container, int position) {
+                container.removeView(viewList.get(position));
                 container.addView(viewList.get(position));
                 return viewList.get(position);
             }
@@ -138,21 +171,30 @@ public class MainActivity extends Activity implements ScrollViewListener{
         viewPager.setOnPageChangeListener(new MyOnPageChangeListener());
         for(int i = 0; i < citiesList.size(); i++){
             currentIndex = i;
-            initAllLayouts();
+            initOneLayout();
         }
         currentIndex = 0;
     }
+    private void insertOnePage(String cityName, int index){
+        LayoutInflater lf = getLayoutInflater().from(this);
+        View view = lf.inflate(R.layout.activity_refresh, null);
+        viewList.add(index, view);
+        pagerAdapter.notifyDataSetChanged();
+        citiesList.add(index, cityName);
+        conntOfCities += 1;
+        initOneLayout();
+    }
 
-    private void initAllLayouts(){
+    private void initOneLayout(){
         //tem_view
         LinearLayout tem_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.tem_layout);
-        tem_views[currentIndex] = new TemperatureView(this);
-        tem_layout.addView(tem_views[currentIndex], 1080, 900);
+        tem_views.add(currentIndex, new TemperatureView(this));
+        tem_layout.addView(tem_views.get(currentIndex), 1080, 900);
 
         //plot_view
         LinearLayout plot_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.line_layout);
-        plot_views[currentIndex] = new LineView(this);
-        plot_layout.addView(plot_views[currentIndex], 1080, 600);
+        plot_views.add(currentIndex, new LineView(this));
+        plot_layout.addView(plot_views.get(currentIndex), 1080, 600);
 
         Date dNow = new Date();
         long timeCount = (dNow.getTime() / 1000) + 60 * 60 * 24 * 2;
@@ -168,37 +210,37 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
         //grid_view
         LinearLayout grid_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.grid_view_layout);
-        grid_views[currentIndex] = new GridView(this);
-        grid_view_layout.addView(grid_views[currentIndex], 1080, 600);
+        grid_views.add(currentIndex, new GridView(this));
+        grid_view_layout.addView(grid_views.get(currentIndex), 1080, 600);
 
         //pm_view
         LinearLayout pm_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.pm_view_layout);
-        pm_views[currentIndex] = new PMView(this);
-        pm_view_layout.addView(pm_views[currentIndex], 1080, 700);
+        pm_views.add(currentIndex, new PMView(this));
+        pm_view_layout.addView(pm_views.get(currentIndex), 1080, 700);
 
         //pro_view
         LinearLayout pro_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.probability_view_layout);
-        pro_views[currentIndex] = new ProbabilityView(this);
-        pro_view_layout.addView(pro_views[currentIndex], 1080, 600);
+        pro_views.add(currentIndex, new ProbabilityView(this));
+        pro_view_layout.addView(pro_views.get(currentIndex), 1080, 600);
 
         //sun_view
         LinearLayout sun_view_layout = (LinearLayout) viewList.get(currentIndex).findViewById(R.id.sun_raise_donw_view_layout);
-        sun_views[currentIndex] = new SunRaiseDownView(this);
-        sun_view_layout.addView(sun_views[currentIndex], 1080, 600);
+        sun_views.add(currentIndex, new SunRaiseDownView(this));
+        sun_view_layout.addView(sun_views.get(currentIndex), 1080, 600);
 
         //init all views and update data
         int temp = 10;
         String weather = "阴天";
         String air_quality = "空气良好";
-        tem_views[currentIndex].setTemp(temp);
-        tem_views[currentIndex].setWeather(weather);
-        tem_views[currentIndex].setAir_quality(air_quality);
+        tem_views.get(currentIndex).setTemp(temp);
+        tem_views.get(currentIndex).setWeather(weather);
+        tem_views.get(currentIndex).setAir_quality(air_quality);
 
         int[] temps_day = new int[]{23, 34, 12, 34, 21};
         int[] temps_night = new int[]{12, 14, 10, 8, 11};
-        plot_views[currentIndex].setTemps_day(temps_day);
-        plot_views[currentIndex].setTemps_night(temps_night);
-        plot_views[currentIndex].startAnimator();
+        plot_views.get(currentIndex).setTemps_day(temps_day);
+        plot_views.get(currentIndex).setTemps_night(temps_night);
+        plot_views.get(currentIndex).startAnimator();
 
         GridView.GridViewInfo gridViewInfo = new GridView.GridViewInfo();
         gridViewInfo.setHumidityValue("75");
@@ -208,22 +250,22 @@ public class MainActivity extends Activity implements ScrollViewListener{
         gridViewInfo.setUVRaysValue("最强");
         gridViewInfo.setPressureValue("1027.3");
         gridViewInfo.setBodyFeelingValue("4.5");
-        grid_views[currentIndex].setGridViewInfo(gridViewInfo);
-        grid_views[currentIndex].startAnimator();
+        grid_views.get(currentIndex).setGridViewInfo(gridViewInfo);
+        grid_views.get(currentIndex).startAnimator();
 
         PMView.PMViewInfo pminfo = new PMView.PMViewInfo();
         pminfo.setAQI(70);
         pminfo.setPM2_5Value(54);
         pminfo.setDate("11月25日");
         pminfo.setTime("20:00");
-        pm_views[currentIndex].setPMViewInfo(pminfo);
-        pm_views[currentIndex].startAnimator();
+        pm_views.get(currentIndex).setPMViewInfo(pminfo);
+        pm_views.get(currentIndex).startAnimator();
 
         int probabilities[] = new int[]{12, 45, 76, 29};
         ProbabilityView.ProbabilityViewInfo probabilityViewInfo = new ProbabilityView.ProbabilityViewInfo();
         probabilityViewInfo.setProbabilities(probabilities);
-        pro_views[currentIndex].setProbabilityInfo(probabilityViewInfo);
-        pro_views[currentIndex].startAnimator();
+        pro_views.get(currentIndex).setProbabilityInfo(probabilityViewInfo);
+        pro_views.get(currentIndex).startAnimator();
     }
 
     boolean scrool_direction_down = true;
@@ -259,15 +301,15 @@ public class MainActivity extends Activity implements ScrollViewListener{
         else
             scrool_direction_down = false;
 
-        updateView(plot_views[currentIndex], y, plot_view_down_start,
+        updateView(plot_views.get(currentIndex), y, plot_view_down_start,
                 plot_view_down_end, plot_view_up_start, plot_view_up_end);
-        updateView(grid_views[currentIndex], y, grid_view_down_start,
+        updateView(grid_views.get(currentIndex), y, grid_view_down_start,
                 grid_view_down_end, grid_view_up_start, grid_view_up_end);
-        updateView(pm_views[currentIndex], y, pm_view_down_start,
+        updateView(pm_views.get(currentIndex), y, pm_view_down_start,
                 pm_view_down_end, pm_view_up_start, pm_view_up_end);
-        updateView(pro_views[currentIndex], y, pro_view_down_start,
+        updateView(pro_views.get(currentIndex), y, pro_view_down_start,
                 pro_view_down_end, pro_view_up_start, pro_view_up_end);
-        updateView(sun_views[currentIndex], y, sun_view_down_start,
+        updateView(sun_views.get(currentIndex), y, sun_view_down_start,
                 sun_view_down_end, sun_view_up_start, sun_view_up_end);
     }
     private void updateView(ViewUpdate view, int y,
@@ -292,12 +334,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
         }
         Log.e("onScrollChanged", String.valueOf(y) + "--" + String.valueOf(view.isUpdate) + "--" + String.valueOf(scrool_direction_down) );
     }
-    TemperatureView tem_views[] = new TemperatureView[conntOfCities];
-    LineView plot_views[] = new LineView[conntOfCities];
-    GridView grid_views[] = new GridView[conntOfCities];
-    PMView pm_views[] = new PMView[conntOfCities];
-    ProbabilityView pro_views[] = new ProbabilityView[conntOfCities];
-    SunRaiseDownView sun_views[] = new SunRaiseDownView[conntOfCities];
+
 
     public class MyOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
@@ -306,7 +343,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
 
         public void onPageScrolled(int arg0, float arg1, int arg2) {
             String city_name;
-            Log.e("onPageScrolled:", "0--" + arg0 + "--1--" + arg1 + "--2--" + arg2);
+            //Log.e("onPageScrolled:", "0--" + arg0 + "--1--" + arg1 + "--2--" + arg2);
             double diff = arg1 - 0.5;
             float alpha;
             if(diff > 0){
@@ -335,7 +372,93 @@ public class MainActivity extends Activity implements ScrollViewListener{
         city_name_textview.setText(city_name);
         city_name_textview.setAlpha(alpha);
     }
+    public class BroadcastMain extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent)
+        {
+            String jsonString = intent.getExtras().getString( "update" );
+            Log.e("handler_auto_update", jsonString);
+            Message msg = handler_auto_update.obtainMessage();
+            msg.what = 01;
+            handler_auto_update.sendMessage( msg );
+        }
+    }
+    boolean updateAuto = false;
+    Handler handler_auto_update = new Handler()
+    {
+        public void handleMessage(android.os.Message msg)
+        {
+            switch (msg.what)
+            {
+                case 01:
+                    updateAuto = true;
+                    refreshableView.RefreshByHand();
+                    break;
+                default:
+                    break;
+            }
 
+        };
+
+    };
+    private void notifyInToolBar(){
+        NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(MainActivity.this);
+        builder.setTicker("天气信息已经更新！");
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setWhen(System.currentTimeMillis());
+        builder.setAutoCancel(true);
+        //        设置自定义RemoteView
+        RemoteViews view=new RemoteViews(getPackageName(),R.layout.remote_view);
+
+        builder.setContent(view);
+        PendingIntent pi=PendingIntent.getActivity(MainActivity.this,1,new Intent(MainActivity.this,MainActivity.class),0);
+        builder.setContentIntent(pi);
+        builder.setVibrate(new long[]{1000, 1000, 1000, 1000});
+        builder.setLights(Color.RED, 0, 1);
+        builder.setOngoing(true);
+        manager.notify(2, builder.build());
+    }
+    public void simpleNotification(){
+        //        获取NotificationManager实例
+        NotificationManager manager= (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //        构造Notification.Builder 对象
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(MainActivity.this);
+
+        //        设置Notification图标
+        builder.setSmallIcon(R.mipmap.ic_launcher);
+        //builder.setLargeIcon(myIcon);
+        //        设置Notification tickertext
+        builder.setTicker("A new Message");
+        //        设置通知的题目
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat ("hh:mm:ss");
+        String time = ft.format(dNow);
+        builder.setContentTitle(this.todayWeather.getCity() + "\t" + "更新时间为" + time);
+        //        设置通知的内容
+        builder.setContentText("今天温度为：" + this.todayWeather.getWendu() + "℃");
+        builder.setContentInfo("Info");
+        //        设置通知可以被自动取消
+        builder.setAutoCancel(true);
+        //        设置通知栏显示的Notification按时间排序
+        builder.setWhen(System.currentTimeMillis());
+        //        设置其他物理属性，包括通知提示音、震动、屏幕下方LED灯闪烁
+        builder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));//这里设置一个本地文件为提示音
+//        builder.setVibrate(new long[]{1000,1000,1000,1000});
+        builder.setLights(Color.BLUE,0,1);
+        //        设置该通知点击后将要启动的Intent,这里需要注意PendingIntent的用法,构造方法中的四个参数(context,int requestCode,Intent,int flags);
+        Intent intent=new Intent(MainActivity.this,MainActivity.class);
+        PendingIntent pi=PendingIntent.getActivity(MainActivity.this,0,intent,0);
+        builder.setContentIntent(pi);
+
+        //        实例化Notification
+
+        Notification notification=builder.build();//notify(int id,notification对象);id用来标示每个notification
+        manager.notify(1,notification);
+
+
+    }
+    BroadcastMain broadcastMain;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -345,16 +468,37 @@ public class MainActivity extends Activity implements ScrollViewListener{
         scrollView.setScrollViewListener(this);
         initBaseInfo();
         initViewPager();
+
+        Intent intent = new Intent();
+        intent.setClass(this, MyService.class);
+        startService(intent);
+
+        broadcastMain = new BroadcastMain();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(MyService.BROADCASTACTION);
+        registerReceiver(broadcastMain, filter);
     }
     public static CityDB cityDB;
     private void initBaseInfo(){
         infoToShow = new InfoToShow();
-        getLocation();
+//        getLocation();
         cityDB = openCityDB();
 
         refreshableView = (MyRefreshView) findViewById(R.id.refreshable_view);
         rotateView = (RotateView) findViewById(R.id.rotate_view);
         setOnFreshListener();
+
+        setTypeImgs();
+    }
+    private void setTypeImgs(){
+        type_imgs.put("晴", R.drawable.simple_weather_icon_01);
+        type_imgs.put("多云", R.drawable.simple_weather_icon_06);
+        type_imgs.put("小雨", R.drawable.simple_weather_icon_28);
+        type_imgs.put("中雨", R.drawable.simple_weather_icon_22);
+        type_imgs.put("大雨", R.drawable.simple_weather_icon_23);
+        type_imgs.put("阵雨", R.drawable.simple_weather_icon_27);
+        type_imgs.put("阴", R.drawable.simple_weather_icon_04);
+        type_imgs.put("无", R.drawable.simple_weather_icon_05);
     }
 
     private void setOnFreshListener(){
@@ -380,7 +524,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
                                 } catch (Exception e) {
                                 }
                             }
-                            if(!isBreak) {
+                            if (!isBreak) {
                                 count = 0;
                                 while (true) {
                                     if (count++ > 30) {
@@ -451,10 +595,11 @@ public class MainActivity extends Activity implements ScrollViewListener{
     }
     public void OnClickOtherActivity(View view){
         try {
-            Intent intent = new Intent(this, ProvinceListActivity.class);
+            Intent intent = new Intent(this, CitiesListActivity.class);
             Bundle bundle = new Bundle();
-            ArrayList<String> provinces = getAllProvinces();
-            bundle.putStringArrayList("provinces", provinces);
+            ArrayList<String> cities = getAllCities();
+
+            bundle.putStringArrayList("cities", cities);
             intent.putExtras(bundle);
             startActivityForResult(intent, 1);
         }
@@ -464,6 +609,21 @@ public class MainActivity extends Activity implements ScrollViewListener{
         }
     }
 
+    public void OnClickOtherActivity1(View view){
+        try {
+            getLocation();
+            int i = 0;
+            for(i = 0; i < citiesList.size(); i++){
+                if(locationCityName.equals(citiesList.get(i)))
+                    break;
+            }
+            viewPager.setCurrentItem(i, true);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            Log.d("Lesshst: ", e.toString());
+        }
+    }
     private ArrayList<String> getAllProvinces(){
         ArrayList<String> provinces = new ArrayList<String>();
         ArrayList<City> cities = cityDB.getAllCity();
@@ -473,6 +633,15 @@ public class MainActivity extends Activity implements ScrollViewListener{
                 provinces.add(provinceName);
         }
         return provinces;
+    }
+
+    private ArrayList<String> getAllCities(){
+        ArrayList<City> cities = cityDB.getAllCity();
+        ArrayList<String> ret = new ArrayList<String>();
+        for(City city : cities){
+            ret.add(city.getCity());
+        }
+        return ret;
     }
 
     private String _quname = null;
@@ -570,36 +739,63 @@ public class MainActivity extends Activity implements ScrollViewListener{
         show = todayWeather.getQuality();
         pm25_desc.setText("" + show);
     }
-
+    private TodayWeather todayWeather;
     private void updateTodayWeather(TodayWeather todayWeather){
+        this.todayWeather = todayWeather;
+        if(updateAuto){
+            simpleNotification();
+            updateAuto = false;
+        }
         View currentView = viewList.get(currentIndex);
-        tem_views[currentIndex].setTemp(Integer.parseInt(todayWeather.getWendu()));
-        tem_views[currentIndex].setWeather(todayWeather.getForcastWeathers()[1].getType());
-        tem_views[currentIndex].setAir_quality(todayWeather.getQuality());
-        tem_views[currentIndex].invalidate();
+        tem_views.get(currentIndex).setTemp(Integer.parseInt(todayWeather.getWendu()));
+        tem_views.get(currentIndex).setWeather(todayWeather.getForcastWeathers()[1].getType());
+        tem_views.get(currentIndex).setAir_quality(todayWeather.getQuality());
+        tem_views.get(currentIndex).invalidate();
 
         int[] temps_day = todayWeather.getTempsHighDay();
         int[] temps_night = todayWeather.getTempsLowDay();
-        plot_views[currentIndex].setTemps_day(temps_day);
-        plot_views[currentIndex].setTemps_night(temps_night);
-        plot_views[currentIndex].startAnimator();
+        plot_views.get(currentIndex).setTemps_day(temps_day);
+        plot_views.get(currentIndex).setTemps_night(temps_night);
+        plot_views.get(currentIndex).startAnimator();
 
-        ((TextView)currentView.findViewById(R.id.first_day_temp_show)).setText(String.valueOf(temps_day[0]) + "°/" + temps_night[0] + "°");
-        ((TextView)currentView.findViewById(R.id.second_day_temp_show)).setText(String.valueOf(temps_day[1]) + "°/" + temps_night[1] + "°");
-        ((TextView)currentView.findViewById(R.id.third_day_temp_show)).setText(String.valueOf(temps_day[2]) + "°/" + temps_night[2] + "°");
-        ((TextView)currentView.findViewById(R.id.forth_day_temp_show)).setText(String.valueOf(temps_day[3]) + "°/" + temps_night[3] + "°");
-        ((TextView)currentView.findViewById(R.id.fifth_day_temp_show)).setText(String.valueOf(temps_day[4]) + "°/" + temps_night[4] + "°");
 
-        grid_views[currentIndex].setGridViewInfo(todayWeather.getGridViewInfo());
-        grid_views[currentIndex].startAnimator();
+        for(int index = 0; index < temps_night.length; index++){
+            ((TextView)currentView.findViewById(img_day_temp_ids[index])).setText(String.valueOf(temps_day[index]) + "°/" + temps_night[index] + "°");
+        }
+//        ((TextView)currentView.findViewById(R.id.first_day_temp_show)).setText(String.valueOf(temps_day[0]) + "°/" + temps_night[0] + "°");
+//        ((TextView)currentView.findViewById(R.id.second_day_temp_show)).setText(String.valueOf(temps_day[1]) + "°/" + temps_night[1] + "°");
+//        ((TextView)currentView.findViewById(R.id.third_day_temp_show)).setText(String.valueOf(temps_day[2]) + "°/" + temps_night[2] + "°");
+//        ((TextView)currentView.findViewById(R.id.forth_day_temp_show)).setText(String.valueOf(temps_day[3]) + "°/" + temps_night[3] + "°");
+//        ((TextView)currentView.findViewById(R.id.fifth_day_temp_show)).setText(String.valueOf(temps_day[4]) + "°/" + temps_night[4] + "°");
 
-        pm_views[currentIndex].setPMViewInfo(todayWeather.getPMViewInfo());
-        pm_views[currentIndex].startAnimator();
+        String[] types = todayWeather.getForcastDayTypes();
 
-        pro_views[currentIndex].setProbabilityInfo(todayWeather.getProbabilityViewInfo());
-        pro_views[currentIndex].startAnimator();
+        for(int index = 0; index < types.length; index++) {
+            ImageView imgView = ((ImageView) currentView.findViewById(img_day_cloud_ids[index]));
+            if (type_imgs.containsKey(types[index]))
+                imgView.setImageResource(type_imgs.get(types[index]));
+            else
+                imgView.setImageResource(type_imgs.get("无"));
+        }
 
-        sun_views[currentIndex].setSunRaiseDownViewInfo(todayWeather.getSunRaiseDownViewInfo());
+//        String str_show = "";
+//        for(String str : types){
+//            str_show += "-" + str;
+//        }
+//
+//
+//        Log.e("first_day_cloud_show", str_show);
+
+        grid_views.get(currentIndex).setGridViewInfo(todayWeather.getGridViewInfo());
+        grid_views.get(currentIndex).startAnimator();
+
+        pm_views.get(currentIndex).setPMViewInfo(todayWeather.getPMViewInfo());
+        pm_views.get(currentIndex).startAnimator();
+
+        pro_views.get(currentIndex).setProbabilityInfo(todayWeather.getProbabilityViewInfo());
+        pro_views.get(currentIndex).startAnimator();
+
+        sun_views.get(currentIndex).setSunRaiseDownViewInfo(todayWeather.getSunRaiseDownViewInfo());
     }
 
     private final LocationListener locationListener = new LocationListener() {
@@ -623,7 +819,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
     private String mAdminArea = "";
 
     private Location mLocation;
-
+    private String locationCityName = "";
     private void updateWithNewLocation(Location location) {
 
         if (location != null) {
@@ -640,6 +836,7 @@ public class MainActivity extends Activity implements ScrollViewListener{
                     String firstCityName = address.getAdminArea();
                     infoToShow.locationName = StringProcessing.FilterStr(addressName);
                     mAddressCityNameHan = infoToShow.locationName;
+                    locationCityName = infoToShow.locationName;
 //                    mAddressCityName = CN2Pinyin.converterToSpell(infoToShow.locationName);
                     mAdminArea = StringProcessing.FilterStr(firstCityName);
                     sb.append(address.getLocality()).append("/").append(address.getSubLocality()).append("\n");
@@ -686,12 +883,24 @@ public class MainActivity extends Activity implements ScrollViewListener{
         if(resultCode == RESULT_OK && requestCode == 1){
             String result_value = data.getStringExtra("city");
             Log.d("Lesshst: ret value, city:", result_value);
+
+
+            int i = 0;
+            for(i = 0; i < conntOfCities; i++){
+                if(result_value.equals(citiesList.get(i)))
+                    break;
+            }
+            if(i == conntOfCities){
+                currentIndex = 0;
+                insertOnePage(result_value, currentIndex);
+            }
             changeCity(result_value);
         }
     }
 
     public void changeCity(String cityName){
         mAddressCityNameHan = cityName;
+        setCurrentTitle_City(mAddressCityNameHan, 1.0f);
         mAdminArea = cityDB.getCityProvince(mAddressCityNameHan).getProvince();
         try {
             refreshableView.RefreshByHand();

@@ -30,7 +30,7 @@ public class TodayWeather {
     private String nightType;
     private String sunrise;
     private String sunset;
-    private String time;
+    private String time = "20:00";
     private ForcastWeather forcastWeathers[];
 
     public static class ForcastWeather{
@@ -223,6 +223,14 @@ public class TodayWeather {
         return temps_day;
     }
 
+    public String[] getForcastDayTypes(){
+        String[] types_day = new String[]{"晴", "多云", "小雨", "中雨", "大雨"};
+        for(int i = 0; i < 5; i++){
+            types_day[i] = forcastWeathers[i].type;
+        }
+        return types_day;
+    }
+
     public int[] getTempsLowDay(){
         int[] temps_day = new int[]{23, 34, 12, 34, 21};
         for(int i = 0; i < 5; i++){
@@ -249,8 +257,14 @@ public class TodayWeather {
 
     public PMView.PMViewInfo getPMViewInfo(){
         PMView.PMViewInfo pminfo = new PMView.PMViewInfo();
-        pminfo.setAQI(Integer.parseInt(getAqi()));
-        pminfo.setPM2_5Value(Integer.parseInt(getPm25()));
+        try {
+            pminfo.setAQI(Integer.parseInt(getAqi()));
+            pminfo.setPM2_5Value(Integer.parseInt(getPm25()));
+        }
+        catch (Exception e){
+            pminfo.setAQI(56);
+            pminfo.setPM2_5Value(45);
+        }
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat ("MM月dd日");
         String day = ft.format(dNow);
