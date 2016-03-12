@@ -116,11 +116,39 @@ public class MainActivity extends Activity implements ScrollViewListener{
     int[] img_day_cloud_ids = new int[]{R.id.first_day_cloud_show, R.id.second_day_cloud_show, R.id.third_day_cloud_show,
             R.id.forth_day_cloud_show, R.id.fifth_day_cloud_show};
 
+
+    boolean scrool_direction_down = true;
+
+    int plot_view_down_start = -40;
+    int plot_view_down_end = 1630;
+    int plot_view_up_start = 1000;
+    int plot_view_up_end = -40;
+
+    int grid_view_down_start = 500;
+    int grid_view_down_end = 2500;
+    int grid_view_up_start = 1880;
+    int grid_view_up_end = 0;
+
+    int pm_view_down_start = 1300;
+    int pm_view_down_end = 3200;
+    int pm_view_up_start = 2600;
+    int pm_view_up_end = 677;
+
+    int pro_view_down_start = 2000;
+    int pro_view_down_end = 4175;
+    int pro_view_up_start = 4175;
+    int pro_view_up_end = 1759;
+    //
+    int sun_view_down_start = 2558;
+    int sun_view_down_end = 5055;
+    int sun_view_up_start = 5055;
+    int sun_view_up_end = 1400;
+
     private void initViewPager() {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         LayoutInflater lf = getLayoutInflater().from(this);
-        String [] citiesNames = new String[]{"大兴", "北京", "上海", "广州", "深圳", "杭州"};
+        String [] citiesNames = new String[]{"北京", "上海", "广州", "深圳", "杭州", "大兴"};
         conntOfCities = citiesNames.length;
         viewList = new ArrayList<View>();// 将要分页显示的View装入数组
         citiesList = new ArrayList<String>();// 每个页面的Title数据
@@ -267,33 +295,6 @@ public class MainActivity extends Activity implements ScrollViewListener{
         pro_views.get(currentIndex).setProbabilityInfo(probabilityViewInfo);
         pro_views.get(currentIndex).startAnimator();
     }
-
-    boolean scrool_direction_down = true;
-
-    int plot_view_down_start = -40;
-    int plot_view_down_end = 1630;
-    int plot_view_up_start = 1630;
-    int plot_view_up_end = -40;
-
-    int grid_view_down_start = 106;
-    int grid_view_down_end = 2672;
-    int grid_view_up_start = 2672;
-    int grid_view_up_end = 106;
-
-    int pm_view_down_start = 1300;
-    int pm_view_down_end = 3200;
-    int pm_view_up_start = 2600;
-    int pm_view_up_end = 677;
-
-    int pro_view_down_start = 2459;
-    int pro_view_down_end = 4175;
-    int pro_view_up_start = 4175;
-    int pro_view_up_end = 1759;
-//
-    int sun_view_down_start = 2558;
-    int sun_view_down_end = 5055;
-    int sun_view_up_start = 5055;
-    int sun_view_up_end = 2558;
 
     public void onScrollChanged(ObservableScrollView scrollView, int x, int y, int oldx, int oldy) {
         if(y - oldy > 0)
@@ -758,13 +759,13 @@ public class MainActivity extends Activity implements ScrollViewListener{
         plot_views.get(currentIndex).setTemps_night(temps_night);
         plot_views.get(currentIndex).startAnimator();
 
-
+        //设置温度
         for(int index = 0; index < temps_night.length; index++){
             ((TextView)currentView.findViewById(img_day_temp_ids[index])).setText(String.valueOf(temps_day[index]) + "°/" + temps_night[index] + "°");
         }
 
         String[] types = todayWeather.getForcastDayTypes();
-
+        //设置天气类型的图标
         for(int index = 0; index < types.length; index++) {
             ImageView imgView = ((ImageView) currentView.findViewById(img_day_cloud_ids[index]));
             if (type_imgs.containsKey(types[index]))
@@ -774,15 +775,19 @@ public class MainActivity extends Activity implements ScrollViewListener{
         }
 
         grid_views.get(currentIndex).setGridViewInfo(todayWeather.getGridViewInfo());
-        grid_views.get(currentIndex).startAnimator();
+        //grid_views.get(currentIndex).startAnimator();
+        grid_views.get(currentIndex).endAnimator();
 
         pm_views.get(currentIndex).setPMViewInfo(todayWeather.getPMViewInfo());
-        pm_views.get(currentIndex).startAnimator();
+        //pm_views.get(currentIndex).startAnimator();
+        pm_views.get(currentIndex).endAnimator();
 
         pro_views.get(currentIndex).setProbabilityInfo(todayWeather.getProbabilityViewInfo());
-        pro_views.get(currentIndex).startAnimator();
+        //pro_views.get(currentIndex).startAnimator();
+        pro_views.get(currentIndex).endAnimator();
 
         sun_views.get(currentIndex).setSunRaiseDownViewInfo(todayWeather.getSunRaiseDownViewInfo());
+        sun_views.get(currentIndex).endAnimator();
     }
 
     private final LocationListener locationListener = new LocationListener() {

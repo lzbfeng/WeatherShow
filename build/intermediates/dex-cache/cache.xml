@@ -2,74 +2,74 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\libs\pinyin4j-2.5.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ae353005f973da1cd8545b54354504c2503f6865">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\pinyin4j-2.5.0-b6bd29a699412335893438a35f82da374c04edb3.jar" />
-    </item>
-    <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\classes-886ba56dbc259fa77d13d9dce67778386d54c106.jar" />
-    </item>
-    <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\libs\httpcore-4.4.3.jar"
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\libs\httpcore-4.4.3.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="e876a79d561e5c6207b78d347e198c8c4531a5e5">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\httpcore-4.4.3-3fa68bcfae1811cc865308040feb828be94ca4f7.jar" />
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\httpcore-4.4.3-5fddc987fc64893be06e9c5352c02aea31c45514.jar" />
     </item>
     <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\libs\httpmime-4.5.1.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="96823b9421ebb9f490dec837d9f96134e864e3a7">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\httpmime-4.5.1-1d0074ef3cd3c8c050852d22cbdd62dad5b63716.jar" />
-    </item>
-    <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.1.0\jars\classes.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="57ae0d750ff83f0c738d21720224ac7ea866a094">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\classes-0290322e8e9afab17082c007fb5b1bce499f3649.jar" />
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\classes-4fe5693ce1de99ef4e81321944ec804071884222.jar" />
     </item>
     <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-309075dccee990952b3a549cd0cd0844625d844e.jar" />
-    </item>
-    <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\libs\httpclient-4.5.1.jar"
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\libs\httpclient-4.5.1.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="7e3cecc566df91338c6c67883b89ddd05a17db43">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\httpclient-4.5.1-4ed50e92ead431a86f6bc6d2d1963f8cc54a7dcf.jar" />
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\httpclient-4.5.1-03860aac806d53832bb9a27d159ea58d418ec93a.jar" />
     </item>
     <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\libs\robotium-solo-5.1.jar"
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\libs\internal_impl-23.1.0.jar"
         jumboMode="false"
         revision="23.0.2"
-        sha1="5ff4001bfb640635cf35737c112c34bfea30b0c1">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\robotium-solo-5.1-3ac1dbefac17da457358122fe7eb7fe80636d52e.jar" />
-    </item>
-    <item
-        jar="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\libs\json.org.jar"
-        jumboMode="false"
-        revision="23.0.2"
-        sha1="d2ee50d7a036902a5ca15d3e7d7dbd15eb93f910">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\json.org-9ec405a75eef47f87ad139f0642708977c7d0de8.jar" />
+        sha1="8716243bf04bae8d6c9ca94d27b9a9be7236f0a3">
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.0-3143633261dd61b6722e680eff4af744c8251ac9.jar" />
     </item>
     <item
         jar="C:\Users\lesshst\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.1.0\support-annotations-23.1.0.jar"
         jumboMode="false"
         revision="23.0.2"
         sha1="92e3fc113ec3ee36b64603a38857b95700025633">
-        <dex dex="C:\Users\lesshst\Desktop\Android\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-054582960d0cf9e4b7107e41cba699a252dbd5b4.jar" />
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.0-054582960d0cf9e4b7107e41cba699a252dbd5b4.jar" />
+    </item>
+    <item
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\libs\json.org.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="d2ee50d7a036902a5ca15d3e7d7dbd15eb93f910">
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\json.org-b4dfd89357c84aaffe23ba80cf67662078bbd21f.jar" />
+    </item>
+    <item
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\libs\pinyin4j-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ae353005f973da1cd8545b54354504c2503f6865">
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\pinyin4j-2.5.0-a2ad64eb9c6dcd18e6c24dda6b00322b0e6a3bb6.jar" />
+    </item>
+    <item
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\libs\httpmime-4.5.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="96823b9421ebb9f490dec837d9f96134e864e3a7">
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\httpmime-4.5.1-f09f863e1c6c8a07a60860f228d0f864e844dc76.jar" />
+    </item>
+    <item
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="ddde541c289c8b816a8f8fd6c325d80788c522a6">
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\classes-c83a6106aa80f3aa13f0c0c992a40a7bf5f3baeb.jar" />
+    </item>
+    <item
+        jar="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\libs\robotium-solo-5.1.jar"
+        jumboMode="false"
+        revision="23.0.2"
+        sha1="5ff4001bfb640635cf35737c112c34bfea30b0c1">
+        <dex dex="E:\Desktop\InterviewPrepare\projects\WeatherShow\WeatherShow0.0.2\app\build\intermediates\pre-dexed\debug\robotium-solo-5.1-f4063fcacc87a223c7f52a164524c10ccf32c580.jar" />
     </item>
 
 </items>

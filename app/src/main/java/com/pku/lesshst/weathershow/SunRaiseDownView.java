@@ -154,9 +154,15 @@ public class SunRaiseDownView extends ViewUpdate {
         this.time_down = Integer.parseInt(down.substring(0, 2)) * 60 + Integer.parseInt(down.substring(down.length() - 2, down.length()));
 
         Date dNow = new Date();
-        SimpleDateFormat ft = new SimpleDateFormat ("hh:mm");
+        SimpleDateFormat ft = new SimpleDateFormat ("HH:mm");
         String now = ft.format(dNow);
         this.time_now = Integer.parseInt(now.substring(0, 2)) * 60 + Integer.parseInt(now.substring(now.length() - 2, now.length()));
+
+        if(this.time_now > this.time_down){
+            this.time_now = this.time_down;
+        }else if(this.time_now < this.time_raise){
+            this.time_now = this.time_raise;
+        }
     }
 
     public void setSunRaiseDownViewInfoAndUpdate(SunRaiseDownViewInfo info){
