@@ -3,7 +3,6 @@
 ##程序运行展示
 
 ![](http://7xoi5h.com1.z0.glb.clouddn.com/weathershow_pic2.gif)
-![](http://i04.pic.sogou.com/1e66ed394e8ef15e)
 
 ##天气信息接口
 * 北京天气信息：
